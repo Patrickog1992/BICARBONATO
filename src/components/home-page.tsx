@@ -44,7 +44,8 @@ export default function HomePage() {
         ✨ Apenas hoje 09/07/2025 - Todos os planos com 50% de desconto, aproveite!
       </div>
       
-      <header className="container mx-auto px-4 py-4 flex justify-end items-center relative z-50 gap-6">
+      <header className="container mx-auto px-4 py-4 flex justify-between items-center relative z-50 gap-6">
+        <Logo />
         <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
           <a href="#inicio" className="hover:text-white">Início</a>
           <a href="#como-funciona" className="hover:text-white">Como funciona?</a>
