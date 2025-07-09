@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -100,7 +99,7 @@ export default function HomePage() {
 
               <div className="lg:w-1/2 mt-12 lg:mt-0 flex justify-center">
                 <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl animate-float">
-                    <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                    <div className="w-[120px] h-18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
                     <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                     <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                     <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
@@ -152,7 +151,7 @@ export default function HomePage() {
             </div>
             <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
               <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl shadow-red-900/20">
-                  <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                  <div className="w-[120px] h-18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
                   <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                   <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                   <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
@@ -171,7 +170,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl hover:scale-105 transition-transform duration-300">
-                      <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                      <div className="w-[120px] h-18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
@@ -190,7 +189,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl hover:scale-105 transition-transform duration-300">
-                      <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                      <div className="w-[120px] h-18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
@@ -203,7 +202,7 @@ export default function HomePage() {
                       <p className="text-neutral-400 max-w-xs">Tema inspirado na Netflix com data e episódios(fotos) favoritos.</p>
                       <div className="flex gap-4 mt-4">
                         <Button variant="outline" className="w-full" disabled>Experimentar agora</Button>
-                        <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
+                        <Button className="w-full" asChild><Link href="/create/netflix">Criar página</Link></Button>
                       </div>
                   </div>
                 </div>
