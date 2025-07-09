@@ -104,7 +104,7 @@ export default function HomePage() {
                     <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                     <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
                     <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
-                        <Image src="https://placehold.co/270x550.png" className="w-full h-full object-cover" alt="App preview in a phone" width={270} height={550} data-ai-hint="love letter" />
+                        <Image src="https://i.imgur.com/pGyjq58.png" className="w-full h-full object-cover" alt="App preview in a phone" width={270} height={550} data-ai-hint="love letter" />
                     </div>
                 </div>
               </div>
@@ -159,17 +159,45 @@ export default function HomePage() {
         <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Temas CodeLove</h2>
             <p className="max-w-2xl mx-auto text-neutral-300 mb-12">Escolha o tema ideal para a página personalizada.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <Card className="bg-neutral-900 border-neutral-800">
-                    <CardHeader className="p-0"><Image src="https://placehold.co/500x300.png" alt="Tema Padrão" width={500} height={300} className="rounded-t-lg" data-ai-hint="hearts background"/></CardHeader>
-                    <CardContent className="text-left pt-6"><h3 className="font-bold text-xl mb-2">Padrão</h3><p className="text-neutral-400">Tema padrão com contador de tempo e animações de fundo.</p></CardContent>
-                    <CardFooter className="gap-4"><Button variant="outline" className="w-full">Experimentar agora</Button><Button className="w-full" asChild><Link href="/create">Criar página</Link></Button></CardFooter>
-                </Card>
-                 <Card className="bg-neutral-900 border-neutral-800">
-                    <CardHeader className="p-0"><Image src="https://placehold.co/500x300.png" alt="Tema Netflix" width={500} height={300} className="rounded-t-lg" data-ai-hint="movie streaming interface"/></CardHeader>
-                    <CardContent className="text-left pt-6"><h3 className="font-bold text-xl mb-2">Netflix</h3><p className="text-neutral-400">Tema inspirado na Netflix com data e episódios(fotos) favoritos.</p></CardContent>
-                    <CardFooter className="gap-4"><Button variant="outline" className="w-full">Experimentar agora</Button><Button className="w-full" asChild><Link href="/create">Criar página</Link></Button></CardFooter>
-                </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl hover:scale-105 transition-transform duration-300">
+                      <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                      <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
+                      <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
+                      <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
+                      <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
+                          <Image src="https://placehold.co/270x550.png" className="w-full h-full object-cover" alt="Tema Padrão" width={270} height={550} data-ai-hint="hearts background" />
+                      </div>
+                  </div>
+                  <div className="text-center mt-2">
+                    <h3 className="font-bold text-xl mb-2">Padrão</h3>
+                    <p className="text-neutral-400 max-w-xs">Tema padrão com contador de tempo e animações de fundo.</p>
+                    <div className="flex gap-4 mt-4">
+                      <Button variant="outline" className="w-full">Experimentar agora</Button>
+                      <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center gap-4">
+                  <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl hover:scale-105 transition-transform duration-300">
+                      <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                      <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
+                      <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
+                      <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
+                      <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
+                          <Image src="https://placehold.co/270x550.png" className="w-full h-full object-cover" alt="Tema Netflix" width={270} height={550} data-ai-hint="movie streaming interface" />
+                      </div>
+                  </div>
+                   <div className="text-center mt-2">
+                      <h3 className="font-bold text-xl mb-2">Netflix</h3>
+                      <p className="text-neutral-400 max-w-xs">Tema inspirado na Netflix com data e episódios(fotos) favoritos.</p>
+                      <div className="flex gap-4 mt-4">
+                        <Button variant="outline" className="w-full">Experimentar agora</Button>
+                        <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
+                      </div>
+                  </div>
+                </div>
             </div>
         </div>
       </section>
