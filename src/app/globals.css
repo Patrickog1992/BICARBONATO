@@ -233,4 +233,39 @@
       transform: scale(1.2) translate(10vw, 15vh) rotate(20deg);
     }
   }
+
+  .cloud-base {
+    position: absolute;
+    background: white;
+    background: linear-gradient(to top, #fff 5%, #f1f1f1 100%);
+    border-radius: 100px;
+    opacity: 0.2;
+    filter: blur(2px);
+    animation: move-clouds-rtl linear infinite;
+    z-index: 0;
+  }
+
+  .cloud-base:after, .cloud-base:before {
+    content: '';
+    position: absolute;
+    background: white;
+    z-index: -1;
+  }
+
+  .cloud-sm { width: 200px; height: 60px; }
+  .cloud-sm:after { width: 100px; height: 100px; top: -50px; left: 50px; border-radius: 100px; }
+  .cloud-sm:before { width: 180px; height: 180px; top: -90px; right: 50px; border-radius: 200px; }
+
+  .cloud-md { width: 300px; height: 100px; }
+  .cloud-md:after { width: 120px; height: 120px; top: -55px; left: 60px; border-radius: 100px; }
+  .cloud-md:before { width: 200px; height: 200px; top: -110px; right: 60px; border-radius: 200px; }
+
+  .cloud-lg { width: 400px; height: 120px; }
+  .cloud-lg:after { width: 150px; height: 150px; top: -70px; left: 80px; border-radius: 150px; }
+  .cloud-lg:before { width: 250px; height: 250px; top: -130px; right: 80px; border-radius: 250px; }
+
+  @keyframes move-clouds-rtl {
+    0% { transform: translateX(110vw); }
+    100% { transform: translateX(-30vw); }
+  }
 }
