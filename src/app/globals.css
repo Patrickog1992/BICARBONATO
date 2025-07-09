@@ -242,4 +242,43 @@
       transform: scale(1.2) translate(10vw, 15vh) rotate(20deg);
     }
   }
+
+  .cloud {
+    position: absolute;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    animation: drift linear infinite;
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+  }
+
+  .cloud::before {
+    width: 120%;
+    height: 120%;
+    top: -60%;
+    right: -20%;
+  }
+
+  .cloud::after {
+    width: 90%;
+    height: 90%;
+    bottom: -45%;
+    left: -15%;
+  }
+
+  @keyframes drift {
+    from {
+      transform: translateX(-20vw);
+    }
+    to {
+      transform: translateX(120vw);
+    }
+  }
 }

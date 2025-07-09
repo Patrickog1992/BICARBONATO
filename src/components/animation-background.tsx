@@ -136,6 +136,37 @@ const AuroraAnimation = () => {
     );
 };
 
+const CloudsAnimation = () => {
+  const [clouds, setClouds] = useState<React.ReactNode[]>([]);
+
+  useEffect(() => {
+    const createCloud = (i: number) => {
+      const size = Math.random() * 200 + 100; // size between 100px and 300px
+      const top = Math.random() * 40; // top 0-40%
+      const duration = (Math.random() * 50 + 50) / (size / 100); // 50-100s, faster for smaller clouds
+
+      return (
+        <div
+          key={`cloud-${i}`}
+          className="cloud"
+          style={{
+            width: `${size}px`,
+            height: `${size / 2}px`,
+            top: `${top}%`,
+            animationDuration: `${duration}s`,
+            animationDelay: `${Math.random() * -duration}s`, // start at random points
+          }}
+        ></div>
+      );
+    };
+
+    const initialClouds = Array.from({ length: 15 }).map((_, i) => createCloud(i));
+    setClouds(initialClouds);
+  }, []);
+
+  return <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">{clouds}</div>;
+};
+
 const Emoji = ({ style, emoji }: { style: React.CSSProperties; emoji: string }) => (
   <div className="falling-emoji" style={style}>
     {emoji}
@@ -202,6 +233,8 @@ export default function AnimationBackground({ animation, children, emojis }: Ani
                 return <MeteorsAnimation />;
             case 'aurora':
                 return <AuroraAnimation />;
+            case 'clouds':
+                return <CloudsAnimation />;
             case 'emojis':
                 return <EmojisAnimation emojis={emojis} />;
             default:
