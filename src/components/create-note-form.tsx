@@ -26,6 +26,7 @@ import { Textarea } from './ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from './ui/calendar';
+import RelationshipCounter from './relationship-counter';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
@@ -240,9 +241,10 @@ export default function CreateNoteForm() {
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
-                      <CardContent className="rounded-[2rem] overflow-hidden w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8 text-center">
-                          <div className="text-white space-y-4">
+                      <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8 text-center">
+                           <div className="text-white space-y-2">
                               <h1 className="font-headline text-2xl font-bold">{formData.title || "Seu título aparecerá aqui"}</h1>
+                              {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
                               <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
                           </div>
                       </CardContent>

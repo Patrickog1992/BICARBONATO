@@ -7,6 +7,7 @@ import { toPng } from 'html-to-image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { NoteData } from '@/services/note';
+import RelationshipCounter from './relationship-counter';
 
 function getYouTubeEmbedUrl(url: string | undefined): string | null {
   if (!url) return null;
@@ -34,12 +35,20 @@ interface NoteDisplayProps {
 export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
 
   useEffect(() => {
     if (note.musicUrl) {
       setEmbedUrl(getYouTubeEmbedUrl(note.musicUrl));
     }
-  }, [note.musicUrl]);
+    // Props from Server Components are serialized, so we need to convert the string back to a Date object.
+    if (note.startDate) {
+      const date = new Date(note.startDate);
+      if (!isNaN(date.getTime())) {
+        setStartDate(date);
+      }
+    }
+  }, [note.musicUrl, note.startDate]);
 
   const handleDownload = async () => {
     if (qrCodeRef.current === null) {
@@ -83,12 +92,14 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
         </div>
 
         {note.title && (
-          <h1 className="font-headline text-4xl md:text-5xl font-bold mb-6 text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700">
+          <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700">
             {note.title}
           </h1>
         )}
 
-        <div className="space-y-6">
+        {startDate && <RelationshipCounter startDate={startDate} />}
+
+        <div className="space-y-6 mt-6">
           {paragraphs.map((p, index) => (
             <p
               key={index}
