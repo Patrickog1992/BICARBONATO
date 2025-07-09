@@ -154,7 +154,7 @@ export default function CreateNoteForm() {
                     </form>
                 </Form>
             </div>
-             <div className="w-full lg:w-1/2 h-full hidden lg:block">
+             <div className="w-full lg:w-1/2 h-full">
               <div className="sticky top-24">
                   <Card className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl">
                       <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
