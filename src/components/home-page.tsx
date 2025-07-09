@@ -183,7 +183,7 @@ export default function HomePage() {
                     <h3 className="font-bold text-xl mb-2">Padrão</h3>
                     <p className="text-neutral-400 max-w-xs">Tema padrão com contador de tempo e animações de fundo.</p>
                     <div className="flex gap-4 mt-4">
-                      <Button variant="outline" className="w-full">Experimentar agora</Button>
+                      <Button variant="outline" className="w-full" disabled>Experimentar agora</Button>
                       <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
                     </div>
                   </div>
@@ -202,7 +202,7 @@ export default function HomePage() {
                       <h3 className="font-bold text-xl mb-2">Netflix</h3>
                       <p className="text-neutral-400 max-w-xs">Tema inspirado na Netflix com data e episódios(fotos) favoritos.</p>
                       <div className="flex gap-4 mt-4">
-                        <Button variant="outline" className="w-full">Experimentar agora</Button>
+                        <Button variant="outline" className="w-full" disabled>Experimentar agora</Button>
                         <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
                       </div>
                   </div>
