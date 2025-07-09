@@ -30,6 +30,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from '@/hooks/use-toast';
 import { generateLoveNoteSuggestion } from '@/ai/flows/generate-love-note-suggestion';
 import { Card, CardContent } from '@/components/ui/card';
+import { addNote } from '@/services/note';
 
 
 const formSchema = z.object({
@@ -54,6 +55,7 @@ const formSchema = z.object({
 export default function CreateNoteForm() {
     const router = useRouter();
     const [isSuggestionLoading, setIsSuggestionLoading] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -95,10 +97,21 @@ export default function CreateNoteForm() {
         }
     };
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        const content = encodeURIComponent(values.loveNote);
-        const musicUrl = values.musicUrl ? encodeURIComponent(values.musicUrl) : '';
-        router.push(`/note?content=${content}&musicUrl=${musicUrl}`);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsSubmitting(true);
+        try {
+            const noteId = await addNote(values);
+            router.push(`/note/${noteId}`);
+        } catch (error) {
+             console.error('Error creating note:', error);
+            toast({
+                variant: 'destructive',
+                title: 'Erro ao criar a página',
+                description: 'Houve um problema ao salvar sua nota. Por favor, tente novamente.',
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
 
@@ -194,7 +207,7 @@ export default function CreateNoteForm() {
                                             variant="ghost"
                                             size="sm"
                                             onClick={handleGenerateSuggestion}
-                                            disabled={isSuggestionLoading}
+                                            disabled={isSuggestionLoading || isSubmitting}
                                         >
                                             {isSuggestionLoading ? (
                                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -233,7 +246,10 @@ export default function CreateNoteForm() {
                             )}
                         />
                          <div className="text-center md:text-right pt-4">
-                            <Button type="submit" size="lg">Criar Minha Página</Button>
+                            <Button type="submit" size="lg" disabled={isSubmitting}>
+                                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                Criar Minha Página
+                            </Button>
                         </div>
                     </form>
                 </Form>

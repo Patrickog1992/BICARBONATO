@@ -1,76 +1,56 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, useRef } from 'react';
 import { Heart, Download } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { NoteData } from '@/services/note';
 
-function getYouTubeEmbedUrl(url: string): string | null {
+function getYouTubeEmbedUrl(url: string | undefined): string | null {
   if (!url) return null;
   let videoId: string | null = null;
   try {
     const urlObj = new URL(url);
     if (urlObj.hostname === 'youtu.be') {
-        videoId = urlObj.pathname.slice(1);
+      videoId = urlObj.pathname.slice(1);
     } else if (urlObj.hostname.includes('youtube.com')) {
-        videoId = urlObj.searchParams.get('v');
+      videoId = urlObj.searchParams.get('v');
     }
   } catch (e) {
-      console.error("Invalid URL for YouTube parsing", e);
-      return null;
+    console.error('Invalid URL for YouTube parsing', e);
+    return null;
   }
-  
+
   return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : null;
 }
 
+interface NoteDisplayProps {
+  note: NoteData;
+  currentUrl: string;
+}
 
-export default function NoteDisplay() {
-  const searchParams = useSearchParams();
-  const noteContent = searchParams.get('content');
-  const musicUrl = searchParams.get('musicUrl');
+export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
   const qrCodeRef = useRef<HTMLDivElement>(null);
-
-  const [decodedNote, setDecodedNote] = useState('');
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [currentUrl, setCurrentUrl] = useState('');
 
   useEffect(() => {
-    // This ensures we get the full URL only on the client side
-    if (window.location.href) {
-      setCurrentUrl(window.location.href);
+    if (note.musicUrl) {
+      setEmbedUrl(getYouTubeEmbedUrl(note.musicUrl));
     }
-    
-    if (noteContent) {
-      try {
-        setDecodedNote(decodeURIComponent(noteContent));
-      } catch (e) {
-        setError('This love note seems to be corrupted.');
-      }
-    } else {
-      setError('No love note was found here.');
-    }
-
-    if (musicUrl) {
-        try {
-            const decodedMusicUrl = decodeURIComponent(musicUrl);
-            setEmbedUrl(getYouTubeEmbedUrl(decodedMusicUrl));
-        } catch (e) {
-            // fail silently if music url is malformed
-            console.error("Could not decode music URL", e);
-        }
-    }
-  }, [noteContent, musicUrl]);
+  }, [note.musicUrl]);
 
   const handleDownload = async () => {
     if (qrCodeRef.current === null) {
       return;
     }
     try {
-      const dataUrl = await toPng(qrCodeRef.current);
+      const dataUrl = await toPng(qrCodeRef.current, {
+        backgroundColor: '#ffffff', // Ensure a white background for the QR code image
+        width: 232,
+        height: 232,
+      });
       const link = document.createElement('a');
       link.download = 'codelove-qrcode.png';
       link.href = dataUrl;
@@ -80,64 +60,73 @@ export default function NoteDisplay() {
     }
   };
 
+  if (!note) {
+    return (
+      <main className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+        <p className="font-headline text-3xl text-destructive">Nota não encontrada.</p>
+      </main>
+    );
+  }
 
-  const paragraphs = decodedNote.split('\n').filter(p => p.trim() !== '');
+  const paragraphs = note.loveNote.split('\n').filter(p => p.trim() !== '');
 
   return (
-    <main 
+    <main
       className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 gap-8 animate-in fade-in duration-1000"
       style={{
-        background: 'hsl(var(--background))'
+        background: 'hsl(var(--background))',
       }}
     >
       <div className="relative max-w-3xl w-full text-center p-8 md:p-12 bg-card rounded-2xl shadow-2xl border-2 border-accent/20">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card p-3 rounded-full border-2 border-accent/20">
-           <Heart className="w-8 h-8 text-accent" fill="hsl(var(--accent))" />
+          <Heart className="w-8 h-8 text-accent" fill="hsl(var(--accent))" />
         </div>
-        
-        {error ? (
-          <p className="font-headline text-3xl text-destructive">{error}</p>
-        ) : (
-          <div className="space-y-6">
-            {paragraphs.map((p, index) => (
-                <p key={index} className="font-body text-2xl md:text-3xl leading-relaxed text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700" style={{animationDelay: `${100 * (index + 1)}ms`, animationFillMode: 'backwards'}}>
-                    {p}
-                </p>
-            ))}
+
+        <div className="space-y-6">
+          {paragraphs.map((p, index) => (
+            <p
+              key={index}
+              className="font-body text-2xl md:text-3xl leading-relaxed text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700"
+              style={{ animationDelay: `${100 * (index + 1)}ms`, animationFillMode: 'backwards' }}
+            >
+              {p}
+            </p>
+          ))}
+        </div>
+
+        {embedUrl && (
+          <div className="mt-12 aspect-video">
+            <iframe
+              width="100%"
+              height="100%"
+              src={embedUrl}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="rounded-lg"
+            ></iframe>
           </div>
         )}
-        
-        {embedUrl && (
-            <div className="mt-12 aspect-video">
-                <iframe
-                    width="100%"
-                    height="100%"
-                    src={embedUrl}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="rounded-lg"
-                ></iframe>
-            </div>
-        )}
       </div>
-      
-      {currentUrl && !error && (
+
+      {currentUrl && (
         <Card className="max-w-sm w-full">
-            <CardHeader>
-                <CardTitle className="text-center">Seu QR Code</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center gap-4">
-                <div ref={qrCodeRef} className="p-4 bg-white rounded-lg">
-                    <QRCodeCanvas value={currentUrl} size={200} />
-                </div>
-                <p className="text-sm text-muted-foreground text-center">Mostre este QR Code para a pessoa amada escanear com a câmera do celular.</p>
-                <Button onClick={handleDownload} className="w-full">
-                    <Download className="mr-2 h-4 w-4" />
-                    Baixar QR Code
-                </Button>
-            </CardContent>
+          <CardHeader>
+            <CardTitle className="text-center">Seu QR Code</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center gap-4">
+            <div ref={qrCodeRef} className="p-4 bg-white rounded-lg">
+              <QRCodeCanvas value={currentUrl} size={200} />
+            </div>
+            <p className="text-sm text-muted-foreground text-center">
+              Mostre este QR Code para a pessoa amada escanear com a câmera do celular.
+            </p>
+            <Button onClick={handleDownload} className="w-full">
+              <Download className="mr-2 h-4 w-4" />
+              Baixar QR Code
+            </Button>
+          </CardContent>
         </Card>
       )}
     </main>
