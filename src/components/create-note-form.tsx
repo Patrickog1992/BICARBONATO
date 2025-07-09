@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { CalendarIcon, Loader2, Music, Upload } from 'lucide-react';
+import { CalendarIcon, Loader2, Music, Sparkles, Upload } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Image from 'next/image';
@@ -37,6 +37,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
@@ -44,9 +45,21 @@ const formSchema = z.object({
   musicUrl: z.string().optional(),
   startDate: z.date().optional(),
   images: z.array(z.string()).optional(),
+  backgroundAnimation: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
+
+const animationNames: { [key: string]: string } = {
+    'none': 'Nenhuma',
+    'hearts': 'Chuva de corações',
+    'comets': 'Céu Estrelado com Cometas',
+    'meteors': 'Céu Estrelado com Meteoros',
+    'aurora': 'Aurora',
+    'vortex': 'Vórtice de cores',
+    'clouds': 'Nuvens',
+    'emojis': 'Emojis'
+};
 
 export default function CreateNoteForm() {
     const router = useRouter();
@@ -63,6 +76,7 @@ export default function CreateNoteForm() {
             musicUrl: '',
             startDate: undefined,
             images: [],
+            backgroundAnimation: 'none',
         },
     });
     
@@ -77,6 +91,7 @@ export default function CreateNoteForm() {
                 musicUrl: values.musicUrl,
                 startDate: values.startDate,
                 images: values.images,
+                backgroundAnimation: values.backgroundAnimation
             }
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -139,7 +154,7 @@ export default function CreateNoteForm() {
         { title: "Data de início", description: "Informe a data de início que simbolize o início de uma união, relacionamento, amizade, etc." },
         { title: "Fotos", description: "Anexe fotos e escolha o modo de exibição para personalizar a página. Você pode adicionar até 8 fotos." },
         { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
-        { title: "Animação de fundo", description: "Escolha uma animação de fundo para a página." },
+        { title: "Animação de fundo", description: "Escolha uma animação de fundo para a página. Você pode escolher entre as opções abaixo." },
         { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link." },
         { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
     ];
@@ -310,6 +325,75 @@ export default function CreateNoteForm() {
                             />
                           </div>
                         )}
+                         {step === 6 && (
+                            <div className="space-y-8 animate-in fade-in">
+                                <FormField
+                                    control={form.control}
+                                    name="backgroundAnimation"
+                                    render={({ field }) => (
+                                        <FormItem className="space-y-3">
+                                            <FormControl>
+                                                <RadioGroup
+                                                    onValueChange={field.onChange}
+                                                    defaultValue={field.value}
+                                                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                                                >
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="none" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Nenhuma</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="hearts" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Chuva de corações</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="comets" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Céu Estrelado com Cometas</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="meteors" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Céu Estrelado com Meteoros</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="aurora" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Aurora</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="vortex" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Vórtice de cores</FormLabel>
+                                                    </FormItem>
+                                                     <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="clouds" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">Nuvens</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="emojis" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal text-white">ou escolha 3 emojis</FormLabel>
+                                                    </FormItem>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        )}
                         
                         <div className="flex items-center justify-between gap-4 mt-8">
                            <div>
@@ -362,6 +446,12 @@ export default function CreateNoteForm() {
                                 <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
                                     <Music className="w-5 h-5 text-white" />
                                     <p className="text-xs text-white truncate">Música selecionada</p>
+                                </div>
+                              )}
+                              {formData.backgroundAnimation && formData.backgroundAnimation !== 'none' && (
+                                <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
+                                    <Sparkles className="w-5 h-5 text-white" />
+                                    <p className="text-xs text-white truncate">Animação: {animationNames[formData.backgroundAnimation]}</p>
                                 </div>
                               )}
                           </div>

@@ -8,6 +8,7 @@ export interface NoteData {
   musicUrl?: string;
   startDate?: Date;
   images?: string[];
+  backgroundAnimation?: string;
   userSentiment?: string;
   relationshipLength?: string;
   sharedMemory?: string;
