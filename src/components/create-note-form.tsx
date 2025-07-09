@@ -58,8 +58,6 @@ const animationNames: { [key: string]: string } = {
     'comets': 'Céu Estrelado com Cometas',
     'meteors': 'Céu Estrelado com Meteoros',
     'aurora': 'Aurora',
-    'vortex': 'Vórtice de cores (Indisponível)',
-    'clouds': 'Nuvens',
     'emojis': 'Emojis'
 };
 
@@ -376,18 +374,6 @@ export default function CreateNoteForm() {
                                                             <RadioGroupItem value="aurora" />
                                                         </FormControl>
                                                         <FormLabel className="font-normal text-white">Aurora</FormLabel>
-                                                    </FormItem>
-                                                    <FormItem className="flex items-center space-x-3 space-y-0">
-                                                        <FormControl>
-                                                            <RadioGroupItem value="vortex" disabled />
-                                                        </FormControl>
-                                                        <FormLabel className="font-normal text-neutral-500">Vórtice de cores</FormLabel>
-                                                    </FormItem>
-                                                     <FormItem className="flex items-center space-x-3 space-y-0">
-                                                        <FormControl>
-                                                            <RadioGroupItem value="clouds" />
-                                                        </FormControl>
-                                                        <FormLabel className="font-normal text-white">Nuvens</FormLabel>
                                                     </FormItem>
                                                     <FormItem className="flex items-center space-x-3 space-y-0">
                                                         <FormControl>
