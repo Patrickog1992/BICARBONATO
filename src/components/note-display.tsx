@@ -8,6 +8,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { NoteData } from '@/services/note';
 import RelationshipCounter from './relationship-counter';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Image from "next/image";
+
 
 function getYouTubeEmbedUrl(url: string | undefined): string | null {
   if (!url) return null;
@@ -110,6 +119,28 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
             </p>
           ))}
         </div>
+        
+        {note.images && note.images.length > 0 && (
+            <div className="mt-8 w-full">
+                <Carousel className="w-full max-w-md mx-auto">
+                    <CarouselContent>
+                        {note.images.map((src, index) => (
+                            <CarouselItem key={index}>
+                                <div className="p-1">
+                                    <Card>
+                                        <CardContent className="flex aspect-square items-center justify-center p-0">
+                                            <Image src={src} alt={`Note image ${index + 1}`} width={500} height={500} className="rounded-lg object-cover w-full h-full" />
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                </Carousel>
+            </div>
+        )}
 
         {embedUrl && (
           <div className="mt-12 aspect-video">

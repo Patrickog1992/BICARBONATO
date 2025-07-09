@@ -7,6 +7,7 @@ export interface NoteData {
   loveNote: string;
   musicUrl?: string;
   startDate?: Date;
+  images?: string[];
   userSentiment?: string;
   relationshipLength?: string;
   sharedMemory?: string;
