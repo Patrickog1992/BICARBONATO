@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { CalendarIcon, Loader2, Music, Sparkles, Upload } from 'lucide-react';
+import { CalendarIcon, Loader2, Music, Sparkles, Upload, Mail, Phone } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Image from 'next/image';
@@ -48,6 +48,8 @@ const formSchema = z.object({
   images: z.array(z.string()).optional(),
   backgroundAnimation: z.string().optional(),
   emojis: z.string().optional(),
+  email: z.string().email({ message: 'Por favor, insira um e-mail válido.' }),
+  phone: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -79,6 +81,8 @@ export default function CreateNoteForm() {
             images: [],
             backgroundAnimation: 'none',
             emojis: '',
+            email: '',
+            phone: '',
         },
     });
     
@@ -95,6 +99,8 @@ export default function CreateNoteForm() {
                 images: values.images,
                 backgroundAnimation: values.backgroundAnimation,
                 emojis: values.emojis,
+                email: values.email,
+                phone: values.phone,
             }
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -138,6 +144,7 @@ export default function CreateNoteForm() {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
+        if (step === 7) fieldsToValidate = ['email'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -158,13 +165,14 @@ export default function CreateNoteForm() {
         { title: "Fotos", description: "Anexe fotos e escolha o modo de exibição para personalizar a página. Você pode adicionar até 8 fotos." },
         { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
         { title: "Animação de fundo", description: "Escolha uma animação de fundo para a página. Você pode escolher entre as opções abaixo." },
-        { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link." },
+        { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link da página personalizada." },
         { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
     ];
     
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
-      (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote));
+      (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
+      (step === 7 && (!form.watch('email') || !!form.formState.errors.email));
       
     const previewAnimationName = formData.backgroundAnimation === 'emojis' && formData.emojis
       ? `Emojis (${formData.emojis})`
@@ -414,6 +422,45 @@ export default function CreateNoteForm() {
                                                     />
                                                 </div>
                                             )}
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        )}
+                        {step === 7 && (
+                            <div className="space-y-8 animate-in fade-in">
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className='text-white'>E-mail</FormLabel>
+                                            <FormControl>
+                                                <div className="relative">
+                                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                                                    <Input placeholder="Ex: seu.email@gmail.com" {...field} className="pl-10" />
+                                                </div>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="phone"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className='text-white'>Telefone</FormLabel>
+                                            <FormControl>
+                                                <div className="relative">
+                                                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                                                    <Input placeholder="Ex: (99) 99999-9999" {...field} className="pl-10" />
+                                                </div>
+                                            </FormControl>
+                                            <FormDescription>
+                                                Opcional.
+                                            </FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}

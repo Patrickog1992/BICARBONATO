@@ -14,6 +14,8 @@ export interface NoteData {
   relationshipLength?: string;
   sharedMemory?: string;
   createdAt?: any;
+  email?: string;
+  phone?: string;
 }
 
 export async function addNote(noteData: Omit<NoteData, 'createdAt'>) {
