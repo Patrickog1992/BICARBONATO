@@ -24,11 +24,11 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { addNote } from '@/services/note';
 import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { Textarea } from './ui/textarea';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { Calendar } from './ui/calendar';
+import { Calendar } from '@/components/ui/calendar';
 import RelationshipCounter from './relationship-counter';
 import {
   Carousel,
@@ -37,9 +37,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import AnimationBackground from './animation-background';
-import { Badge } from './ui/badge';
+import { Label } from '@/components/ui/label';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
@@ -49,7 +49,7 @@ const formSchema = z.object({
   images: z.array(z.string()).optional(),
   backgroundAnimation: z.string().optional(),
   emojis: z.string().optional(),
-  email: z.string().email({ message: 'Por favor, insira um e-mail válido.' }),
+  email: z.string().min(1, { message: 'O e-mail é obrigatório.' }).email({ message: 'Por favor, insira um e-mail válido.' }),
   phone: z.string().optional(),
   plan: z.string({ required_error: 'Por favor, selecione um plano.' }),
 });
@@ -640,3 +640,5 @@ export default function CreateNoteForm() {
         </div>
     )
 }
+
+    
