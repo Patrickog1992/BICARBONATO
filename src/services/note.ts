@@ -16,6 +16,7 @@ export interface NoteData {
   createdAt?: any;
   email?: string;
   phone?: string;
+  plan?: string;
 }
 
 export async function addNote(noteData: Omit<NoteData, 'createdAt'>) {

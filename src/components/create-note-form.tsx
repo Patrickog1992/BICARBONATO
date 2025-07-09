@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { CalendarIcon, Loader2, Music, Sparkles, Upload, Mail, Phone } from 'lucide-react';
+import { CalendarIcon, Loader2, Music, Sparkles, Upload, Mail, Phone, CheckCircle, Package } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Image from 'next/image';
@@ -24,7 +24,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { addNote } from '@/services/note';
 import { Progress } from "@/components/ui/progress";
-import { Card, CardContent } from './ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { cn } from '@/lib/utils';
@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/carousel";
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import AnimationBackground from './animation-background';
+import { Badge } from './ui/badge';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
@@ -50,6 +51,7 @@ const formSchema = z.object({
   emojis: z.string().optional(),
   email: z.string().email({ message: 'Por favor, insira um e-mail válido.' }),
   phone: z.string().optional(),
+  plan: z.string({ required_error: 'Por favor, selecione um plano.' }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -68,7 +70,7 @@ export default function CreateNoteForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [step, setStep] = useState(1);
-    const totalSteps = 8;
+    const totalSteps = 9;
     const { toast } = useToast();
 
     const form = useForm<FormData>({
@@ -83,6 +85,7 @@ export default function CreateNoteForm() {
             emojis: '',
             email: '',
             phone: '',
+            plan: 'forever',
         },
     });
     
@@ -101,6 +104,7 @@ export default function CreateNoteForm() {
                 emojis: values.emojis,
                 email: values.email,
                 phone: values.phone,
+                plan: values.plan,
             }
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -145,6 +149,7 @@ export default function CreateNoteForm() {
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
         if (step === 7) fieldsToValidate = ['email'];
+        if (step === 8) fieldsToValidate = ['plan'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -166,13 +171,15 @@ export default function CreateNoteForm() {
         { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
         { title: "Animação de fundo", description: "Escolha uma animação de fundo para a página. Você pode escolher entre as opções abaixo." },
         { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link da página personalizada." },
+        { title: "Plano Ideal", description: "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo." },
         { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
     ];
     
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 7 && (!form.watch('email') || !!form.formState.errors.email));
+      (step === 7 && (!form.watch('email') || !!form.formState.errors.email)) ||
+      (step === 8 && !form.watch('plan'));
       
     const previewAnimationName = formData.backgroundAnimation === 'emojis' && formData.emojis
       ? `Emojis (${formData.emojis})`
@@ -467,6 +474,96 @@ export default function CreateNoteForm() {
                                 />
                             </div>
                         )}
+                        {step === 8 && (
+                           <div className="space-y-8 animate-in fade-in">
+                                <FormField
+                                    control={form.control}
+                                    name="plan"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    onValueChange={field.onChange}
+                                                    defaultValue={field.value}
+                                                    className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"
+                                                >
+                                                    <FormItem>
+                                                        <FormControl>
+                                                            <RadioGroupItem value="forever" id="forever" className="sr-only" />
+                                                        </FormControl>
+                                                        <Label htmlFor="forever" className="cursor-pointer">
+                                                            <Card className={`relative border-2 bg-neutral-900 h-full ${field.value === 'forever' ? 'border-primary' : 'border-neutral-800'}`}>
+                                                                <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 text-sm rounded-full font-bold">Recomendado</div>
+                                                                <CardHeader className="pt-8">
+                                                                    <CardTitle>Para sempre</CardTitle>
+                                                                    <CardDescription>Esse plano é vitalício, não precisa renovar.</CardDescription>
+                                                                </CardHeader>
+                                                                <CardContent className="space-y-4 text-left">
+                                                                    <ul className="space-y-2 text-sm text-neutral-300">
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Texto dedicado</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Contador em tempo real</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Data de início</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>QR Code exclusivo</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Máximo de 8 imagens</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Com música</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Fundo dinâmico</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Com animações exclusivas</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>URL personalizada</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Suporte 24 horas</li>
+                                                                    </ul>
+                                                                </CardContent>
+                                                                <CardFooter className="flex flex-col items-start pt-4">
+                                                                    <p className="text-neutral-400"><span className="line-through">R$ 54,00</span></p>
+                                                                    <p className="text-3xl font-bold my-2">R$ 27,00 <span className="text-sm font-normal text-neutral-400">/uma vez</span></p>
+                                                                </CardFooter>
+                                                            </Card>
+                                                        </Label>
+                                                    </FormItem>
+                                                    <FormItem>
+                                                        <FormControl>
+                                                            <RadioGroupItem value="annual" id="annual" className="sr-only" />
+                                                        </FormControl>
+                                                        <Label htmlFor="annual" className="cursor-pointer">
+                                                             <Card className={`border-2 bg-neutral-900 h-full ${field.value === 'annual' ? 'border-primary' : 'border-neutral-800'}`}>
+                                                                <CardHeader>
+                                                                    <CardTitle>Anual</CardTitle>
+                                                                    <CardDescription>Esse plano possui um período de 1 ano.</CardDescription>
+                                                                </CardHeader>
+                                                                <CardContent className="space-y-4 text-left">
+                                                                    <ul className="space-y-2 text-sm text-neutral-300">
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Texto dedicado</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Contador em tempo real</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Data de início</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>QR Code exclusivo</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Máximo de 4 imagens</li>
+                                                                        <li className="flex items-center text-neutral-500 line-through"><CheckCircle className="text-neutral-600 mr-2" size={16}/>Sem música</li>
+                                                                        <li className="flex items-center text-neutral-500 line-through"><CheckCircle className="text-neutral-600 mr-2" size={16}/>Sem fundo dinâmico</li>
+                                                                        <li className="flex items-center text-neutral-500 line-through"><CheckCircle className="text-neutral-600 mr-2" size={16}/>Sem animações exclusivas</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>URL personalizada</li>
+                                                                        <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" size={16}/>Suporte 24 horas</li>
+                                                                    </ul>
+                                                                </CardContent>
+                                                                <CardFooter className="flex flex-col items-start pt-4">
+                                                                    <p className="text-neutral-400"><span className="line-through">R$ 34,00</span></p>
+                                                                    <p className="text-3xl font-bold my-2">R$ 17,00 <span className="text-sm font-normal text-neutral-400">/por ano</span></p>
+                                                                </CardFooter>
+                                                            </Card>
+                                                         </Label>
+                                                    </FormItem>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        )}
+                        {step === 9 && (
+                            <div className="space-y-4 animate-in fade-in text-center">
+                                <p className="text-lg text-white">Tudo pronto!</p>
+                                <p className='text-neutral-300'>Sua página está prestes a ser criada com as informações ao lado. Clique em "Criar Minha Página" para finalizar.</p>
+                            </div>
+                        )}
                         
                         <div className="flex items-center justify-between gap-4 mt-8">
                            <div>
@@ -526,6 +623,12 @@ export default function CreateNoteForm() {
                                     <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
                                         <Sparkles className="w-5 h-5 text-white" />
                                         <p className="text-xs text-white truncate">Animação: {previewAnimationName}</p>
+                                    </div>
+                                )}
+                                {formData.plan && (
+                                    <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
+                                        <Package className="w-5 h-5 text-white" />
+                                        <p className="text-xs text-white truncate">Plano: {formData.plan === 'forever' ? 'Para sempre' : 'Anual'}</p>
                                     </div>
                                 )}
                             </div>
