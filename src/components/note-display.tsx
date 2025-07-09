@@ -16,6 +16,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import AnimationBackground from './animation-background';
 
 
 function getYouTubeEmbedUrl(url: string | undefined): string | null {
@@ -89,94 +90,93 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
   const paragraphs = note.loveNote.split('\n').filter(p => p.trim() !== '');
 
   return (
-    <main
-      className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 gap-8 animate-in fade-in duration-1000"
-      style={{
-        background: 'hsl(var(--background))',
-      }}
-    >
-      <div className="relative max-w-3xl w-full text-center p-8 md:p-12 bg-card rounded-2xl shadow-2xl border-2 border-accent/20">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card p-3 rounded-full border-2 border-accent/20">
-          <Heart className="w-8 h-8 text-accent" fill="hsl(var(--accent))" />
-        </div>
-
-        {note.title && (
-          <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700">
-            {note.title}
-          </h1>
-        )}
-
-        {startDate && <RelationshipCounter startDate={startDate} />}
-
-        <div className="space-y-6 mt-6">
-          {paragraphs.map((p, index) => (
-            <p
-              key={index}
-              className="font-body text-2xl md:text-3xl leading-relaxed text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700"
-              style={{ animationDelay: `${100 * (index + 1)}ms`, animationFillMode: 'backwards' }}
-            >
-              {p}
-            </p>
-          ))}
-        </div>
-        
-        {note.images && note.images.length > 0 && (
-            <div className="mt-8 w-full">
-                <Carousel className="w-full max-w-md mx-auto">
-                    <CarouselContent>
-                        {note.images.map((src, index) => (
-                            <CarouselItem key={index}>
-                                <div className="p-1">
-                                    <Card>
-                                        <CardContent className="flex aspect-square items-center justify-center p-0">
-                                            <Image src={src} alt={`Note image ${index + 1}`} width={500} height={500} className="rounded-lg object-cover w-full h-full" />
-                                        </CardContent>
-                                    </Card>
-                                </div>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                </Carousel>
-            </div>
-        )}
-
-        {embedUrl && (
-          <div className="mt-12 aspect-video">
-            <iframe
-              width="100%"
-              height="100%"
-              src={embedUrl}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              className="rounded-lg"
-            ></iframe>
+    <AnimationBackground animation={note.backgroundAnimation}>
+      <main
+        className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 gap-8 animate-in fade-in duration-1000"
+      >
+        <div className="relative max-w-3xl w-full text-center p-8 md:p-12 bg-card rounded-2xl shadow-2xl border-2 border-accent/20">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card p-3 rounded-full border-2 border-accent/20">
+            <Heart className="w-8 h-8 text-accent" fill="hsl(var(--accent))" />
           </div>
-        )}
-      </div>
 
-      {currentUrl && (
-        <Card className="max-w-sm w-full">
-          <CardHeader>
-            <CardTitle className="text-center">Seu QR Code</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col items-center gap-4">
-            <div ref={qrCodeRef} className="p-4 bg-white rounded-lg">
-              <QRCodeCanvas value={currentUrl} size={200} />
+          {note.title && (
+            <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700">
+              {note.title}
+            </h1>
+          )}
+
+          {startDate && <RelationshipCounter startDate={startDate} />}
+
+          <div className="space-y-6 mt-6">
+            {paragraphs.map((p, index) => (
+              <p
+                key={index}
+                className="font-body text-2xl md:text-3xl leading-relaxed text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700"
+                style={{ animationDelay: `${100 * (index + 1)}ms`, animationFillMode: 'backwards' }}
+              >
+                {p}
+              </p>
+            ))}
+          </div>
+          
+          {note.images && note.images.length > 0 && (
+              <div className="mt-8 w-full">
+                  <Carousel className="w-full max-w-md mx-auto">
+                      <CarouselContent>
+                          {note.images.map((src, index) => (
+                              <CarouselItem key={index}>
+                                  <div className="p-1">
+                                      <Card>
+                                          <CardContent className="flex aspect-square items-center justify-center p-0">
+                                              <Image src={src} alt={`Note image ${index + 1}`} width={500} height={500} className="rounded-lg object-cover w-full h-full" />
+                                          </CardContent>
+                                      </Card>
+                                  </div>
+                              </CarouselItem>
+                          ))}
+                      </CarouselContent>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                  </Carousel>
+              </div>
+          )}
+
+          {embedUrl && (
+            <div className="mt-12 aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src={embedUrl}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="rounded-lg"
+              ></iframe>
             </div>
-            <p className="text-sm text-muted-foreground text-center">
-              Mostre este QR Code para a pessoa amada escanear com a câmera do celular.
-            </p>
-            <Button onClick={handleDownload} className="w-full">
-              <Download className="mr-2 h-4 w-4" />
-              Baixar QR Code
-            </Button>
-          </CardContent>
-        </Card>
-      )}
-    </main>
+          )}
+        </div>
+
+        {currentUrl && (
+          <Card className="max-w-sm w-full">
+            <CardHeader>
+              <CardTitle className="text-center">Seu QR Code</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center gap-4">
+              <div ref={qrCodeRef} className="p-4 bg-white rounded-lg">
+                <QRCodeCanvas value={currentUrl} size={200} />
+              </div>
+              <p className="text-sm text-muted-foreground text-center">
+                Mostre este QR Code para a pessoa amada escanear com a câmera do celular.
+              </p>
+              <Button onClick={handleDownload} className="w-full">
+                <Download className="mr-2 h-4 w-4" />
+                Baixar QR Code
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+      </main>
+    </AnimationBackground>
   );
 }

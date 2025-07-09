@@ -38,6 +38,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
+import AnimationBackground from './animation-background';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
@@ -422,39 +423,41 @@ export default function CreateNoteForm() {
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
-                      <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8 text-center">
-                           <div className="text-white space-y-2">
-                              <h1 className="font-headline text-2xl font-bold text-red-500">{formData.title || "Seu título aparecerá aqui"}</h1>
-                              {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
-                              <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
-                              {formData.images && formData.images.length > 0 && (
-                                <div className="mt-4 w-full">
-                                    <Carousel className="w-full max-w-xs mx-auto">
-                                        <CarouselContent>
-                                            {formData.images.map((src, index) => (
-                                                <CarouselItem key={index}>
-                                                    <Image src={src} alt={`Preview ${index + 1}`} width={200} height={200} className="rounded-md object-cover w-full aspect-square" />
-                                                </CarouselItem>
-                                            ))}
-                                        </CarouselContent>
-                                        <CarouselPrevious className="left-[-24px] text-white" />
-                                        <CarouselNext className="right-[-24px] text-white" />
-                                    </Carousel>
-                                </div>
-                              )}
-                              {formData.musicUrl && (
-                                <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
-                                    <Music className="w-5 h-5 text-white" />
-                                    <p className="text-xs text-white truncate">Música selecionada</p>
-                                </div>
-                              )}
-                              {formData.backgroundAnimation && formData.backgroundAnimation !== 'none' && (
-                                <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
-                                    <Sparkles className="w-5 h-5 text-white" />
-                                    <p className="text-xs text-white truncate">Animação: {animationNames[formData.backgroundAnimation]}</p>
-                                </div>
-                              )}
-                          </div>
+                      <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-0">
+                           <AnimationBackground animation={formData.backgroundAnimation}>
+                            <div className="text-white space-y-2 text-center p-4 pt-8">
+                                <h1 className="font-headline text-2xl font-bold text-red-500">{formData.title || "Seu título aparecerá aqui"}</h1>
+                                {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
+                                <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
+                                {formData.images && formData.images.length > 0 && (
+                                    <div className="mt-4 w-full">
+                                        <Carousel className="w-full max-w-xs mx-auto">
+                                            <CarouselContent>
+                                                {formData.images.map((src, index) => (
+                                                    <CarouselItem key={index}>
+                                                        <Image src={src} alt={`Preview ${index + 1}`} width={200} height={200} className="rounded-md object-cover w-full aspect-square" />
+                                                    </CarouselItem>
+                                                ))}
+                                            </CarouselContent>
+                                            <CarouselPrevious className="left-[-24px] text-white" />
+                                            <CarouselNext className="right-[-24px] text-white" />
+                                        </Carousel>
+                                    </div>
+                                )}
+                                {formData.musicUrl && (
+                                    <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
+                                        <Music className="w-5 h-5 text-white" />
+                                        <p className="text-xs text-white truncate">Música selecionada</p>
+                                    </div>
+                                )}
+                                {formData.backgroundAnimation && formData.backgroundAnimation !== 'none' && (
+                                    <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
+                                        <Sparkles className="w-5 h-5 text-white" />
+                                        <p className="text-xs text-white truncate">Animação: {animationNames[formData.backgroundAnimation]}</p>
+                                    </div>
+                                )}
+                            </div>
+                           </AnimationBackground>
                       </CardContent>
                   </Card>
               </div>
