@@ -1,8 +1,12 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Heart } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { Heart, Download } from 'lucide-react';
+import { QRCodeCanvas } from 'qrcode.react';
+import { toPng } from 'html-to-image';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 function getYouTubeEmbedUrl(url: string): string | null {
   if (!url) return null;
@@ -27,12 +31,19 @@ export default function NoteDisplay() {
   const searchParams = useSearchParams();
   const noteContent = searchParams.get('content');
   const musicUrl = searchParams.get('musicUrl');
+  const qrCodeRef = useRef<HTMLDivElement>(null);
 
   const [decodedNote, setDecodedNote] = useState('');
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [currentUrl, setCurrentUrl] = useState('');
 
   useEffect(() => {
+    // This ensures we get the full URL only on the client side
+    if (window.location.href) {
+      setCurrentUrl(window.location.href);
+    }
+    
     if (noteContent) {
       try {
         setDecodedNote(decodeURIComponent(noteContent));
@@ -54,11 +65,27 @@ export default function NoteDisplay() {
     }
   }, [noteContent, musicUrl]);
 
+  const handleDownload = async () => {
+    if (qrCodeRef.current === null) {
+      return;
+    }
+    try {
+      const dataUrl = await toPng(qrCodeRef.current);
+      const link = document.createElement('a');
+      link.download = 'codelove-qrcode.png';
+      link.href = dataUrl;
+      link.click();
+    } catch (err) {
+      console.error('Oops, something went wrong!', err);
+    }
+  };
+
+
   const paragraphs = decodedNote.split('\n').filter(p => p.trim() !== '');
 
   return (
     <main 
-      className="flex items-center justify-center min-h-screen p-8 animate-in fade-in duration-1000"
+      className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 gap-8 animate-in fade-in duration-1000"
       style={{
         background: 'hsl(var(--background))'
       }}
@@ -95,6 +122,24 @@ export default function NoteDisplay() {
             </div>
         )}
       </div>
+      
+      {currentUrl && !error && (
+        <Card className="max-w-sm w-full">
+            <CardHeader>
+                <CardTitle className="text-center">Seu QR Code</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center gap-4">
+                <div ref={qrCodeRef} className="p-4 bg-white rounded-lg">
+                    <QRCodeCanvas value={currentUrl} size={200} />
+                </div>
+                <p className="text-sm text-muted-foreground text-center">Mostre este QR Code para a pessoa amada escanear com a câmera do celular.</p>
+                <Button onClick={handleDownload} className="w-full">
+                    <Download className="mr-2 h-4 w-4" />
+                    Baixar QR Code
+                </Button>
+            </CardContent>
+        </Card>
+      )}
     </main>
   );
 }
