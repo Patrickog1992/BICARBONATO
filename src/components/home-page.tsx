@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -34,8 +35,8 @@ export default function HomePage() {
   
   const faqItems = [
     { question: "O que é a CodeLove?", answer: "CodeLove é uma plataforma que permite criar páginas personalizadas para pessoas especiais, transformando suas memórias em uma declaração de amor digital e eterna." },
-    { question: "Como posso criar uma página personalizada na CodeLove?", answer: "É muito simples! Basta escolher um plano, personalizar sua página com fotos, textos e músicas, efetuar o pagamento e você receberá o acesso por e-mail para compartilhar com seu amor." },
-    { question: "O que está incluído na minha página personalizada?", answer: "Sua página inclui texto dedicado, fotos, contador de relacionamento, música, QR code exclusivo, URL personalizada e, dependendo do plano, animações e fundo dinâmico." },
+    { question: "Como posso criar uma página personalizada na CodeLove?", answer: "É muito simples! Basta clicar em 'Criar minha página', personalizar sua página com textos e músicas, e você receberá o link para compartilhar com seu amor." },
+    { question: "O que está incluído na minha página personalizada?", answer: "Sua página inclui uma mensagem de amor personalizada e pode ter uma música de fundo do YouTube. Em breve, você também poderá adicionar fotos e muito mais!" },
     { question: "Como recebo minha página personalizada após o pagamento?", answer: "Após a confirmação do pagamento, você receberá um e-mail com o link de acesso e o QR Code da sua página personalizada." },
     { question: "A página personalizada tem validade?", answer: "Oferecemos dois planos. O plano 'Para Sempre' é vitalício e não expira. O plano 'Anual' tem validade de um ano, podendo ser renovado." },
     { question: "Quanto tempo leva para receber o QR Code por email?", answer: "O envio é quase instantâneo após a confirmação do pagamento. Geralmente, leva apenas alguns minutos." },
@@ -63,7 +64,7 @@ export default function HomePage() {
         <div className="hidden md:flex items-center gap-4">
             <Button variant="ghost" size="sm"><Languages className="mr-2 h-4 w-4"/> Selecionar Idioma</Button>
             <Button variant="outline" size="sm"><UserCircle className="mr-2 h-4 w-4"/>Minha conta</Button>
-            <Button size="sm"><Rocket className="mr-2 h-4 w-4"/>Vamos começar?</Button>
+            <Button size="sm" asChild><Link href="/create"><Rocket className="mr-2 h-4 w-4"/>Vamos começar?</Link></Button>
         </div>
         <div className="md:hidden">
             <Button variant="ghost" size="icon"><Menu /></Button>
@@ -72,11 +73,11 @@ export default function HomePage() {
       
       {/* Hero Section */}
       <section id="inicio" className="container mx-auto px-4 py-16 md:py-24 text-center">
-        <h1 className="text-4xl md:text-6xl font-headline font-bold mb-4">Declare seu amor<br/>para seu amor!</h1>
+        <h1 className="text-4xl md:text-6xl font-headline font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Declare seu amor<br/>para seu amor!</h1>
         <p className="max-w-2xl mx-auto text-muted-foreground text-lg mb-8">
           Crie uma página personalizada para quem você ama e surpreenda a pessoa com uma declaração especial que ficará para sempre.
         </p>
-        <Button size="lg">Criar minha página</Button>
+        <Button size="lg" asChild><Link href="/create">Criar minha página</Link></Button>
         <div className="mt-8 flex justify-center items-center gap-4">
             <div className="flex -space-x-2">
                 <Avatar>
@@ -211,7 +212,7 @@ export default function HomePage() {
                     </CardContent>
                     <CardFooter className="gap-4">
                         <Button variant="outline" className="w-full">Experimentar agora</Button>
-                        <Button className="w-full">Criar página</Button>
+                        <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
                     </CardFooter>
                 </Card>
                  <Card>
@@ -224,7 +225,7 @@ export default function HomePage() {
                     </CardContent>
                     <CardFooter className="gap-4">
                         <Button variant="outline" className="w-full">Experimentar agora</Button>
-                        <Button className="w-full">Criar página</Button>
+                        <Button className="w-full" asChild><Link href="/create">Criar página</Link></Button>
                     </CardFooter>
                 </Card>
             </div>
@@ -253,7 +254,7 @@ export default function HomePage() {
                                         </div>
                                     </CardHeader>
                                     <CardContent className="flex-grow">
-                                        <p className="text-sm text-left text-muted-foreground">"{testimonial.text.replace(/Heartzuu/g, 'CodeLove')}"</p>
+                                        <p className="text-sm text-left text-muted-foreground">"{testimonial.text}"</p>
                                     </CardContent>
                                     <CardFooter>
                                        <StarRating rating={5} />
@@ -299,7 +300,7 @@ export default function HomePage() {
                         <CardFooter className="flex flex-col pt-0">
                             <p className="text-muted-foreground"><span className="line-through">R$ 54,00</span></p>
                             <p className="text-3xl font-bold my-2">R$ 27,00 <span className="text-sm font-normal text-muted-foreground">/uma vez</span></p>
-                            <Button className="w-full">Criar minha página</Button>
+                            <Button className="w-full" asChild><Link href="/create">Criar minha página</Link></Button>
                         </CardFooter>
                     </Card>
 
@@ -326,7 +327,7 @@ export default function HomePage() {
                         <CardFooter className="flex flex-col pt-0">
                             <p className="text-muted-foreground"><span className="line-through">R$ 34,00</span></p>
                             <p className="text-3xl font-bold my-2">R$ 17,00 <span className="text-sm font-normal text-muted-foreground">/por ano</span></p>
-                            <Button className="w-full">Criar minha página</Button>
+                            <Button className="w-full" asChild><Link href="/create">Criar minha página</Link></Button>
                         </CardFooter>
                     </Card>
                 </div>
@@ -341,9 +342,9 @@ export default function HomePage() {
             <Accordion type="single" collapsible className="max-w-3xl mx-auto text-left">
                 {faqItems.map((item, index) => (
                     <AccordionItem value={`item-${index+1}`} key={index}>
-                        <AccordionTrigger>{item.question.replace(/Heartzzu/g, 'CodeLove')}</AccordionTrigger>
+                        <AccordionTrigger>{item.question}</AccordionTrigger>
                         <AccordionContent>
-                           {item.answer.replace(/Heartzzu/g, 'CodeLove')}
+                           {item.answer}
                         </AccordionContent>
                     </AccordionItem>
                 ))}
@@ -355,11 +356,11 @@ export default function HomePage() {
       {/* Final CTA */}
         <section className="bg-primary/10">
             <div className="container mx-auto px-4 py-16 md:py-24 text-center">
-                <h2 className="text-3xl md:text-5xl font-headline font-bold mb-4">Declare seu amor<br/>de forma única</h2>
+                <h2 className="text-3xl md:text-5xl font-headline font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Declare seu amor<br/>de forma única</h2>
                 <p className="max-w-2xl mx-auto text-muted-foreground text-lg mb-8">
                 Crie uma página personalizada para quem você ama e surpreenda a pessoa com uma declaração especial que ficará para sempre.
                 </p>
-                <Button size="lg">Criar minha página</Button>
+                <Button size="lg" asChild><Link href="/create">Criar minha página</Link></Button>
                 <div className="mt-8 flex justify-center items-center gap-4">
                     <div className="flex -space-x-2">
                         <Avatar>

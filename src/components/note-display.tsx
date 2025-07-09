@@ -4,10 +4,32 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
 
+function getYouTubeEmbedUrl(url: string): string | null {
+  if (!url) return null;
+  let videoId: string | null = null;
+  try {
+    const urlObj = new URL(url);
+    if (urlObj.hostname === 'youtu.be') {
+        videoId = urlObj.pathname.slice(1);
+    } else if (urlObj.hostname.includes('youtube.com')) {
+        videoId = urlObj.searchParams.get('v');
+    }
+  } catch (e) {
+      console.error("Invalid URL for YouTube parsing", e);
+      return null;
+  }
+  
+  return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : null;
+}
+
+
 export default function NoteDisplay() {
   const searchParams = useSearchParams();
   const noteContent = searchParams.get('content');
+  const musicUrl = searchParams.get('musicUrl');
+
   const [decodedNote, setDecodedNote] = useState('');
+  const [embedUrl, setEmbedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,7 +42,17 @@ export default function NoteDisplay() {
     } else {
       setError('No love note was found here.');
     }
-  }, [noteContent]);
+
+    if (musicUrl) {
+        try {
+            const decodedMusicUrl = decodeURIComponent(musicUrl);
+            setEmbedUrl(getYouTubeEmbedUrl(decodedMusicUrl));
+        } catch (e) {
+            // fail silently if music url is malformed
+            console.error("Could not decode music URL", e);
+        }
+    }
+  }, [noteContent, musicUrl]);
 
   const paragraphs = decodedNote.split('\n').filter(p => p.trim() !== '');
 
@@ -46,6 +78,21 @@ export default function NoteDisplay() {
                 </p>
             ))}
           </div>
+        )}
+        
+        {embedUrl && (
+            <div className="mt-12 aspect-video">
+                <iframe
+                    width="100%"
+                    height="100%"
+                    src={embedUrl}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="rounded-lg"
+                ></iframe>
+            </div>
         )}
       </div>
     </main>
