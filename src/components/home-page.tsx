@@ -149,8 +149,16 @@ export default function HomePage() {
                     <div className="flex items-start gap-3"><Lock className="text-primary flex-shrink-0 w-6 h-6"/><div><h4 className="font-bold">URL personalizada</h4><p className="text-sm text-neutral-400">Crie uma URL personalizada para sua página.</p></div></div>
                 </div>
             </div>
-            <div className="md:w-1/2 mt-8 md:mt-0">
-                <Image src="https://placehold.co/600x700.png" alt="Exemplo de Recurso" width={600} height={700} className="rounded-lg shadow-lg shadow-red-900/20" data-ai-hint="love letter"/>
+            <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
+              <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl shadow-red-900/20">
+                  <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                  <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
+                  <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
+                  <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
+                  <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
+                      <Image src="https://placehold.co/270x550.png" className="w-full h-full object-cover" alt="Exemplo de Recurso" width={270} height={550} data-ai-hint="love letter" />
+                  </div>
+              </div>
             </div>
         </div>
       </section>
