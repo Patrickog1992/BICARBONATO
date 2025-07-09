@@ -161,9 +161,9 @@ export default function CreateNoteForm() {
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
-                      <CardContent className="rounded-[2rem] overflow-hidden w-full h-full bg-black p-4 flex flex-col items-center justify-center">
+                      <CardContent className="rounded-[2rem] overflow-hidden w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8">
                           <div className="text-white space-y-4 text-center">
-                              <h1 className="font-headline text-3xl font-bold">{formData.title || "Seu título aparecerá aqui"}</h1>
+                              <h1 className="font-headline text-2xl font-bold">{formData.title || "Seu título aparecerá aqui"}</h1>
                           </div>
                       </CardContent>
                   </Card>
