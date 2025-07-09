@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -20,13 +21,13 @@ const StarRating = ({ rating }: { rating: number }) => (
 
 export default function HomePage() {
   const testimonials = [
-    { name: "Mariana e João", time: "1 mês atrás", text: "Adorei a experiência! Pude criar uma página especial para o João com nossas fotos favoritas, uma playlist personalizada e um texto que representa nossa história. Ele ficou super emocionado quando viu!", image: "https://placehold.co/48x48.png", dataAiHint: "couple portrait" },
-    { name: "Ana e Pedro", time: "2 dias atrás", text: "Com a CodeLove, pude expressar meu amor de um jeito totalmente diferente. Adorei criar uma página só para nós dois.", image: "https://placehold.co/48x48.png", dataAiHint: "happy couple" },
-    { name: "Lucas e Carol", time: "3 meses atrás", text: "Montei uma página surpresa para a Carol, com nossas fotos de viagem e uma mensagem sincera. Ela adorou! Com certeza vou usar de novo.", image: "https://placehold.co/48x48.png", dataAiHint: "traveling couple" },
-    { name: "Camila e Felipe", time: "4 meses atrás", text: "A interface é simples e criar uma página com nossas fotos e músicas favoritas foi super especial!", image: "https://placehold.co/48x48.png", dataAiHint: "smiling couple" },
-    { name: "Bia e Henrique", time: "1 ano atrás", text: "A página ficou incrível e personalizada! Ele não esperava por algo tão emocionante.", image: "https://placehold.co/48x48.png", dataAiHint: "laughing couple" },
-    { name: "Clara e Rafael", time: "2 meses atrás", text: "Usar o CodeLove foi incrível! A plataforma é muito intuitiva e fácil de usar. Conseguimos montar um presente digital perfeito com músicas que marcaram nossa relação.", image: "https://placehold.co/48x48.png", dataAiHint: "couple hug" },
-    { name: "Vanessa e Ricardo", time: "1 semana atrás", text: "CodeLove tornou nosso relacionamento ainda mais especial. Ele amou a surpresa cheia de memórias.", image: "https://placehold.co/48x48.png", dataAiHint: "couple memories" },
+    { name: "Mariana e João", time: "1 mês atrás", text: "Adorei a experiência! Pude criar uma página especial para o João com nossas fotos favoritas, uma playlist personalizada e um texto que representa nossa história. Ele ficou super emocionado quando viu!", image: "https://i.imgur.com/6hNipoh.jpeg" },
+    { name: "Ana e Pedro", time: "2 dias atrás", text: "Com a CodeLove, pude expressar meu amor de um jeito totalmente diferente. Adorei criar uma página só para nós dois.", image: "https://i.imgur.com/0lbIxMI.jpeg" },
+    { name: "Lucas e Carol", time: "3 meses atrás", text: "Montei uma página surpresa para a Carol, com nossas fotos de viagem e uma mensagem sincera. Ela adorou! Com certeza vou usar de novo.", image: "https://i.imgur.com/73dp13S.jpeg" },
+    { name: "Camila e Felipe", time: "4 meses atrás", text: "A interface é simples e criar uma página com nossas fotos e músicas favoritas foi super especial!", image: "https://i.imgur.com/4JMCPq6.gif" },
+    { name: "Bia e Henrique", time: "1 ano atrás", text: "A página ficou incrível e personalizada! Ele não esperava por algo tão emocionante.", image: "https://i.imgur.com/6hNipoh.jpeg" },
+    { name: "Clara e Rafael", time: "2 meses atrás", text: "Usar o CodeLove foi incrível! A plataforma é muito intuitiva e fácil de usar. Conseguimos montar um presente digital perfeito com músicas que marcaram nossa relação.", image: "https://i.imgur.com/0lbIxMI.jpeg" },
+    { name: "Vanessa e Ricardo", time: "1 semana atrás", text: "CodeLove tornou nosso relacionamento ainda mais especial. Ele amou a surpresa cheia de memórias.", image: "https://i.imgur.com/73dp13S.jpeg" },
   ];
   
   const faqItems = [
@@ -81,15 +82,15 @@ export default function HomePage() {
                 <div className="mt-8 flex justify-center lg:justify-start items-center gap-4">
                     <div className="flex -space-x-2">
                         <Avatar>
-                            <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 1" data-ai-hint="couple"/>
+                            <AvatarImage src="https://i.imgur.com/6hNipoh.jpeg" alt="Casal 1" />
                             <AvatarFallback>C1</AvatarFallback>
                         </Avatar>
                         <Avatar>
-                            <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 2" data-ai-hint="couple"/>
+                            <AvatarImage src="https://i.imgur.com/0lbIxMI.jpeg" alt="Casal 2" />
                             <AvatarFallback>C2</AvatarFallback>
                         </Avatar>
                         <Avatar>
-                            <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 3" data-ai-hint="couple"/>
+                            <AvatarImage src="https://i.imgur.com/73dp13S.jpeg" alt="Casal 3" />
                             <AvatarFallback>C3</AvatarFallback>
                         </Avatar>
                     </div>
@@ -222,7 +223,7 @@ export default function HomePage() {
                 <blockquote>
                   <div className="flex items-center gap-4 mb-4">
                     <Avatar>
-                      <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint}/>
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
                       <AvatarFallback>{testimonial.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <div><p className="text-base text-left font-bold">{testimonial.name}</p><p className="text-sm text-left text-neutral-400">{testimonial.time}</p></div>
