@@ -63,37 +63,52 @@ export default function HomePage() {
       </header>
       
       <main>
-        <section id="inicio" className="h-full bg-black bg-grid-neutral-800/20 relative flex items-center justify-center pt-32 pb-20">
+        <section id="inicio" className="bg-black bg-grid-neutral-800/20 relative">
           <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]"></div>
-          <div className="container text-center relative z-10">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-transparent">
-              Declare seu amor<br/>para seu amor!
-            </h1>
-            <p className="max-w-2xl mx-auto text-neutral-300 text-lg mb-8">
-              Crie uma página personalizada para quem você ama e surpreenda a pessoa com uma declaração especial que ficará para sempre.
-            </p>
-            <Button size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-lg px-8 py-6" asChild>
-              <Link href="/create"><Heart className="mr-2"/>Criar minha página</Link>
-            </Button>
-            <div className="mt-8 flex justify-center items-center gap-4">
-                <div className="flex -space-x-2">
-                  <Avatar>
-                      <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 1" data-ai-hint="couple"/>
-                      <AvatarFallback>C1</AvatarFallback>
-                  </Avatar>
-                  <Avatar>
-                      <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 2" data-ai-hint="couple"/>
-                      <AvatarFallback>C2</AvatarFallback>
-                  </Avatar>
-                  <Avatar>
-                      <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 3" data-ai-hint="couple"/>
-                      <AvatarFallback>C3</AvatarFallback>
-                  </Avatar>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pt-32 pb-20">
+              <div className="lg:w-1/2 text-center lg:text-left">
+                <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-transparent">
+                  Declare seu amor<br/>para seu amor!
+                </h1>
+                <p className="max-w-xl mx-auto lg:mx-0 text-neutral-300 text-lg mb-8">
+                  Crie uma página personalizada para quem você ama e surpreenda a pessoa com uma declaração especial que ficará para sempre.
+                </p>
+                <div className="flex justify-center lg:justify-start">
+                    <Button size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-lg px-8 py-6" asChild>
+                        <Link href="/create"><Heart className="mr-2"/>Criar minha página</Link>
+                    </Button>
                 </div>
-                <p className="text-sm text-neutral-400">Mais de <strong>40.325</strong> usuários satisfeitos</p>
-            </div>
-            <div className="mt-16 animate-float">
-              <Image src="https://placehold.co/1000x500.png" alt="Mockup da página de amor" width={1000} height={500} className="rounded-lg shadow-2xl shadow-red-900/20 mx-auto" data-ai-hint="website mockup"/>
+                <div className="mt-8 flex justify-center lg:justify-start items-center gap-4">
+                    <div className="flex -space-x-2">
+                        <Avatar>
+                            <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 1" data-ai-hint="couple"/>
+                            <AvatarFallback>C1</AvatarFallback>
+                        </Avatar>
+                        <Avatar>
+                            <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 2" data-ai-hint="couple"/>
+                            <AvatarFallback>C2</AvatarFallback>
+                        </Avatar>
+                        <Avatar>
+                            <AvatarImage src="https://placehold.co/40x40.png" alt="Casal 3" data-ai-hint="couple"/>
+                            <AvatarFallback>C3</AvatarFallback>
+                        </Avatar>
+                    </div>
+                    <p className="text-sm text-neutral-400">Mais de <strong>40.325</strong> usuários satisfeitos</p>
+                </div>
+              </div>
+
+              <div className="lg:w-1/2 mt-12 lg:mt-0 flex justify-center">
+                <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl animate-float">
+                    <div className="w-[120px] h-[18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                    <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
+                    <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
+                    <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
+                    <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
+                        <Image src="https://placehold.co/270x550.png" className="w-full h-full object-cover" alt="App preview in a phone" width={270} height={550} data-ai-hint="love letter" />
+                    </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
