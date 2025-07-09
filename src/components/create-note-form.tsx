@@ -619,18 +619,6 @@ export default function CreateNoteForm() {
                                         <p className="text-xs text-white truncate">Música selecionada</p>
                                     </div>
                                 )}
-                                {formData.backgroundAnimation && formData.backgroundAnimation !== 'none' && (
-                                    <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
-                                        <Sparkles className="w-5 h-5 text-white" />
-                                        <p className="text-xs text-white truncate">Animação: {previewAnimationName}</p>
-                                    </div>
-                                )}
-                                {formData.plan && (
-                                    <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
-                                        <Package className="w-5 h-5 text-white" />
-                                        <p className="text-xs text-white truncate">Plano: {formData.plan === 'forever' ? 'Para sempre' : 'Anual'}</p>
-                                    </div>
-                                )}
                             </div>
                            </AnimationBackground>
                       </CardContent>
@@ -640,5 +628,3 @@ export default function CreateNoteForm() {
         </div>
     )
 }
-
-    
