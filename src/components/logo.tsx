@@ -1,12 +1,16 @@
-import { Heart } from 'lucide-react';
+import Image from 'next/image';
 
 export function Logo() {
   return (
-    <div className="flex items-center gap-2.5 text-center">
-      <Heart className="h-8 w-8 text-accent" />
-      <h1 className="text-4xl font-headline font-bold text-foreground">
-        CodeLove
-      </h1>
+    <div className="flex items-center">
+      <Image 
+        src="https://i.imgur.com/pGyjq58.png" 
+        alt="CodeLove Logo" 
+        width={180} 
+        height={46} 
+        className="object-contain"
+        priority
+      />
     </div>
   );
 }
