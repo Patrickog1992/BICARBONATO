@@ -25,7 +25,6 @@ const HeartsAnimation = () => {
       return <Heart key={newHeart.id} style={newHeart.style} />;
     };
     
-    // Create multiple hearts at start
     const initialHearts = Array.from({ length: 20 }).map(createHeart);
     setHearts(initialHearts);
 
@@ -46,6 +45,46 @@ const HeartsAnimation = () => {
   return <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">{hearts}</div>;
 };
 
+const CometsAnimation = () => {
+    const [stars, setStars] = useState<React.ReactNode[]>([]);
+    const [comets, setComets] = useState<React.ReactNode[]>([]);
+
+    useEffect(() => {
+        const createStar = (i: number) => {
+            const size = Math.random() * 2 + 1;
+            return <div key={`star-${i}`} className="star" style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${Math.random() * 3 + 2}s`
+            }} />
+        };
+        const initialStars = Array.from({ length: 150 }).map((_, i) => createStar(i));
+        setStars(initialStars);
+        
+        const createComet = (i: number) => {
+            return <div key={`comet-${i}`} className="comet" style={{
+                top: `${Math.random() * 60}%`, // Start in the top 60%
+                left: `-${Math.random() * 20}%`, // Start off-screen to the left
+                animationDuration: `${Math.random() * 5 + 8}s`,
+                animationDelay: `${Math.random() * 15}s`,
+            }} />
+        }
+        const initialComets = Array.from({length: 7}).map((_, i) => createComet(i));
+        setComets(initialComets);
+
+    }, []);
+
+    return (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            {stars}
+            {comets}
+        </div>
+    );
+};
+
 
 interface AnimationBackgroundProps {
     animation: string | undefined;
@@ -58,6 +97,7 @@ export default function AnimationBackground({ animation, children }: AnimationBa
             case 'hearts':
                 return <HeartsAnimation />;
             case 'comets':
+                return <CometsAnimation />;
             case 'meteors':
             case 'aurora':
             case 'vortex':
