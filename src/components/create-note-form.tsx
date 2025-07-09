@@ -13,16 +13,18 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { addNote } from '@/services/note';
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from './ui/card';
+import { Textarea } from './ui/textarea';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
-  loveNote: z.string().optional(),
+  loveNote: z.string().min(1, { message: 'A mensagem não pode estar vazia.' }),
   musicUrl: z.string().optional(),
 });
 
@@ -51,7 +53,7 @@ export default function CreateNoteForm() {
         try {
             const noteData = {
                 title: values.title,
-                loveNote: values.loveNote || 'Sua mensagem de amor aqui!',
+                loveNote: values.loveNote,
                 musicUrl: values.musicUrl,
             }
             const noteId = await addNote(noteData);
@@ -71,6 +73,7 @@ export default function CreateNoteForm() {
     const handleNextStep = async () => {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
+        if (step === 2) fieldsToValidate = ['loveNote'];
 
         const isValid = await form.trigger(fieldsToValidate);
         if (isValid) {
@@ -86,7 +89,7 @@ export default function CreateNoteForm() {
 
     const stepHeaders = [
         { title: "Título da página", description: "Escreva o titulo dedicatório para a página. Ex: João & Maria ou Feliz Aniversário ou etc!" },
-        { title: "Sua mensagem de amor", description: "Escreva sua declaração e, se quiser, use a IA para te ajudar." },
+        { title: "Sua mensagem", description: "Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho." },
         { title: "Data de início", description: "Informe a data de início que simbolize o início de uma união, relacionamento, amizade, etc." },
         { title: "Fotos", description: "Anexe fotos e escolha o modo de exibição para personalizar a página." },
         { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo." },
@@ -95,7 +98,9 @@ export default function CreateNoteForm() {
         { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
     ];
     
-    const isNextDisabled = !form.watch('title') || !!form.formState.errors.title;
+    const isNextDisabled =
+      (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
+      (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote));
 
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -128,6 +133,27 @@ export default function CreateNoteForm() {
                                                     {...field} 
                                                 />
                                             </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        )}
+                        {step === 2 && (
+                            <div className="space-y-8 animate-in fade-in">
+                                <FormField
+                                    control={form.control}
+                                    name="loveNote"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho."
+                                                    {...field}
+                                                    className="min-h-[200px]"
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -161,9 +187,10 @@ export default function CreateNoteForm() {
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
-                      <CardContent className="rounded-[2rem] overflow-hidden w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8">
-                          <div className="text-white space-y-4 text-center">
+                      <CardContent className="rounded-[2rem] overflow-hidden w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8 text-center">
+                          <div className="text-white space-y-4">
                               <h1 className="font-headline text-2xl font-bold">{formData.title || "Seu título aparecerá aqui"}</h1>
+                              <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
                           </div>
                       </CardContent>
                   </Card>
