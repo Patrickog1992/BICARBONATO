@@ -3,8 +3,8 @@ import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'QR Love Notes',
-  description: 'Create and share love notes via QR codes.',
+  title: 'CodeLove',
+  description: 'Crie uma página personalizada para quem você ama e surpreenda a pessoa com uma declaração especial que ficará para sempre.',
 };
 
 export default function RootLayout({
