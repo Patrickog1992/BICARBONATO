@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Loader2, Heart } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -163,7 +163,6 @@ export default function CreateNoteForm() {
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
                       <CardContent className="rounded-[2rem] overflow-hidden w-full h-full bg-black p-4 flex flex-col items-center justify-center">
                           <div className="text-white space-y-4 text-center">
-                              <Heart className="w-12 h-12 text-accent mx-auto" fill="hsl(var(--accent))" />
                               <h1 className="font-headline text-3xl font-bold">{formData.title || "Seu título aparecerá aqui"}</h1>
                           </div>
                       </CardContent>
