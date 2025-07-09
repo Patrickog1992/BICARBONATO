@@ -3,6 +3,7 @@ import { db } from '@/lib/firebase';
 import { collection, addDoc, getDoc, doc, serverTimestamp } from 'firebase/firestore';
 
 export interface NoteData {
+  title?: string;
   loveNote: string;
   musicUrl?: string;
   userSentiment?: string;

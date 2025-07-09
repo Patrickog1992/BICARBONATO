@@ -82,6 +82,12 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
           <Heart className="w-8 h-8 text-accent" fill="hsl(var(--accent))" />
         </div>
 
+        {note.title && (
+          <h1 className="font-headline text-4xl md:text-5xl font-bold mb-6 text-foreground animate-in fade-in slide-in-from-bottom-5 duration-700">
+            {note.title}
+          </h1>
+        )}
+
         <div className="space-y-6">
           {paragraphs.map((p, index) => (
             <p
