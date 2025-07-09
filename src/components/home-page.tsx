@@ -44,8 +44,7 @@ export default function HomePage() {
         ✨ Apenas hoje 09/07/2025 - Todos os planos com 50% de desconto, aproveite!
       </div>
       
-      <header className="container mx-auto px-4 py-4 flex justify-between items-center relative z-50">
-        <Logo />
+      <header className="container mx-auto px-4 py-4 flex justify-end items-center relative z-50 gap-6">
         <nav className="hidden md:flex items-center gap-6 text-sm text-neutral-300">
           <a href="#inicio" className="hover:text-white">Início</a>
           <a href="#como-funciona" className="hover:text-white">Como funciona?</a>
@@ -54,7 +53,6 @@ export default function HomePage() {
           <a href="#faq" className="hover:text-white">F.A.Q</a>
         </nav>
         <div className="hidden md:flex items-center gap-2">
-            <Button variant="ghost" size="sm"><Languages className="mr-2 h-4 w-4"/> Idioma</Button>
             <Button variant="outline" size="sm" className="bg-black/20 border-neutral-700 hover:bg-neutral-800"><UserCircle className="mr-2 h-4 w-4"/>Minha conta</Button>
         </div>
         <div className="md:hidden">
