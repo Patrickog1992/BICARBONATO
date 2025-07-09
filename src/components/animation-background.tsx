@@ -125,6 +125,17 @@ const MeteorsAnimation = () => {
     );
 };
 
+const AuroraAnimation = () => {
+    return (
+        <div className="aurora">
+            <div className="aurora__item"></div>
+            <div className="aurora__item"></div>
+            <div className="aurora__item"></div>
+            <div className="aurora__item"></div>
+        </div>
+    );
+};
+
 
 interface AnimationBackgroundProps {
     animation: string | undefined;
@@ -141,6 +152,7 @@ export default function AnimationBackground({ animation, children }: AnimationBa
             case 'meteors':
                 return <MeteorsAnimation />;
             case 'aurora':
+                return <AuroraAnimation />;
             case 'vortex':
             case 'clouds':
             case 'emojis':
