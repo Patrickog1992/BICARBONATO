@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Heart = ({ style }: { style: React.CSSProperties }) => (
   <div className="heart" style={style}></div>
@@ -8,21 +8,20 @@ const Heart = ({ style }: { style: React.CSSProperties }) => (
 
 const HeartsAnimation = () => {
   const [hearts, setHearts] = useState<React.ReactNode[]>([]);
+  const keyCounter = useRef(0);
 
   useEffect(() => {
     const createHeart = () => {
+      const key = `heart-${keyCounter.current++}`;
       const size = Math.random() * 1.5 + 0.5; // size between 0.5vw and 2vw
-      const newHeart = {
-        id: Date.now() + Math.random(),
-        style: {
-          left: `${Math.random() * 100}%`,
-          width: `${size}vw`,
-          height: `${size}vw`,
-          animationDuration: `${Math.random() * 5 + 5}s`, // 5s to 10s
-          animationDelay: `${Math.random() * 5}s`,
-        },
+      const style = {
+        left: `${Math.random() * 100}%`,
+        width: `${size}vw`,
+        height: `${size}vw`,
+        animationDuration: `${Math.random() * 5 + 5}s`, // 5s to 10s
+        animationDelay: `${Math.random() * 5}s`,
       };
-      return <Heart key={newHeart.id} style={newHeart.style} />;
+      return <Heart key={key} style={style} />;
     };
     
     const initialHearts = Array.from({ length: 20 }).map(createHeart);
@@ -175,24 +174,22 @@ const Emoji = ({ style, emoji }: { style: React.CSSProperties; emoji: string }) 
 
 const EmojisAnimation = ({ emojis }: { emojis?: string }) => {
   const [fallingEmojis, setFallingEmojis] = useState<React.ReactNode[]>([]);
+  const keyCounter = useRef(0);
   
   const emojiArray = emojis && emojis.trim() !== '' ? Array.from(emojis.replace(/\s/g, '')) : ['❤️', '✨', '🎉'];
 
   useEffect(() => {
     const createEmoji = () => {
+      const key = `emoji-${keyCounter.current++}`;
       const size = Math.random() * 1.5 + 1;
       const selectedEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
-      const newEmoji = {
-        id: Date.now() + Math.random(),
-        style: {
-          left: `${Math.random() * 100}%`,
-          fontSize: `${size}rem`,
-          animationDuration: `${Math.random() * 5 + 7}s`,
-          animationDelay: `${Math.random() * 7}s`,
-        },
-        emoji: selectedEmoji,
+      const style = {
+        left: `${Math.random() * 100}%`,
+        fontSize: `${size}rem`,
+        animationDuration: `${Math.random() * 5 + 7}s`,
+        animationDelay: `${Math.random() * 7}s`,
       };
-      return <Emoji key={newEmoji.id} style={newEmoji.style} emoji={newEmoji.emoji} />;
+      return <Emoji key={key} style={style} emoji={selectedEmoji} />;
     };
     
     const initialEmojis = Array.from({ length: 30 }).map(createEmoji);
