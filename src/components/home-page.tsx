@@ -175,7 +175,7 @@ export default function HomePage() {
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
                       <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
-                          <Image src="https://placehold.co/270x550.png" className="w-full h-full object-cover" alt="Tema Padrão" width={270} height={550} data-ai-hint="hearts background" />
+                          <Image src="https://i.imgur.com/4JMCPq6.gif" className="w-full h-full object-contain" alt="Tema Padrão" width={270} height={550} data-ai-hint="hearts background" />
                       </div>
                   </div>
                   <div className="text-center mt-2">
