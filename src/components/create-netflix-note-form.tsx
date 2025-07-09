@@ -491,7 +491,9 @@ export default function CreateNetflixNoteForm() {
                                     </div>
                                   )}
                                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                                  <div className="absolute top-2 left-2 w-6 h-6 text-[#E50914] font-bold text-3xl">N</div>
+                                  <div className="absolute top-3 left-3">
+                                    <Image src="https://i.imgur.com/SgK6WMs.png" alt="Netflix Logo" width={60} height={16} />
+                                  </div>
                               </div>
                               <div className="p-3 space-y-3">
                                 <h1 className="text-xl font-bold text-white uppercase tracking-wide">{formData.title || "TÍTULO DA SÉRIE"}</h1>

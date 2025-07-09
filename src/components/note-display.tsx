@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import AnimationBackground from './animation-background';
+import NetflixNoteDisplay from './netflix-note-display';
 
 
 function getYouTubeEmbedUrl(url: string | undefined): string | null {
@@ -43,6 +44,10 @@ interface NoteDisplayProps {
 }
 
 export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
+  if (note.theme === 'netflix') {
+    return <NetflixNoteDisplay note={note} currentUrl={currentUrl} />;
+  }
+
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -78,14 +83,6 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
       console.error('Oops, something went wrong!', err);
     }
   };
-
-  if (!note) {
-    return (
-      <main className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
-        <p className="font-headline text-3xl text-destructive">Nota não encontrada.</p>
-      </main>
-    );
-  }
 
   const paragraphs = note.loveNote.split('\n').filter(p => p.trim() !== '');
 
