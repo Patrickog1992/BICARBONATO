@@ -160,13 +160,62 @@ const CloudsAnimation = () => {
     return <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">{clouds}</div>;
 };
 
+const Emoji = ({ style, emoji }: { style: React.CSSProperties; emoji: string }) => (
+  <div className="falling-emoji" style={style}>
+    {emoji}
+  </div>
+);
+
+const EmojisAnimation = ({ emojis }: { emojis?: string }) => {
+  const [fallingEmojis, setFallingEmojis] = useState<React.ReactNode[]>([]);
+  
+  const emojiArray = emojis && emojis.trim() !== '' ? Array.from(emojis.replace(/\s/g, '')) : ['❤️', '✨', '🎉'];
+
+  useEffect(() => {
+    const createEmoji = () => {
+      const size = Math.random() * 1.5 + 1;
+      const selectedEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+      const newEmoji = {
+        id: Date.now() + Math.random(),
+        style: {
+          left: `${Math.random() * 100}%`,
+          fontSize: `${size}rem`,
+          animationDuration: `${Math.random() * 5 + 7}s`,
+          animationDelay: `${Math.random() * 7}s`,
+        },
+        emoji: selectedEmoji,
+      };
+      return <Emoji key={newEmoji.id} style={newEmoji.style} emoji={newEmoji.emoji} />;
+    };
+    
+    const initialEmojis = Array.from({ length: 30 }).map(createEmoji);
+    setFallingEmojis(initialEmojis);
+
+    const interval = setInterval(() => {
+      setFallingEmojis(prev => [...prev, createEmoji()]);
+    }, 800);
+
+    const cleanupInterval = setInterval(() => {
+      setFallingEmojis(prev => prev.slice(-60));
+    }, 10000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(cleanupInterval);
+    };
+  }, [JSON.stringify(emojiArray)]);
+
+  return <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">{fallingEmojis}</div>;
+};
+
 
 interface AnimationBackgroundProps {
     animation: string | undefined;
     children: React.ReactNode;
+    emojis?: string;
 }
 
-export default function AnimationBackground({ animation, children }: AnimationBackgroundProps) {
+export default function AnimationBackground({ animation, children, emojis }: AnimationBackgroundProps) {
     const renderAnimation = () => {
         switch(animation) {
             case 'hearts':
@@ -179,8 +228,9 @@ export default function AnimationBackground({ animation, children }: AnimationBa
                 return <AuroraAnimation />;
             case 'clouds':
                 return <CloudsAnimation />;
-            case 'vortex':
             case 'emojis':
+                return <EmojisAnimation emojis={emojis} />;
+            case 'vortex':
                 return null;
             default:
                 return null;

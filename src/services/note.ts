@@ -9,6 +9,7 @@ export interface NoteData {
   startDate?: Date;
   images?: string[];
   backgroundAnimation?: string;
+  emojis?: string;
   userSentiment?: string;
   relationshipLength?: string;
   sharedMemory?: string;

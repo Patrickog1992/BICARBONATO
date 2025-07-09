@@ -47,6 +47,7 @@ const formSchema = z.object({
   startDate: z.date().optional(),
   images: z.array(z.string()).optional(),
   backgroundAnimation: z.string().optional(),
+  emojis: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -57,7 +58,7 @@ const animationNames: { [key: string]: string } = {
     'comets': 'Céu Estrelado com Cometas',
     'meteors': 'Céu Estrelado com Meteoros',
     'aurora': 'Aurora',
-    'vortex': 'Vórtice de cores',
+    'vortex': 'Vórtice de cores (Indisponível)',
     'clouds': 'Nuvens',
     'emojis': 'Emojis'
 };
@@ -78,6 +79,7 @@ export default function CreateNoteForm() {
             startDate: undefined,
             images: [],
             backgroundAnimation: 'none',
+            emojis: '',
         },
     });
     
@@ -92,7 +94,8 @@ export default function CreateNoteForm() {
                 musicUrl: values.musicUrl,
                 startDate: values.startDate,
                 images: values.images,
-                backgroundAnimation: values.backgroundAnimation
+                backgroundAnimation: values.backgroundAnimation,
+                emojis: values.emojis,
             }
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -163,6 +166,11 @@ export default function CreateNoteForm() {
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote));
+      
+    const previewAnimationName = formData.backgroundAnimation === 'emojis' && formData.emojis
+      ? `Emojis (${formData.emojis})`
+      : animationNames[formData.backgroundAnimation || 'none'];
+
 
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -371,9 +379,9 @@ export default function CreateNoteForm() {
                                                     </FormItem>
                                                     <FormItem className="flex items-center space-x-3 space-y-0">
                                                         <FormControl>
-                                                            <RadioGroupItem value="vortex" />
+                                                            <RadioGroupItem value="vortex" disabled />
                                                         </FormControl>
-                                                        <FormLabel className="font-normal text-white">Vórtice de cores</FormLabel>
+                                                        <FormLabel className="font-normal text-neutral-500">Vórtice de cores</FormLabel>
                                                     </FormItem>
                                                      <FormItem className="flex items-center space-x-3 space-y-0">
                                                         <FormControl>
@@ -389,6 +397,30 @@ export default function CreateNoteForm() {
                                                     </FormItem>
                                                 </RadioGroup>
                                             </FormControl>
+                                            
+                                            {field.value === 'emojis' && (
+                                                <div className="pt-4 animate-in fade-in">
+                                                    <FormField
+                                                        control={form.control}
+                                                        name="emojis"
+                                                        render={({ field: emojiField }) => (
+                                                            <FormItem>
+                                                                <FormLabel className="text-white">Seus Emojis</FormLabel>
+                                                                <FormControl>
+                                                                    <Input 
+                                                                        placeholder="Ex: ❤️✨🎉" 
+                                                                        {...emojiField} 
+                                                                    />
+                                                                </FormControl>
+                                                                <FormDescription>
+                                                                    Cole os emojis para a animação.
+                                                                </FormDescription>
+                                                                <FormMessage />
+                                                            </FormItem>
+                                                        )}
+                                                    />
+                                                </div>
+                                            )}
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -424,7 +456,7 @@ export default function CreateNoteForm() {
                       <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
                       <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-0">
-                           <AnimationBackground animation={formData.backgroundAnimation}>
+                           <AnimationBackground animation={formData.backgroundAnimation} emojis={formData.emojis}>
                             <div className="text-white space-y-2 text-center p-4 pt-8">
                                 <h1 className="font-headline text-2xl font-bold text-red-500">{formData.title || "Seu título aparecerá aqui"}</h1>
                                 {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
@@ -453,7 +485,7 @@ export default function CreateNoteForm() {
                                 {formData.backgroundAnimation && formData.backgroundAnimation !== 'none' && (
                                     <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
                                         <Sparkles className="w-5 h-5 text-white" />
-                                        <p className="text-xs text-white truncate">Animação: {animationNames[formData.backgroundAnimation]}</p>
+                                        <p className="text-xs text-white truncate">Animação: {previewAnimationName}</p>
                                     </div>
                                 )}
                             </div>

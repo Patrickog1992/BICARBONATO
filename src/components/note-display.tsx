@@ -90,7 +90,7 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
   const paragraphs = note.loveNote.split('\n').filter(p => p.trim() !== '');
 
   return (
-    <AnimationBackground animation={note.backgroundAnimation}>
+    <AnimationBackground animation={note.backgroundAnimation} emojis={note.emojis}>
       <main
         className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 gap-8 animate-in fade-in duration-1000"
       >

@@ -63,6 +63,15 @@
     background-size: 10px 10px;
   }
 
+  .falling-emoji {
+    position: absolute;
+    top: -10vh;
+    animation: fall 10s linear infinite;
+    opacity: 0;
+    user-select: none;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+
   .heart {
     position: absolute;
     top: -5vh;
