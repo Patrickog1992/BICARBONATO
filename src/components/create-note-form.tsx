@@ -5,7 +5,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { CalendarIcon, Loader2 } from 'lucide-react';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -21,11 +23,15 @@ import { addNote } from '@/services/note';
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from './ui/card';
 import { Textarea } from './ui/textarea';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { cn } from '@/lib/utils';
+import { Calendar } from './ui/calendar';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
   loveNote: z.string().min(1, { message: 'A mensagem não pode estar vazia.' }),
   musicUrl: z.string().optional(),
+  startDate: z.date().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -43,6 +49,7 @@ export default function CreateNoteForm() {
             title: '',
             loveNote: '',
             musicUrl: '',
+            startDate: undefined,
         },
     });
     
@@ -55,6 +62,7 @@ export default function CreateNoteForm() {
                 title: values.title,
                 loveNote: values.loveNote,
                 musicUrl: values.musicUrl,
+                startDate: values.startDate,
             }
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -75,7 +83,7 @@ export default function CreateNoteForm() {
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
 
-        const isValid = await form.trigger(fieldsToValidate);
+        const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
             if (step < totalSteps) {
                 setStep(prev => prev + 1);
@@ -153,6 +161,51 @@ export default function CreateNoteForm() {
                                                     className="min-h-[200px]"
                                                 />
                                             </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                        )}
+                        {step === 3 && (
+                             <div className="space-y-8 animate-in fade-in">
+                                <FormField
+                                    control={form.control}
+                                    name="startDate"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-col">
+                                            <Popover>
+                                                <PopoverTrigger asChild>
+                                                    <FormControl>
+                                                        <Button
+                                                            variant={"outline"}
+                                                            className={cn(
+                                                                "w-full justify-start text-left font-normal",
+                                                                !field.value && "text-muted-foreground"
+                                                            )}
+                                                        >
+                                                            <CalendarIcon className="mr-2 h-4 w-4" />
+                                                            {field.value ? (
+                                                                format(field.value, "PPP", { locale: ptBR })
+                                                            ) : (
+                                                                <span>Selecione uma data</span>
+                                                            )}
+                                                        </Button>
+                                                    </FormControl>
+                                                </PopoverTrigger>
+                                                <PopoverContent className="w-auto p-0" align="start">
+                                                    <Calendar
+                                                        mode="single"
+                                                        selected={field.value}
+                                                        onSelect={field.onChange}
+                                                        disabled={(date) =>
+                                                            date > new Date() || date < new Date("1900-01-01")
+                                                        }
+                                                        initialFocus
+                                                        locale={ptBR}
+                                                    />
+                                                </PopoverContent>
+                                            </Popover>
                                             <FormMessage />
                                         </FormItem>
                                     )}

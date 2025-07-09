@@ -1,18 +1,19 @@
 'use server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
 
 export interface NoteData {
   title?: string;
   loveNote: string;
   musicUrl?: string;
+  startDate?: Date;
   userSentiment?: string;
   relationshipLength?: string;
   sharedMemory?: string;
   createdAt?: any;
 }
 
-export async function addNote(noteData: NoteData) {
+export async function addNote(noteData: Omit<NoteData, 'createdAt'>) {
   try {
     const docRef = await addDoc(collection(db, 'notes'), {
       ...noteData,
@@ -31,7 +32,15 @@ export async function getNote(id: string): Promise<NoteData | null> {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            return docSnap.data() as NoteData;
+            const data = docSnap.data();
+            // Convert Firestore Timestamp to Date for client-side usage
+            if (data.startDate && data.startDate instanceof Timestamp) {
+                data.startDate = data.startDate.toDate();
+            }
+            if (data.createdAt && data.createdAt instanceof Timestamp) {
+              data.createdAt = data.createdAt.toDate();
+            }
+            return data as NoteData;
         } else {
             console.log("No such document!");
             return null;
