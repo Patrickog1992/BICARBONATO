@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { CalendarIcon, Loader2, Upload } from 'lucide-react';
+import { CalendarIcon, Loader2, Music, Upload } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Image from 'next/image';
@@ -14,8 +14,10 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -136,7 +138,7 @@ export default function CreateNoteForm() {
         { title: "Sua mensagem", description: "Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho." },
         { title: "Data de início", description: "Informe a data de início que simbolize o início de uma união, relacionamento, amizade, etc." },
         { title: "Fotos", description: "Anexe fotos e escolha o modo de exibição para personalizar a página. Você pode adicionar até 8 fotos." },
-        { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo." },
+        { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
         { title: "Animação de fundo", description: "Escolha uma animação de fundo para a página." },
         { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link." },
         { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
@@ -253,7 +255,7 @@ export default function CreateNoteForm() {
                                 <FormField
                                     control={form.control}
                                     name="images"
-                                    render={({ field }) => (
+                                    render={() => (
                                         <FormItem>
                                             <FormControl>
                                                 <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
@@ -270,11 +272,43 @@ export default function CreateNoteForm() {
                                                     />
                                                 </div>
                                             </FormControl>
+                                            {formData.images && formData.images.length > 0 && (
+                                                <div className="mt-4 grid grid-cols-4 gap-2">
+                                                    {formData.images.map((src, index) => (
+                                                        <div key={index} className="relative aspect-square">
+                                                            <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
                             </div>
+                        )}
+                        {step === 5 && (
+                          <div className="space-y-8 animate-in fade-in">
+                            <FormField
+                              control={form.control}
+                              name="musicUrl"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className='text-white'>Link da música do YouTube</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Ex: https://www.youtube.com/watch?v=..."
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormDescription>
+                                    A música será reproduzida automaticamente.
+                                  </FormDescription>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
                         )}
                         
                         <div className="flex items-center justify-between gap-4 mt-8">
@@ -306,7 +340,7 @@ export default function CreateNoteForm() {
                       <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
                       <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-4 flex flex-col items-center justify-start pt-8 text-center">
                            <div className="text-white space-y-2">
-                              <h1 className="font-headline text-2xl font-bold">{formData.title || "Seu título aparecerá aqui"}</h1>
+                              <h1 className="font-headline text-2xl font-bold text-red-500">{formData.title || "Seu título aparecerá aqui"}</h1>
                               {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
                               <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
                               {formData.images && formData.images.length > 0 && (
@@ -322,6 +356,12 @@ export default function CreateNoteForm() {
                                         <CarouselPrevious className="left-[-24px] text-white" />
                                         <CarouselNext className="right-[-24px] text-white" />
                                     </Carousel>
+                                </div>
+                              )}
+                              {formData.musicUrl && (
+                                <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
+                                    <Music className="w-5 h-5 text-white" />
+                                    <p className="text-xs text-white truncate">Música selecionada</p>
                                 </div>
                               )}
                           </div>
