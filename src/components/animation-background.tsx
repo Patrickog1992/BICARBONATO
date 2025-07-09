@@ -85,6 +85,46 @@ const CometsAnimation = () => {
     );
 };
 
+const MeteorsAnimation = () => {
+    const [stars, setStars] = useState<React.ReactNode[]>([]);
+    const [meteors, setMeteors] = useState<React.ReactNode[]>([]);
+
+    useEffect(() => {
+        const createStar = (i: number) => {
+            const size = Math.random() * 2 + 1;
+            return <div key={`star-${i}`} className="star" style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${Math.random() * 3 + 2}s`
+            }} />
+        };
+        const initialStars = Array.from({ length: 150 }).map((_, i) => createStar(i));
+        setStars(initialStars);
+        
+        const createMeteor = (i: number) => {
+            return <div key={`meteor-${i}`} className="meteor" style={{
+                top: `${Math.random() * 40 - 20}%`,
+                left: `-${Math.random() * 20}%`,
+                animationDuration: `${Math.random() * 1 + 2}s`,
+                animationDelay: `${Math.random() * 8}s`,
+            }} />
+        }
+        const initialMeteors = Array.from({length: 10}).map((_, i) => createMeteor(i));
+        setMeteors(initialMeteors);
+
+    }, []);
+
+    return (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            {stars}
+            {meteors}
+        </div>
+    );
+};
+
 
 interface AnimationBackgroundProps {
     animation: string | undefined;
@@ -99,6 +139,7 @@ export default function AnimationBackground({ animation, children }: AnimationBa
             case 'comets':
                 return <CometsAnimation />;
             case 'meteors':
+                return <MeteorsAnimation />;
             case 'aurora':
             case 'vortex':
             case 'clouds':
