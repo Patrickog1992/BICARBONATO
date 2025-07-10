@@ -1,9 +1,10 @@
+
 'use server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, Timestamp } from 'firebase/firestore';
 
 export interface ClientNoteData {
-  id?: string; // id is optional and only used on the client
+  id?: string;
   title: string;
   loveNote: string;
   musicUrl?: string;
@@ -25,41 +26,26 @@ export interface NoteData extends Omit<ClientNoteData, 'startDate' | 'id'> {
 
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
-    // Explicitly create the object to be stored, excluding the client-side 'id'.
-    const dataToStore: { [key: string]: any } = {
-      title: clientData.title,
-      loveNote: clientData.loveNote,
-      email: clientData.email,
-      plan: clientData.plan,
-      theme: clientData.theme,
+    const { id, ...dataToStore } = clientData;
+    const docData: { [key: string]: any } = {
+      ...dataToStore,
       createdAt: Timestamp.now(),
     };
 
-    if (clientData.musicUrl) {
-      dataToStore.musicUrl = clientData.musicUrl;
-    }
     if (clientData.startDate) {
       const date = new Date(clientData.startDate);
       if (!isNaN(date.getTime())) {
-        dataToStore.startDate = Timestamp.fromDate(date);
+        docData.startDate = Timestamp.fromDate(date);
       }
-    }
-    if (clientData.backgroundAnimation) {
-      dataToStore.backgroundAnimation = clientData.backgroundAnimation;
-    }
-    if (clientData.emojis) {
-      dataToStore.emojis = clientData.emojis;
-    }
-    if (clientData.phone) {
-      dataToStore.phone = clientData.phone;
+    } else {
+      delete docData.startDate;
     }
 
-    const docRef = await addDoc(collection(db, 'notes'), dataToStore);
+    const docRef = await addDoc(collection(db, 'notes'), docData);
     return docRef.id;
 
   } catch (e) {
     console.error('Error adding document: ', e);
-    // Throwing a specific error message can help debug on the client side if needed.
     throw new Error('Could not save the note to the database.');
   }
 }
