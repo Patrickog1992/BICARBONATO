@@ -8,7 +8,7 @@ export interface ClientNoteData {
   title?: string;
   loveNote: string;
   musicUrl?: string;
-  startDate?: string;
+  startDate?: string; // Should be ISO string
   backgroundAnimation?: string;
   emojis?: string;
   userSentiment?: string;
@@ -18,10 +18,11 @@ export interface ClientNoteData {
   phone?: string;
   plan?: string;
   theme?: string;
+  images?: string[];
 }
 
 // Stored data will have Timestamps
-export interface NoteData extends Omit<ClientNoteData, 'startDate'> {
+export interface NoteData extends Omit<ClientNoteData, 'startDate' | 'images'> {
   createdAt: Timestamp;
   startDate?: Timestamp;
   images?: string[];
@@ -30,7 +31,8 @@ export interface NoteData extends Omit<ClientNoteData, 'startDate'> {
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
     // Separate startDate to handle it after document creation
-    const { startDate, ...dataToCreate } = clientData;
+    // Also remove images as we are not storing them
+    const { startDate, images, ...dataToCreate } = clientData;
 
     // Create the document with a server-generated timestamp for createdAt
     const docRef = await addDoc(collection(db, 'notes'), {
@@ -62,9 +64,8 @@ export async function getNote(id: string): Promise<NoteData | null> {
 
         if (docSnap.exists()) {
             const data = docSnap.data();
-            // Convert Firestore Timestamp to Date for client-side usage
-            // The toDate() method is called on the client component
-            // We return the raw data from firestore here
+            // Firestore Timestamps are automatically handled by Next.js on the client,
+            // but we ensure the images array exists.
             if (!data.images) {
               data.images = [];
             }
