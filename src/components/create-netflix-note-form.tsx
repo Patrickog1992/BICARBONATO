@@ -43,7 +43,7 @@ import { Label } from '@/components/ui/label';
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
   loveNote: z.string().min(1, { message: 'A sinopse não pode estar vazia.' }),
-  musicUrl: z.string().optional(),
+  musicUrl: z.string().url({ message: 'Por favor, insira uma URL válida.' }).optional().or(z.literal('')),
   startDate: z.date().optional(),
   email: z.string().min(1, { message: 'O e-mail é obrigatório.' }).email({ message: 'Por favor, insira um e-mail válido.' }),
   phone: z.string().optional(),
@@ -57,7 +57,7 @@ export default function CreateNetflixNoteForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [step, setStep] = useState(1);
-    const totalSteps = 7; // No animation step
+    const totalSteps = 7;
     const { toast } = useToast();
     const [images, setImages] = useState<string[]>([]);
 
@@ -83,8 +83,6 @@ export default function CreateNetflixNoteForm() {
             const noteData = {
                 ...restOfValues,
                 theme: 'netflix',
-                // We pass the images to the note service, but it won't save them to Firestore
-                // to avoid exceeding document size limits. They are used for display purposes only.
                 images: images, 
             };
             const noteId = await addNote(noteData, startDate);
