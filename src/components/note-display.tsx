@@ -72,8 +72,7 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
     try {
       const dataUrl = await toPng(qrCodeRef.current, {
         backgroundColor: '#ffffff', // Ensure a white background for the QR code image
-        width: 232,
-        height: 232,
+        pixelRatio: 2,
       });
       const link = document.createElement('a');
       link.download = 'codelove-qrcode.png';
