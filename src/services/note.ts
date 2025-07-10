@@ -1,51 +1,57 @@
 'use server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDoc, doc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
 
 export interface ClientNoteData {
-  title?: string;
+  id?: string; // id is optional and only used on the client
+  title: string;
   loveNote: string;
   musicUrl?: string;
   startDate?: string; // ISO string
   backgroundAnimation?: string;
   emojis?: string;
-  email?: string;
+  email: string;
   phone?: string;
-  plan?: string;
-  theme?: string;
+  plan: string;
+  theme: string;
 }
 
-export interface NoteData {
+export interface NoteData extends Omit<ClientNoteData, 'startDate' | 'id'> {
   id: string;
-  title?: string;
-  loveNote: string;
-  musicUrl?: string;
   startDate?: Timestamp;
-  backgroundAnimation?: string;
-  emojis?: string;
-  email?: string;
-  phone?: string;
-  plan?: string;
-  theme?: string;
   createdAt: Timestamp;
 }
 
+
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
-    // Create a mutable object for the data to be stored.
+    // Explicitly create the object to be stored, excluding the client-side 'id'.
     const dataToStore: { [key: string]: any } = {
-      ...clientData,
+      title: clientData.title,
+      loveNote: clientData.loveNote,
+      email: clientData.email,
+      plan: clientData.plan,
+      theme: clientData.theme,
       createdAt: Timestamp.now(),
     };
 
-    // Convert startDate from ISO string to Firestore Timestamp if it exists.
+    if (clientData.musicUrl) {
+      dataToStore.musicUrl = clientData.musicUrl;
+    }
     if (clientData.startDate) {
       const date = new Date(clientData.startDate);
       if (!isNaN(date.getTime())) {
         dataToStore.startDate = Timestamp.fromDate(date);
-      } else {
-        delete dataToStore.startDate; // Remove invalid date
       }
+    }
+    if (clientData.backgroundAnimation) {
+      dataToStore.backgroundAnimation = clientData.backgroundAnimation;
+    }
+    if (clientData.emojis) {
+      dataToStore.emojis = clientData.emojis;
+    }
+    if (clientData.phone) {
+      dataToStore.phone = clientData.phone;
     }
 
     const docRef = await addDoc(collection(db, 'notes'), dataToStore);
@@ -53,7 +59,8 @@ export async function addNote(clientData: ClientNoteData): Promise<string> {
 
   } catch (e) {
     console.error('Error adding document: ', e);
-    throw new Error('Could not save the note.');
+    // Throwing a specific error message can help debug on the client side if needed.
+    throw new Error('Could not save the note to the database.');
   }
 }
 
@@ -64,7 +71,21 @@ export async function getNote(id: string): Promise<NoteData | null> {
 
         if (docSnap.exists()) {
             const data = docSnap.data();
-            return { id: docSnap.id, ...data } as NoteData;
+            // Ensure the returned data conforms to the NoteData interface
+            return {
+                id: docSnap.id,
+                title: data.title || '',
+                loveNote: data.loveNote || '',
+                email: data.email || '',
+                plan: data.plan || '',
+                theme: data.theme || 'default',
+                musicUrl: data.musicUrl,
+                startDate: data.startDate,
+                backgroundAnimation: data.backgroundAnimation,
+                emojis: data.emojis,
+                phone: data.phone,
+                createdAt: data.createdAt || Timestamp.now(),
+            };
         } else {
             console.log("No such document!");
             return null;
