@@ -1,7 +1,7 @@
 
 'use server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDoc, doc, updateDoc, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
 
 // Data from client has startDate as an ISO string
 export interface ClientNoteData {
@@ -11,44 +11,60 @@ export interface ClientNoteData {
   startDate?: string; // Should be ISO string
   backgroundAnimation?: string;
   emojis?: string;
-  userSentiment?: string;
-  relationshipLength?: string;
-  sharedMemory?: string;
   email?: string;
   phone?: string;
   plan?: string;
   theme?: string;
-  images?: string[];
+  images?: string[]; // Kept for client-side use, but won't be saved
 }
 
 // Stored data will have Timestamps
-export interface NoteData extends Omit<ClientNoteData, 'startDate'> {
-  createdAt: Timestamp;
+export interface NoteData {
+  title?: string;
+  loveNote: string;
+  musicUrl?: string;
   startDate?: Timestamp;
+  backgroundAnimation?: string;
+  emojis?: string;
+  email?: string;
+  phone?: string;
+  plan?: string;
+  theme?: string;
+  images?: string[]; // This will be empty in Firestore
+  createdAt: Timestamp;
 }
+
 
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
-    // Separate startDate to handle it after document creation
-    const { startDate, ...dataToCreate } = clientData;
-
-    // Create the document with a server-generated timestamp for createdAt
-    const docRef = await addDoc(collection(db, 'notes'), {
-      ...dataToCreate,
+    const dataToCreate: { [key: string]: any } = {
+      ...clientData,
       createdAt: serverTimestamp(),
+    };
+
+    // Remove images as we are not saving them
+    delete dataToCreate.images;
+
+    // Remove undefined or empty fields to avoid Firestore errors
+    Object.keys(dataToCreate).forEach(key => {
+        if (dataToCreate[key] === undefined || dataToCreate[key] === '') {
+            delete dataToCreate[key];
+        }
     });
 
-    // If startDate exists, update the document with the Firestore Timestamp
-    if (startDate) {
-      const date = new Date(startDate);
+    // Convert ISO string to Firestore Timestamp only if it exists
+    if (clientData.startDate) {
+      const date = new Date(clientData.startDate);
       if (!isNaN(date.getTime())) {
-        await updateDoc(docRef, {
-          startDate: Timestamp.fromDate(date),
-        });
+        dataToCreate.startDate = Timestamp.fromDate(date);
+      } else {
+        delete dataToCreate.startDate; // remove invalid date
       }
     }
-
+    
+    const docRef = await addDoc(collection(db, 'notes'), dataToCreate);
     return docRef.id;
+
   } catch (e) {
     console.error('Error adding document: ', e);
     throw new Error('Could not save the note.');
@@ -63,7 +79,7 @@ export async function getNote(id: string): Promise<NoteData | null> {
         if (docSnap.exists()) {
             const data = docSnap.data();
             // Firestore Timestamps are automatically handled by Next.js on the client,
-            // but we ensure the images array exists.
+            // but we ensure the images array exists for type safety.
             if (!data.images) {
               data.images = [];
             }
