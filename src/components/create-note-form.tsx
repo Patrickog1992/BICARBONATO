@@ -99,7 +99,7 @@ export default function CreateNoteForm() {
                 loveNote: values.loveNote,
                 musicUrl: values.musicUrl,
                 startDate: values.startDate,
-                images: values.images,
+                // images: values.images, // Temporarily disabled to avoid firestore size limit issues
                 backgroundAnimation: values.backgroundAnimation,
                 emojis: values.emojis,
                 email: values.email,

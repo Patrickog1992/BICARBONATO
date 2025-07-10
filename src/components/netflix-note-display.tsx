@@ -62,20 +62,24 @@ export default function NetflixNoteDisplay({ note, currentUrl }: NetflixNoteDisp
         }
     };
     
+    // As images are not saved, we can't display them here. This component will need to be updated
+    // once image storage (e.g., Firebase Storage) is implemented.
+    const images = note.images || [];
+
     return (
         <div className="flex flex-col items-center justify-start min-h-screen bg-black p-4 sm:p-8 text-white">
             <main className="w-full max-w-5xl mx-auto my-8 flex flex-col items-center gap-8">
                 <div className="w-full rounded-lg bg-[#141414]">
                     <div className="relative">
-                        {note.images && note.images.length > 0 ? (
-                            <Image src={note.images[0]} alt="Hero" width={1280} height={720} className="w-full h-auto object-cover rounded-t-md" />
+                        {images.length > 0 ? (
+                            <Image src={images[0]} alt="Hero" width={1280} height={720} className="w-full h-auto object-cover rounded-t-md" />
                         ) : (
                             <div className="w-full aspect-video bg-neutral-800 rounded-t-md flex items-center justify-center text-neutral-500">
                                 <p>Episódio Principal</p>
                             </div>
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
-                        <div className="absolute top-4 left-4 md:top-6 md:left-6">
+                        <div className="absolute top-4 md:top-6 left-4 md:left-6">
                             <Image src="https://i.imgur.com/SgK6WMs.png" alt="Netflix Logo" width={120} height={32} />
                         </div>
                         <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 text-left">
@@ -120,11 +124,11 @@ export default function NetflixNoteDisplay({ note, currentUrl }: NetflixNoteDisp
                             </div>
                         </div>
 
-                        {note.images && note.images.length > 1 && (
+                        {images.length > 1 && (
                             <div className="pt-8">
                                 <h2 className="text-2xl font-bold mb-4">Mais episódios</h2>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                                    {note.images.slice(1).map((src, index) => (
+                                    {images.slice(1).map((src, index) => (
                                         <div key={index} className="relative aspect-video rounded-md overflow-hidden group cursor-pointer">
                                             <Image src={src} alt={`Episódio ${index + 2}`} fill className="object-cover transition-transform duration-300 group-hover:scale-110" />
                                             <div className="absolute inset-0 bg-black/40"></div>

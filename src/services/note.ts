@@ -7,7 +7,7 @@ export interface NoteData {
   loveNote: string;
   musicUrl?: string;
   startDate?: Date;
-  images?: string[];
+  images?: string[]; // Images are not saved to Firestore, but kept for type consistency for now
   backgroundAnimation?: string;
   emojis?: string;
   userSentiment?: string;
@@ -20,7 +20,7 @@ export interface NoteData {
   theme?: string;
 }
 
-export async function addNote(noteData: Omit<NoteData, 'createdAt'>) {
+export async function addNote(noteData: Omit<NoteData, 'createdAt' | 'images'>) {
   try {
     const docRef = await addDoc(collection(db, 'notes'), {
       ...noteData,
@@ -46,6 +46,10 @@ export async function getNote(id: string): Promise<NoteData | null> {
             }
             if (data.createdAt && data.createdAt instanceof Timestamp) {
               data.createdAt = data.createdAt.toDate();
+            }
+            // Although images are not saved, we ensure the field exists for type safety on the client
+            if (!data.images) {
+              data.images = [];
             }
             return data as NoteData;
         } else {

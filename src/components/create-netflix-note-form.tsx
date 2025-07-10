@@ -85,7 +85,7 @@ export default function CreateNetflixNoteForm() {
                 loveNote: values.loveNote,
                 musicUrl: values.musicUrl,
                 startDate: values.startDate,
-                images: values.images,
+                // images: values.images, // Temporarily disabled to avoid firestore size limit issues
                 email: values.email,
                 phone: values.phone,
                 plan: values.plan,
