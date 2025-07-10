@@ -127,7 +127,7 @@ export default function CreateNetflixNoteForm() {
         if (step === 2) fieldsToValidate = ['loveNote'];
         if (step === 6) fieldsToValidate = ['email'];
 
-        const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
+        const isValid = await form.trigger(fieldsToValidate);
 
         if (isValid) {
             if (step < totalSteps) {
