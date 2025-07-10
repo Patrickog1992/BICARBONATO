@@ -1,7 +1,6 @@
-
 'use server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDoc, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, Timestamp } from 'firebase/firestore';
 
 export interface ClientNoteData {
   title?: string;
@@ -31,30 +30,25 @@ export interface NoteData {
   createdAt: Timestamp;
 }
 
-
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
-    const dataToCreate: { [key: string]: any } = {
+    // Create a mutable object for the data to be stored.
+    const dataToStore: { [key: string]: any } = {
       ...clientData,
-      createdAt: serverTimestamp(),
+      createdAt: Timestamp.now(),
     };
-    
-    // Remove startDate before initial creation to avoid conflicts with serverTimestamp
-    delete dataToCreate.startDate;
-    
-    const docRef = await addDoc(collection(db, 'notes'), dataToCreate);
 
-    // If startDate exists, update the document with the client-side timestamp.
-    // This two-step process avoids conflicts between serverTimestamp and client-generated Timestamps.
+    // Convert startDate from ISO string to Firestore Timestamp if it exists.
     if (clientData.startDate) {
       const date = new Date(clientData.startDate);
       if (!isNaN(date.getTime())) {
-        await updateDoc(docRef, {
-          startDate: Timestamp.fromDate(date)
-        });
+        dataToStore.startDate = Timestamp.fromDate(date);
+      } else {
+        delete dataToStore.startDate; // Remove invalid date
       }
     }
 
+    const docRef = await addDoc(collection(db, 'notes'), dataToStore);
     return docRef.id;
 
   } catch (e) {
