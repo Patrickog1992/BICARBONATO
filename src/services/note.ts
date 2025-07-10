@@ -1,7 +1,7 @@
 
 'use server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDoc, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 
 export interface ClientNoteData {
   title?: string;
@@ -14,6 +14,7 @@ export interface ClientNoteData {
   phone?: string;
   plan?: string;
   theme?: string;
+  images?: string[]; // Kept for client-side display, but will be ignored by addNote
 }
 
 export interface NoteData {
@@ -35,28 +36,26 @@ export interface NoteData {
 
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
+    // Create a new object for Firestore, excluding fields not meant for storage like 'images'
     const dataToCreate: { [key: string]: any } = {
-      ...clientData,
       createdAt: serverTimestamp(),
     };
-    
-    // Convert ISO string to Firestore Timestamp only if it exists and is valid
+
+    // Add fields from clientData to dataToCreate, only if they are not undefined
+    (Object.keys(clientData) as Array<keyof ClientNoteData>).forEach(key => {
+        if (clientData[key] !== undefined && clientData[key] !== '' && key !== 'images' && key !== 'startDate') {
+            dataToCreate[key] = clientData[key];
+        }
+    });
+
+    // Handle startDate separately: convert ISO string to Timestamp
     if (clientData.startDate) {
       const date = new Date(clientData.startDate);
       if (!isNaN(date.getTime())) {
         dataToCreate.startDate = Timestamp.fromDate(date);
-      } else {
-        delete dataToCreate.startDate; // remove invalid date string
       }
     }
-
-    // Ensure no undefined fields are sent to Firestore
-    Object.keys(dataToCreate).forEach(key => {
-        if (dataToCreate[key] === undefined) {
-            delete dataToCreate[key];
-        }
-    });
-
+    
     const docRef = await addDoc(collection(db, 'notes'), dataToCreate);
     return docRef.id;
 
@@ -73,6 +72,7 @@ export async function getNote(id: string): Promise<NoteData | null> {
 
         if (docSnap.exists()) {
             const data = docSnap.data();
+            // Ensure images is always an array, even if it's missing from Firestore
             if (!data.images) {
               data.images = [];
             }

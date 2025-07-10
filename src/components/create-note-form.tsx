@@ -103,18 +103,12 @@ export default function CreateNoteForm() {
                 theme: 'default',
             };
 
-            if (values.musicUrl) {
-                noteData.musicUrl = values.musicUrl;
-            }
-            if (values.phone) {
-                noteData.phone = values.phone;
-            }
-            if (values.backgroundAnimation) {
-                noteData.backgroundAnimation = values.backgroundAnimation;
-            }
-            if (values.emojis) {
-                noteData.emojis = values.emojis;
-            }
+            if (values.musicUrl) noteData.musicUrl = values.musicUrl;
+            if (values.phone) noteData.phone = values.phone;
+            if (values.backgroundAnimation) noteData.backgroundAnimation = values.backgroundAnimation;
+            if (values.emojis) noteData.emojis = values.emojis;
+            
+            // Convert Date to ISO string before sending
             if (values.startDate) {
                 noteData.startDate = values.startDate.toISOString();
             }

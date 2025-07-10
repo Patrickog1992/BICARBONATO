@@ -81,12 +81,10 @@ export default function CreateNetflixNoteForm() {
                 theme: 'netflix',
             };
             
-            if (values.musicUrl) {
-                noteData.musicUrl = values.musicUrl;
-            }
-            if (values.phone) {
-                noteData.phone = values.phone;
-            }
+            if (values.musicUrl) noteData.musicUrl = values.musicUrl;
+            if (values.phone) noteData.phone = values.phone;
+            
+            // Convert Date to ISO string before sending
             if (values.startDate) {
                 noteData.startDate = values.startDate.toISOString();
             }
