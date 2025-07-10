@@ -1,3 +1,4 @@
+
 import NoteDisplay from '@/components/note-display';
 import { getNote, NoteData } from '@/services/note';
 import { notFound } from 'next/navigation';
@@ -18,7 +19,7 @@ export default async function NotePage({ params }: NotePageProps) {
   }
 
   // Construct the full URL on the server side
-  const host = process.env.HOST || 'http://localhost:3000';
+  const host = process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000';
   const currentUrl = `${host}/note/${params.id}`;
 
   return <NoteDisplay note={noteData} currentUrl={currentUrl} />;

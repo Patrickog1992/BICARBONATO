@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
@@ -7,6 +8,7 @@ import { toPng } from 'html-to-image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { NoteData } from '@/services/note';
+import { Timestamp } from 'firebase/firestore';
 import RelationshipCounter from './relationship-counter';
 import {
   Carousel,
@@ -56,12 +58,9 @@ export default function NoteDisplay({ note, currentUrl }: NoteDisplayProps) {
     if (note.musicUrl) {
       setEmbedUrl(getYouTubeEmbedUrl(note.musicUrl));
     }
-    // Props from Server Components are serialized, so we need to convert the string back to a Date object.
-    if (note.startDate) {
-      const date = new Date(note.startDate);
-      if (!isNaN(date.getTime())) {
-        setStartDate(date);
-      }
+    // Firestore Timestamp needs to be converted to Date object for use in components
+    if (note.startDate && note.startDate instanceof Timestamp) {
+        setStartDate(note.startDate.toDate());
     }
   }, [note.musicUrl, note.startDate]);
 

@@ -32,6 +32,7 @@ import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import type { ClientNoteData } from '@/services/note';
 
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
@@ -72,7 +73,7 @@ export default function CreateNetflixNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
-            const noteData: {[key: string]: any} = {
+            const noteData: ClientNoteData = {
                 title: values.title,
                 loveNote: values.loveNote,
                 email: values.email,

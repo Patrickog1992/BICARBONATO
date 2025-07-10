@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { NoteData } from '@/services/note';
@@ -10,6 +11,7 @@ import { toPng } from 'html-to-image';
 import { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Timestamp } from 'firebase/firestore';
 
 interface NetflixNoteDisplayProps {
     note: NoteData;
@@ -37,12 +39,16 @@ function getYouTubeEmbedUrl(url: string | undefined): string | null {
 export default function NetflixNoteDisplay({ note, currentUrl }: NetflixNoteDisplayProps) {
     const qrCodeRef = useRef<HTMLDivElement>(null);
     const [embedUrl, setEmbedUrl] = useState<string | null>(null);
+    const [startDate, setStartDate] = useState<Date | null>(null);
 
     useEffect(() => {
         if (note.musicUrl) {
             setEmbedUrl(getYouTubeEmbedUrl(note.musicUrl));
         }
-    }, [note.musicUrl]);
+        if (note.startDate && note.startDate instanceof Timestamp) {
+            setStartDate(note.startDate.toDate());
+        }
+    }, [note.musicUrl, note.startDate]);
 
     const handleDownload = async () => {
         if (qrCodeRef.current === null) {
@@ -90,10 +96,10 @@ export default function NetflixNoteDisplay({ note, currentUrl }: NetflixNoteDisp
                     <div className="p-4 md:p-8">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="md:col-span-2">
-                                {note.startDate && (
+                                {startDate && (
                                     <div className='space-y-2 mb-4'>
                                         <div className="flex items-center gap-2">
-                                            <p className="text-sm text-green-400 font-semibold">Estreou em {format(new Date(note.startDate), "PPP", { locale: ptBR })}</p>
+                                            <p className="text-sm text-green-400 font-semibold">Estreou em {format(startDate, "PPP", { locale: ptBR })}</p>
                                             <span className="bg-neutral-600 text-white text-[10px] font-bold px-1.5 rounded-sm">HD</span>
                                         </div>
                                         <div className="flex items-center gap-2">
