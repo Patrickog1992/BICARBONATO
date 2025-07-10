@@ -6,10 +6,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { CalendarIcon, Loader2, Music, Sparkles, Upload, Mail, Phone, CheckCircle, Package } from 'lucide-react';
+import { CalendarIcon, Loader2, Music, Sparkles, Mail, Phone, CheckCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -31,13 +30,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
 import RelationshipCounter from './relationship-counter';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import AnimationBackground from './animation-background';
 import { Label } from '@/components/ui/label';
@@ -71,9 +63,8 @@ export default function CreateNoteForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [step, setStep] = useState(1);
-    const totalSteps = 8;
+    const totalSteps = 7;
     const { toast } = useToast();
-    const [images, setImages] = useState<string[]>([]);
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
@@ -108,7 +99,6 @@ export default function CreateNoteForm() {
             if (values.backgroundAnimation) noteData.backgroundAnimation = values.backgroundAnimation;
             if (values.emojis) noteData.emojis = values.emojis;
             
-            // Convert Date to ISO string before sending
             if (values.startDate) {
                 noteData.startDate = values.startDate.toISOString();
             }
@@ -126,35 +116,13 @@ export default function CreateNoteForm() {
             setIsSubmitting(false);
         }
     }
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (!files) return;
-
-        if (images.length + files.length > 8) {
-            toast({
-                variant: 'destructive',
-                title: 'Limite de fotos excedido',
-                description: 'Você pode adicionar no máximo 8 fotos.',
-            });
-            return;
-        }
-
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImages(prevImages => [...prevImages, reader.result as string]);
-            };
-            reader.readAsDataURL(file);
-        });
-    };
     
     const handleNextStep = async () => {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
-        if (step === 7) fieldsToValidate = ['email'];
-        if (step === 8) fieldsToValidate = ['plan'];
+        if (step === 6) fieldsToValidate = ['email'];
+        if (step === 7) fieldsToValidate = ['plan'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -172,18 +140,16 @@ export default function CreateNoteForm() {
         { title: "Título da página", description: "Escreva o titulo dedicatório para a página. Ex: João & Maria ou Feliz Aniversário ou etc!" },
         { title: "Sua mensagem", description: "Escreva uma mensagem especial. Seja criativo e demonstre todo seu carinho." },
         { title: "Data de início", description: "Informe a data de início que simbolize o início de uma união, relacionamento, amizade, etc." },
-        { title: "Fotos", description: "Anexe fotos e escolha o modo de exibição para personalizar a página. Você pode adicionar até 8 fotos." },
         { title: "Música dedicada", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
         { title: "Animação de fundo", description: "Escolha uma animação de fundo para a página. Você pode escolher entre as opções abaixo." },
         { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link da página personalizada." },
         { title: "Plano Ideal", description: "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo." },
-        { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
     ];
     
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 7 && (!form.watch('email') || !!form.formState.errors.email));
+      (step === 6 && (!form.watch('email') || !!form.formState.errors.email));
       
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -288,37 +254,6 @@ export default function CreateNoteForm() {
                             </div>
                         )}
                         {step === 4 && (
-                            <div className="space-y-8 animate-in fade-in">
-                                <FormItem>
-                                    <FormControl>
-                                        <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
-                                            <Upload className="w-8 h-8 text-neutral-500" />
-                                            <span className="mt-2 text-sm text-neutral-400">Clique para adicionar fotos</span>
-                                            <span className="text-xs text-neutral-500">PNG, JPG, JPEG, GIF (máx. 8 fotos)</span>
-                                            <Input
-                                                id="image-upload"
-                                                type="file"
-                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                                accept="image/png, image/jpeg, image/gif"
-                                                multiple
-                                                onChange={handleFileChange}
-                                            />
-                                        </div>
-                                    </FormControl>
-                                    {images && images.length > 0 && (
-                                        <div className="mt-4 grid grid-cols-4 gap-2">
-                                            {images.map((src, index) => (
-                                                <div key={index} className="relative aspect-square">
-                                                    <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                    <FormMessage />
-                                </FormItem>
-                            </div>
-                        )}
-                        {step === 5 && (
                           <div className="space-y-8 animate-in fade-in">
                             <FormField
                               control={form.control}
@@ -341,7 +276,7 @@ export default function CreateNoteForm() {
                             />
                           </div>
                         )}
-                         {step === 6 && (
+                         {step === 5 && (
                             <div className="space-y-8 animate-in fade-in">
                                 <FormField
                                     control={form.control}
@@ -428,7 +363,7 @@ export default function CreateNoteForm() {
                                 />
                             </div>
                         )}
-                        {step === 7 && (
+                        {step === 6 && (
                             <div className="space-y-8 animate-in fade-in">
                                 <FormField
                                     control={form.control}
@@ -467,7 +402,7 @@ export default function CreateNoteForm() {
                                 />
                             </div>
                         )}
-                        {step === 8 && (
+                        {step === 7 && (
                            <div className="space-y-8 animate-in fade-in">
                                 <FormField
                                     control={form.control}
@@ -585,21 +520,7 @@ export default function CreateNoteForm() {
                                 <h1 className="font-headline text-2xl font-bold text-red-500">{formData.title || "Seu título aparecerá aqui"}</h1>
                                 {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
                                 <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
-                                {images && images.length > 0 && (
-                                    <div className="mt-4 w-full">
-                                        <Carousel className="w-full max-w-xs mx-auto">
-                                            <CarouselContent>
-                                                {images.map((src, index) => (
-                                                    <CarouselItem key={index}>
-                                                        <Image src={src} alt={`Preview ${index + 1}`} width={200} height={200} className="rounded-md object-cover w-full aspect-square" />
-                                                    </CarouselItem>
-                                                ))}
-                                            </CarouselContent>
-                                            <CarouselPrevious className="left-[-24px] text-white" />
-                                            <CarouselNext className="right-[-24px] text-white" />
-                                        </Carousel>
-                                    </div>
-                                )}
+                                
                                 {formData.musicUrl && (
                                     <div className="mt-4 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
                                         <Music className="w-5 h-5 text-white" />

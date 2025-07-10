@@ -51,9 +51,8 @@ export default function CreateNetflixNoteForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [step, setStep] = useState(1);
-    const totalSteps = 7;
+    const totalSteps = 6;
     const { toast } = useToast();
-    const [images, setImages] = useState<string[]>([]);
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
@@ -84,7 +83,6 @@ export default function CreateNetflixNoteForm() {
             if (values.musicUrl) noteData.musicUrl = values.musicUrl;
             if (values.phone) noteData.phone = values.phone;
             
-            // Convert Date to ISO string before sending
             if (values.startDate) {
                 noteData.startDate = values.startDate.toISOString();
             }
@@ -102,34 +100,12 @@ export default function CreateNetflixNoteForm() {
             setIsSubmitting(false);
         }
     }
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (!files) return;
-
-        if (images.length + files.length > 8) {
-            toast({
-                variant: 'destructive',
-                title: 'Limite de fotos excedido',
-                description: 'Você pode adicionar no máximo 8 fotos.',
-            });
-            return;
-        }
-
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImages(prevImages => [...prevImages, reader.result as string]);
-            };
-            reader.readAsDataURL(file);
-        });
-    };
     
     const handleNextStep = async () => {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
-        if (step === 6) fieldsToValidate = ['email'];
+        if (step === 5) fieldsToValidate = ['email'];
         
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -147,7 +123,6 @@ export default function CreateNetflixNoteForm() {
         { title: "Qual o nome da sua série?", description: "Escreva o título da sua história. Ex: A Saga de João & Maria." },
         { title: "Sinopse", description: "Escreva a sinopse dessa história de amor. Seja criativo e conte os melhores momentos." },
         { title: "Data de lançamento", description: "Informe a data de início que simbolize o início de uma união, relacionamento, amizade, etc." },
-        { title: "Episódios (Fotos)", description: "Anexe as fotos que serão os episódios da sua série. Você pode adicionar até 8 fotos." },
         { title: "Trilha sonora", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
         { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link da página personalizada." },
         { title: "Plano Ideal", description: "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo." },
@@ -156,7 +131,7 @@ export default function CreateNetflixNoteForm() {
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 6 && (!form.watch('email') || !!form.formState.errors.email));
+      (step === 5 && (!form.watch('email') || !!form.formState.errors.email));
 
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -260,38 +235,7 @@ export default function CreateNetflixNoteForm() {
                                 />
                             </div>
                         )}
-                        {step === 4 && ( // Images / Episodes
-                            <div className="space-y-8 animate-in fade-in">
-                                <FormItem>
-                                    <FormControl>
-                                        <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
-                                            <Upload className="w-8 h-8 text-neutral-500" />
-                                            <span className="mt-2 text-sm text-neutral-400">Clique para adicionar os episódios</span>
-                                            <span className="text-xs text-neutral-500">PNG, JPG, JPEG, GIF (máx. 8 fotos)</span>
-                                            <Input
-                                                id="image-upload"
-                                                type="file"
-                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                                accept="image/png, image/jpeg, image/gif"
-                                                multiple
-                                                onChange={handleFileChange}
-                                            />
-                                        </div>
-                                    </FormControl>
-                                    {images && images.length > 0 && (
-                                        <div className="mt-4 grid grid-cols-4 gap-2">
-                                            {images.map((src, index) => (
-                                                <div key={index} className="relative aspect-square">
-                                                    <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                    <FormMessage />
-                                </FormItem>
-                            </div>
-                        )}
-                        {step === 5 && ( // Music URL
+                        {step === 4 && ( // Music URL
                           <div className="space-y-8 animate-in fade-in">
                             <FormField
                               control={form.control}
@@ -314,7 +258,7 @@ export default function CreateNetflixNoteForm() {
                             />
                           </div>
                         )}
-                        {step === 6 && ( // Contact Info
+                        {step === 5 && ( // Contact Info
                             <div className="space-y-8 animate-in fade-in">
                                 <FormField
                                     control={form.control}
@@ -353,7 +297,7 @@ export default function CreateNetflixNoteForm() {
                                 />
                             </div>
                         )}
-                        {step === 7 && ( // Plan
+                        {step === 6 && ( // Plan
                            <div className="space-y-8 animate-in fade-in">
                                 <FormField
                                     control={form.control}
@@ -464,13 +408,9 @@ export default function CreateNetflixNoteForm() {
                       <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-0">
                           <div className="text-white bg-black w-full h-full p-0 overflow-y-auto">
                               <div className="relative">
-                                  {images && images.length > 0 ? (
-                                    <Image src={images[0]} alt="Hero" width={270} height={150} className="w-full h-[150px] object-cover" />
-                                  ) : (
-                                    <div className="w-full h-[150px] bg-neutral-800 flex items-center justify-center text-neutral-500">
-                                      <p>Episódio Principal</p>
-                                    </div>
-                                  )}
+                                  <div className="w-full h-[150px] bg-neutral-800 flex items-center justify-center text-neutral-500">
+                                    <p>Episódio Principal</p>
+                                  </div>
                                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                                   <div className="absolute top-3 left-3">
                                     <Image src="https://i.imgur.com/SgK6WMs.png" alt="Netflix Logo" width={60} height={16} />
@@ -500,21 +440,6 @@ export default function CreateNetflixNoteForm() {
                                     <div className="mt-2 p-2 bg-neutral-800 rounded-md flex items-center gap-2">
                                         <Music className="w-4 h-4 text-white" />
                                         <p className="text-xs text-white truncate">Trilha sonora tocando</p>
-                                    </div>
-                                )}
-                                
-                                {images && images.length > 0 && (
-                                    <div className="pt-2">
-                                      <h2 className="text-lg font-bold mb-2">Episódios</h2>
-                                      <div className="grid grid-cols-3 gap-2">
-                                        {images.map((src, index) => (
-                                          <div key={index} className="relative aspect-video rounded-md overflow-hidden">
-                                            <Image src={src} alt={`Episódio ${index + 1}`} fill className="object-cover" />
-                                            <div className="absolute inset-0 bg-black/20"></div>
-                                            <p className="absolute bottom-1 left-1 text-xs font-bold bg-black/50 px-1 rounded">E{index+1}</p>
-                                          </div>
-                                        ))}
-                                      </div>
                                     </div>
                                 )}
                               </div>
