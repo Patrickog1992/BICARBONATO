@@ -79,17 +79,27 @@ export default function CreateNetflixNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
-            const { startDate } = values;
-            const noteData = {
+            // Create a clean data object to send to the server
+            // This prevents sending undefined or empty fields that might cause issues
+            const noteData: {[key: string]: any} = {
                 title: values.title,
                 loveNote: values.loveNote,
-                musicUrl: values.musicUrl,
                 email: values.email,
-                phone: values.phone,
                 plan: values.plan,
                 theme: 'netflix',
             };
-            const noteId = await addNote(noteData, startDate);
+
+            if (values.musicUrl) {
+                noteData.musicUrl = values.musicUrl;
+            }
+            if (values.phone) {
+                noteData.phone = values.phone;
+            }
+            if (values.startDate && !isNaN(values.startDate.getTime())) {
+                noteData.startDate = values.startDate;
+            }
+
+            const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
         } catch (error) {
              console.error('Error creating note:', error);
@@ -518,5 +528,3 @@ export default function CreateNetflixNoteForm() {
         </div>
     )
 }
-
-    

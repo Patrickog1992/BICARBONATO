@@ -45,7 +45,7 @@ import { Label } from '@/components/ui/label';
 const formSchema = z.object({
   title: z.string().min(3, { message: 'O título deve ter pelo menos 3 caracteres.' }),
   loveNote: z.string().min(1, { message: 'A mensagem não pode estar vazia.' }),
-  musicUrl: z.string().optional(),
+  musicUrl: z.string().url({ message: 'Por favor, insira uma URL válida.' }).optional().or(z.literal('')),
   startDate: z.date().optional(),
   backgroundAnimation: z.string().optional(),
   emojis: z.string().optional(),
@@ -94,19 +94,32 @@ export default function CreateNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
-            const { startDate, ...restOfValues } = values;
-             const noteData = {
+            // Create a clean data object to send to the server
+            // This prevents sending undefined or empty fields that might cause issues
+            const noteData: {[key: string]: any} = {
                 title: values.title,
                 loveNote: values.loveNote,
-                musicUrl: values.musicUrl,
-                backgroundAnimation: values.backgroundAnimation,
-                emojis: values.emojis,
                 email: values.email,
-                phone: values.phone,
                 plan: values.plan,
-             };
+            };
 
-            const noteId = await addNote(noteData, startDate);
+            if (values.musicUrl) {
+                noteData.musicUrl = values.musicUrl;
+            }
+            if (values.phone) {
+                noteData.phone = values.phone;
+            }
+            if (values.backgroundAnimation) {
+                noteData.backgroundAnimation = values.backgroundAnimation;
+            }
+            if (values.emojis) {
+                noteData.emojis = values.emojis;
+            }
+            if (values.startDate && !isNaN(values.startDate.getTime())) {
+                noteData.startDate = values.startDate;
+            }
+
+            const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
         } catch (error) {
              console.error('Error creating note:', error);
@@ -608,5 +621,3 @@ export default function CreateNoteForm() {
         </div>
     )
 }
-
-    

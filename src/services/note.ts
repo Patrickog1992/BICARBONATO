@@ -6,8 +6,8 @@ export interface NoteData {
   title?: string;
   loveNote: string;
   musicUrl?: string;
-  startDate?: Date; // For client-side use
-  images?: string[]; // For client-side use, not stored in DB
+  startDate?: Date; 
+  images?: string[];
   backgroundAnimation?: string;
   emojis?: string;
   userSentiment?: string;
@@ -21,20 +21,23 @@ export interface NoteData {
 }
 
 // This interface defines the shape of the data that will actually be stored in Firestore.
-// Notice it does not include `images`.
+// It omits fields that are not intended for storage, like `images`.
 interface NoteDataForStorage extends Omit<NoteData, 'images' | 'startDate' | 'createdAt'> {
     createdAt: any; // serverTimestamp()
     startDate?: Timestamp; // Firestore Timestamp
 }
 
 
-export async function addNote(noteData: Omit<NoteData, 'images' | 'createdAt' | 'startDate'>, startDate?: Date) {
+export async function addNote(noteData: Omit<NoteData, 'images' | 'createdAt'>) {
   try {
+    const { startDate, ...restOfNoteData } = noteData;
+
+    // Create a clean object for storage, excluding any undefined values
     const dataToSave: NoteDataForStorage = {
-      ...noteData,
+      ...restOfNoteData,
       createdAt: serverTimestamp(),
     };
-
+    
     // Only add startDate if it's a valid date, converting it to a Firestore Timestamp
     if (startDate && startDate instanceof Date && !isNaN(startDate.getTime())) {
       dataToSave.startDate = Timestamp.fromDate(startDate);
