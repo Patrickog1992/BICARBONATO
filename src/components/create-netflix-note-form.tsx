@@ -83,7 +83,6 @@ export default function CreateNetflixNoteForm() {
             const noteData = {
                 ...restOfValues,
                 theme: 'netflix',
-                images: images, 
             };
             const noteId = await addNote(noteData, startDate);
             router.push(`/note/${noteId}`);
@@ -127,8 +126,7 @@ export default function CreateNetflixNoteForm() {
         if (step === 2) fieldsToValidate = ['loveNote'];
         if (step === 6) fieldsToValidate = ['email'];
 
-        const isValid = await form.trigger(fieldsToValidate);
-
+        const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
             if (step < totalSteps) {
                 setStep(prev => prev + 1);
