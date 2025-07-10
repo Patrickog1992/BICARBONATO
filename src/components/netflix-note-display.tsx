@@ -86,7 +86,20 @@ export default function NetflixNoteDisplay({ note, currentUrl }: NetflixNoteDisp
                     <div className="p-4 md:p-8">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="md:col-span-2">
-                                {note.startDate && <p className="text-sm text-neutral-400 mb-2">Lançamento em {format(new Date(note.startDate), "PPP", { locale: ptBR })}</p>}
+                                {note.startDate && (
+                                    <div className='space-y-2 mb-4'>
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-sm text-green-400 font-semibold">Estreou em {format(new Date(note.startDate), "PPP", { locale: ptBR })}</p>
+                                            <span className="bg-neutral-600 text-white text-[10px] font-bold px-1.5 rounded-sm">HD</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <div className="bg-red-600 text-white font-bold text-sm px-2 py-1 rounded">
+                                                TOP<span className="text-xs">10</span>
+                                            </div>
+                                            <p className="text-sm font-semibold text-white">Em alta no momento</p>
+                                        </div>
+                                    </div>
+                                )}
                                 <p className="text-base whitespace-pre-wrap text-neutral-200">{note.loveNote}</p>
                             </div>
                             <div>

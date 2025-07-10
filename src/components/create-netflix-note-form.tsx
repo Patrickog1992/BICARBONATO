@@ -498,7 +498,20 @@ export default function CreateNetflixNoteForm() {
                               <div className="p-3 space-y-3">
                                 <h1 className="text-xl font-bold text-white uppercase tracking-wide">{formData.title || "TÍTULO DA SÉRIE"}</h1>
                                 
-                                {formData.startDate && <p className="text-xs text-neutral-400">Lançamento em {format(formData.startDate, "PPP", { locale: ptBR })}</p>}
+                                {formData.startDate && (
+                                    <div className='space-y-2'>
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-xs text-green-500 font-semibold">Estreou em {format(formData.startDate, "PPP", { locale: ptBR })}</p>
+                                            <span className="bg-neutral-600 text-white text-[8px] font-bold px-1 rounded-sm">HD</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <div className="bg-red-600 text-white font-bold text-xs px-1.5 py-0.5 rounded-sm">
+                                                TOP<span className="text-[10px]">10</span>
+                                            </div>
+                                            <p className="text-xs font-semibold text-white">Em alta no momento</p>
+                                        </div>
+                                    </div>
+                                )}
                                 
                                 <p className="text-xs whitespace-pre-wrap text-neutral-300">{formData.loveNote || "A sinopse da sua história de amor aparecerá aqui."}</p>
                                 
