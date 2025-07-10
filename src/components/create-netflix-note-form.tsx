@@ -125,9 +125,17 @@ export default function CreateNetflixNoteForm() {
         });
     };
     
-    const handleNextStep = () => {
-        if (step < totalSteps) {
-            setStep(prev => prev + 1);
+    const handleNextStep = async () => {
+        let fieldsToValidate: (keyof FormData)[] = [];
+        if (step === 1) fieldsToValidate = ['title'];
+        if (step === 2) fieldsToValidate = ['loveNote'];
+        if (step === 6) fieldsToValidate = ['email'];
+        
+        const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
+        if (isValid) {
+            if (step < totalSteps) {
+                setStep(prev => prev + 1);
+            }
         }
     };
 
@@ -518,3 +526,5 @@ export default function CreateNetflixNoteForm() {
         </div>
     )
 }
+
+    

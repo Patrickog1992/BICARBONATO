@@ -22,17 +22,15 @@ export interface ClientNoteData {
 }
 
 // Stored data will have Timestamps
-export interface NoteData extends Omit<ClientNoteData, 'startDate' | 'images'> {
+export interface NoteData extends Omit<ClientNoteData, 'startDate'> {
   createdAt: Timestamp;
   startDate?: Timestamp;
-  images?: string[];
 }
 
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
     // Separate startDate to handle it after document creation
-    // Also remove images as we are not storing them
-    const { startDate, images, ...dataToCreate } = clientData;
+    const { startDate, ...dataToCreate } = clientData;
 
     // Create the document with a server-generated timestamp for createdAt
     const docRef = await addDoc(collection(db, 'notes'), {
@@ -79,3 +77,5 @@ export async function getNote(id: string): Promise<NoteData | null> {
         throw new Error('Could not retrieve the note.');
     }
 }
+
+    
