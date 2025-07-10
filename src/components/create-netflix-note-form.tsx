@@ -83,6 +83,9 @@ export default function CreateNetflixNoteForm() {
             const noteData = {
                 ...restOfValues,
                 theme: 'netflix',
+                // We pass the images to the note service, but it won't save them to Firestore
+                // to avoid exceeding document size limits. They are used for display purposes only.
+                images: images, 
             };
             const noteId = await addNote(noteData, startDate);
             router.push(`/note/${noteId}`);
@@ -125,9 +128,17 @@ export default function CreateNetflixNoteForm() {
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
         if (step === 6) fieldsToValidate = ['email'];
-        if (step === 7) fieldsToValidate = ['plan'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
+        
+        if (step === 7) {
+            const isPlanValid = await form.trigger(['plan']);
+            if (isPlanValid) {
+                 await form.handleSubmit(onSubmit)();
+            }
+            return;
+        }
+
         if (isValid) {
             if (step < totalSteps) {
                 setStep(prev => prev + 1);
@@ -147,14 +158,12 @@ export default function CreateNetflixNoteForm() {
         { title: "Trilha sonora", description: "Dedique uma música especial para tocar ao fundo. Cole o link do YouTube." },
         { title: "Informações de contato", description: "Preencha as informações de contato para receber o QR code e o link da página personalizada." },
         { title: "Plano Ideal", description: "Escolha o plano ideal para sua página. Você pode escolher entre os planos abaixo." },
-        { title: "Revise e Crie!", description: "Tudo pronto! Revise as informações e crie sua página." }
     ];
     
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 6 && (!form.watch('email') || !!form.formState.errors.email)) ||
-      (step === 7 && !form.watch('plan'));
+      (step === 6 && (!form.watch('email') || !!form.formState.errors.email));
 
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -442,7 +451,7 @@ export default function CreateNetflixNoteForm() {
                                         Próxima etapa
                                     </Button>
                                 ) : (
-                                    <Button type="submit" size="lg" disabled={isSubmitting}>
+                                    <Button type="submit" size="lg" disabled={isSubmitting || !form.formState.isValid}>
                                         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                         Criar Minha Página
                                     </Button>
@@ -524,5 +533,3 @@ export default function CreateNetflixNoteForm() {
         </div>
     )
 }
-
-    
