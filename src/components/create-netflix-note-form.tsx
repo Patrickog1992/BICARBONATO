@@ -79,10 +79,17 @@ export default function CreateNetflixNoteForm() {
                 email: values.email,
                 plan: values.plan,
                 theme: 'netflix',
-                musicUrl: values.musicUrl,
-                phone: values.phone,
-                startDate: values.startDate ? values.startDate.toISOString() : undefined,
             };
+            
+            if (values.musicUrl) {
+                noteData.musicUrl = values.musicUrl;
+            }
+            if (values.phone) {
+                noteData.phone = values.phone;
+            }
+            if (values.startDate) {
+                noteData.startDate = values.startDate.toISOString();
+            }
 
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -521,7 +528,3 @@ export default function CreateNetflixNoteForm() {
         </div>
     )
 }
-
-    
-
-    

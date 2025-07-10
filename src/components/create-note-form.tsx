@@ -101,12 +101,23 @@ export default function CreateNoteForm() {
                 email: values.email,
                 plan: values.plan,
                 theme: 'default',
-                musicUrl: values.musicUrl,
-                phone: values.phone,
-                backgroundAnimation: values.backgroundAnimation,
-                emojis: values.emojis,
-                startDate: values.startDate ? values.startDate.toISOString() : undefined,
             };
+
+            if (values.musicUrl) {
+                noteData.musicUrl = values.musicUrl;
+            }
+            if (values.phone) {
+                noteData.phone = values.phone;
+            }
+            if (values.backgroundAnimation) {
+                noteData.backgroundAnimation = values.backgroundAnimation;
+            }
+            if (values.emojis) {
+                noteData.emojis = values.emojis;
+            }
+            if (values.startDate) {
+                noteData.startDate = values.startDate.toISOString();
+            }
 
             const noteId = await addNote(noteData);
             router.push(`/note/${noteId}`);
@@ -557,7 +568,7 @@ export default function CreateNoteForm() {
                                         Próxima etapa
                                     </Button>
                                 ) : (
-                                    <Button type="submit" size="lg" disabled={isSubmitting}>
+                                    <Button type="submit" size="lg" disabled={isSubmitting || !form.formState.isValid}>
                                         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                         Criar Minha Página
                                     </Button>
@@ -610,7 +621,3 @@ export default function CreateNoteForm() {
         </div>
     )
 }
-
-    
-
-    
