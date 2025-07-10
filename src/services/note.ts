@@ -15,6 +15,7 @@ export interface ClientNoteData {
   phone?: string;
   plan: string;
   theme: string;
+  images?: string[];
 }
 
 export interface NoteData extends Omit<ClientNoteData, 'startDate' | 'id'> {
@@ -26,19 +27,26 @@ export interface NoteData extends Omit<ClientNoteData, 'startDate' | 'id'> {
 
 export async function addNote(clientData: ClientNoteData): Promise<string> {
   try {
-    const { id, ...dataToStore } = clientData;
     const docData: { [key: string]: any } = {
-      ...dataToStore,
+      title: clientData.title,
+      loveNote: clientData.loveNote,
+      email: clientData.email,
+      plan: clientData.plan,
+      theme: clientData.theme,
       createdAt: Timestamp.now(),
     };
+
+    if (clientData.musicUrl) docData.musicUrl = clientData.musicUrl;
+    if (clientData.phone) docData.phone = clientData.phone;
+    if (clientData.backgroundAnimation) docData.backgroundAnimation = clientData.backgroundAnimation;
+    if (clientData.emojis) docData.emojis = clientData.emojis;
+    if (clientData.images) docData.images = clientData.images;
 
     if (clientData.startDate) {
       const date = new Date(clientData.startDate);
       if (!isNaN(date.getTime())) {
         docData.startDate = Timestamp.fromDate(date);
       }
-    } else {
-      delete docData.startDate;
     }
 
     const docRef = await addDoc(collection(db, 'notes'), docData);
@@ -70,6 +78,7 @@ export async function getNote(id: string): Promise<NoteData | null> {
                 backgroundAnimation: data.backgroundAnimation,
                 emojis: data.emojis,
                 phone: data.phone,
+                images: data.images,
                 createdAt: data.createdAt || Timestamp.now(),
             };
         } else {
