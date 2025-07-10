@@ -6,8 +6,8 @@ export interface NoteData {
   title?: string;
   loveNote: string;
   musicUrl?: string;
-  startDate?: Date;
-  images?: string[]; 
+  startDate?: Date; // For client-side use
+  images?: string[]; // For client-side use, not stored in DB
   backgroundAnimation?: string;
   emojis?: string;
   userSentiment?: string;
@@ -20,22 +20,24 @@ export interface NoteData {
   theme?: string;
 }
 
-export async function addNote(noteData: Omit<NoteData, 'createdAt' | 'startDate'>, startDate?: Date) {
+// This interface defines the shape of the data that will actually be stored in Firestore.
+// Notice it does not include `images`.
+interface NoteDataForStorage extends Omit<NoteData, 'images' | 'startDate' | 'createdAt'> {
+    createdAt: any; // serverTimestamp()
+    startDate?: Timestamp; // Firestore Timestamp
+}
+
+
+export async function addNote(noteData: Omit<NoteData, 'images' | 'createdAt' | 'startDate'>, startDate?: Date) {
   try {
-    const dataToSave: any = {
+    const dataToSave: NoteDataForStorage = {
       ...noteData,
       createdAt: serverTimestamp(),
     };
 
-    // Only add startDate if it's a valid date
+    // Only add startDate if it's a valid date, converting it to a Firestore Timestamp
     if (startDate && startDate instanceof Date && !isNaN(startDate.getTime())) {
       dataToSave.startDate = Timestamp.fromDate(startDate);
-    }
-    
-    // As Firebase has a 1MB limit per document, we won't save images to Firestore.
-    // This should be handled by a file storage service like Firebase Storage in a real app.
-    if (dataToSave.images) {
-      delete dataToSave.images;
     }
 
     const docRef = await addDoc(collection(db, 'notes'), dataToSave);
