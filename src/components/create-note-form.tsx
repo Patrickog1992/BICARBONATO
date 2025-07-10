@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -94,10 +95,16 @@ export default function CreateNoteForm() {
         setIsSubmitting(true);
         try {
             const { startDate, ...restOfValues } = values;
-            const noteData = {
-                ...restOfValues,
-                images: images,
-            };
+             const noteData = {
+                title: values.title,
+                loveNote: values.loveNote,
+                musicUrl: values.musicUrl,
+                backgroundAnimation: values.backgroundAnimation,
+                emojis: values.emojis,
+                email: values.email,
+                phone: values.phone,
+                plan: values.plan,
+             };
 
             const noteId = await addNote(noteData, startDate);
             router.push(`/note/${noteId}`);
@@ -139,8 +146,8 @@ export default function CreateNoteForm() {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
-        if (step === 6) fieldsToValidate = ['email'];
-        if (step === 7) fieldsToValidate = ['plan'];
+        if (step === 7) fieldsToValidate = ['email'];
+        if (step === 8) fieldsToValidate = ['plan'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -169,8 +176,7 @@ export default function CreateNoteForm() {
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 6 && (!form.watch('email') || !!form.formState.errors.email)) ||
-      (step === 7 && !form.watch('plan'));
+      (step === 7 && (!form.watch('email') || !!form.formState.errors.email));
       
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -602,3 +608,5 @@ export default function CreateNoteForm() {
         </div>
     )
 }
+
+    

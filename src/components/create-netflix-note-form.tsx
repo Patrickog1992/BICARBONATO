@@ -79,9 +79,14 @@ export default function CreateNetflixNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
-            const { startDate, ...restOfValues } = values;
+            const { startDate } = values;
             const noteData = {
-                ...restOfValues,
+                title: values.title,
+                loveNote: values.loveNote,
+                musicUrl: values.musicUrl,
+                email: values.email,
+                phone: values.phone,
+                plan: values.plan,
                 theme: 'netflix',
             };
             const noteId = await addNote(noteData, startDate);
@@ -120,17 +125,9 @@ export default function CreateNetflixNoteForm() {
         });
     };
     
-    const handleNextStep = async () => {
-        let fieldsToValidate: (keyof FormData)[] = [];
-        if (step === 1) fieldsToValidate = ['title'];
-        if (step === 2) fieldsToValidate = ['loveNote'];
-        if (step === 6) fieldsToValidate = ['email'];
-
-        const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
-        if (isValid) {
-            if (step < totalSteps) {
-                setStep(prev => prev + 1);
-            }
+    const handleNextStep = () => {
+        if (step < totalSteps) {
+            setStep(prev => prev + 1);
         }
     };
 
@@ -434,14 +431,14 @@ export default function CreateNetflixNoteForm() {
                                 {step > 1 && (<Button type="button" onClick={handlePrevStep} variant="outline" className='bg-transparent border-neutral-700 hover:bg-neutral-800'>Voltar etapa</Button>)}
                            </div>
                            <div>
-                                {step < totalSteps ? (
-                                    <Button type="button" onClick={handleNextStep} disabled={isNextDisabled}>
-                                        Próxima etapa
-                                    </Button>
-                                ) : (
+                                {step === totalSteps ? (
                                     <Button type="submit" size="lg" disabled={isSubmitting || !form.formState.isValid}>
                                         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                         Criar Minha Página
+                                    </Button>
+                                ) : (
+                                    <Button type="button" onClick={handleNextStep} disabled={isNextDisabled}>
+                                        Próxima etapa
                                     </Button>
                                 )}
                            </div>
@@ -521,3 +518,5 @@ export default function CreateNetflixNoteForm() {
         </div>
     )
 }
+
+    
