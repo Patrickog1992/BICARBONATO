@@ -2,45 +2,46 @@
 import { db } from '@/lib/firebase';
 import { collection, addDoc, getDoc, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
 
-export interface NoteData {
+// Interface for data received from the client
+export interface ClientNoteData {
   title?: string;
   loveNote: string;
   musicUrl?: string;
-  startDate?: Date; 
-  images?: string[];
+  startDate?: string; // Expecting ISO string from client
   backgroundAnimation?: string;
   emojis?: string;
   userSentiment?: string;
   relationshipLength?: string;
   sharedMemory?: string;
-  createdAt?: any;
   email?: string;
   phone?: string;
   plan?: string;
   theme?: string;
 }
 
-// This interface defines the shape of the data that will actually be stored in Firestore.
-// It omits fields that are not intended for storage, like `images`.
-interface NoteDataForStorage extends Omit<NoteData, 'images' | 'startDate' | 'createdAt'> {
-    createdAt: any; // serverTimestamp()
-    startDate?: Timestamp; // Firestore Timestamp
+// Interface for data shape in Firestore
+export interface NoteData extends Omit<ClientNoteData, 'startDate'> {
+  createdAt: Timestamp;
+  startDate?: Timestamp; // Stored as Firestore Timestamp
+  images?: string[]; // Although not saved, defined for type safety
 }
 
-
-export async function addNote(noteData: Omit<NoteData, 'images' | 'createdAt'>) {
+export async function addNote(clientData: ClientNoteData) {
   try {
-    const { startDate, ...restOfNoteData } = noteData;
+    const { startDate: startDateString, ...restOfClientData } = clientData;
 
     // Create a clean object for storage, excluding any undefined values
-    const dataToSave: NoteDataForStorage = {
-      ...restOfNoteData,
+    const dataToSave: Omit<NoteData, 'startDate' | 'images'> = {
+      ...restOfClientData,
       createdAt: serverTimestamp(),
     };
     
-    // Only add startDate if it's a valid date, converting it to a Firestore Timestamp
-    if (startDate && startDate instanceof Date && !isNaN(startDate.getTime())) {
-      dataToSave.startDate = Timestamp.fromDate(startDate);
+    // Convert ISO string back to a Date object, then to a Firestore Timestamp
+    if (startDateString) {
+      const date = new Date(startDateString);
+      if (!isNaN(date.getTime())) {
+        (dataToSave as NoteData).startDate = Timestamp.fromDate(date);
+      }
     }
 
     const docRef = await addDoc(collection(db, 'notes'), dataToSave);

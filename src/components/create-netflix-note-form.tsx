@@ -30,13 +30,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 
@@ -79,8 +72,6 @@ export default function CreateNetflixNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
-            // Create a clean data object to send to the server
-            // This prevents sending undefined or empty fields that might cause issues
             const noteData: {[key: string]: any} = {
                 title: values.title,
                 loveNote: values.loveNote,
@@ -89,14 +80,12 @@ export default function CreateNetflixNoteForm() {
                 theme: 'netflix',
             };
 
-            if (values.musicUrl) {
-                noteData.musicUrl = values.musicUrl;
-            }
-            if (values.phone) {
-                noteData.phone = values.phone;
-            }
-            if (values.startDate && !isNaN(values.startDate.getTime())) {
-                noteData.startDate = values.startDate;
+            if (values.musicUrl) noteData.musicUrl = values.musicUrl;
+            if (values.phone) noteData.phone = values.phone;
+            
+            // Convert date to ISO string before sending to server
+            if (values.startDate) {
+                noteData.startDate = values.startDate.toISOString();
             }
 
             const noteId = await addNote(noteData);

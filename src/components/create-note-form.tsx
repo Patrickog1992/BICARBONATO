@@ -94,8 +94,6 @@ export default function CreateNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
-            // Create a clean data object to send to the server
-            // This prevents sending undefined or empty fields that might cause issues
             const noteData: {[key: string]: any} = {
                 title: values.title,
                 loveNote: values.loveNote,
@@ -103,20 +101,14 @@ export default function CreateNoteForm() {
                 plan: values.plan,
             };
 
-            if (values.musicUrl) {
-                noteData.musicUrl = values.musicUrl;
-            }
-            if (values.phone) {
-                noteData.phone = values.phone;
-            }
-            if (values.backgroundAnimation) {
-                noteData.backgroundAnimation = values.backgroundAnimation;
-            }
-            if (values.emojis) {
-                noteData.emojis = values.emojis;
-            }
-            if (values.startDate && !isNaN(values.startDate.getTime())) {
-                noteData.startDate = values.startDate;
+            if (values.musicUrl) noteData.musicUrl = values.musicUrl;
+            if (values.phone) noteData.phone = values.phone;
+            if (values.backgroundAnimation) noteData.backgroundAnimation = values.backgroundAnimation;
+            if (values.emojis) noteData.emojis = values.emojis;
+            
+            // Convert date to ISO string before sending to server
+            if (values.startDate) {
+                noteData.startDate = values.startDate.toISOString();
             }
 
             const noteId = await addNote(noteData);
