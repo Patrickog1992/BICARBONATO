@@ -46,7 +46,6 @@ const formSchema = z.object({
   loveNote: z.string().min(1, { message: 'A mensagem não pode estar vazia.' }),
   musicUrl: z.string().optional(),
   startDate: z.date().optional(),
-  images: z.array(z.string()).optional(),
   backgroundAnimation: z.string().optional(),
   emojis: z.string().optional(),
   email: z.string().min(1, { message: 'O e-mail é obrigatório.' }).email({ message: 'Por favor, insira um e-mail válido.' }),
@@ -70,8 +69,9 @@ export default function CreateNoteForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [step, setStep] = useState(1);
-    const totalSteps = 9;
+    const totalSteps = 8;
     const { toast } = useToast();
+    const [images, setImages] = useState<string[]>([]);
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
@@ -80,7 +80,6 @@ export default function CreateNoteForm() {
             loveNote: '',
             musicUrl: '',
             startDate: undefined,
-            images: [],
             backgroundAnimation: 'none',
             emojis: '',
             email: '',
@@ -94,19 +93,13 @@ export default function CreateNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
+            const { startDate, ...restOfValues } = values;
             const noteData = {
-                title: values.title,
-                loveNote: values.loveNote,
-                musicUrl: values.musicUrl,
-                startDate: values.startDate,
-                // images: values.images, // Temporarily disabled to avoid firestore size limit issues
-                backgroundAnimation: values.backgroundAnimation,
-                emojis: values.emojis,
-                email: values.email,
-                phone: values.phone,
-                plan: values.plan,
-            }
-            const noteId = await addNote(noteData);
+                ...restOfValues,
+                images: images,
+            };
+
+            const noteId = await addNote(noteData, startDate);
             router.push(`/note/${noteId}`);
         } catch (error) {
              console.error('Error creating note:', error);
@@ -124,8 +117,7 @@ export default function CreateNoteForm() {
         const files = event.target.files;
         if (!files) return;
 
-        const currentImages = form.getValues('images') || [];
-        if (currentImages.length + files.length > 8) {
+        if (images.length + files.length > 8) {
             toast({
                 variant: 'destructive',
                 title: 'Limite de fotos excedido',
@@ -137,8 +129,7 @@ export default function CreateNoteForm() {
         Array.from(files).forEach(file => {
             const reader = new FileReader();
             reader.onloadend = () => {
-                const newImages = [...(form.getValues('images') || []), reader.result as string];
-                form.setValue('images', newImages, { shouldValidate: true });
+                setImages(prevImages => [...prevImages, reader.result as string]);
             };
             reader.readAsDataURL(file);
         });
@@ -148,8 +139,8 @@ export default function CreateNoteForm() {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
-        if (step === 7) fieldsToValidate = ['email'];
-        if (step === 8) fieldsToValidate = ['plan'];
+        if (step === 6) fieldsToValidate = ['email'];
+        if (step === 7) fieldsToValidate = ['plan'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -178,14 +169,9 @@ export default function CreateNoteForm() {
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 7 && (!form.watch('email') || !!form.formState.errors.email)) ||
-      (step === 8 && !form.watch('plan'));
+      (step === 6 && (!form.watch('email') || !!form.formState.errors.email)) ||
+      (step === 7 && !form.watch('plan'));
       
-    const previewAnimationName = formData.backgroundAnimation === 'emojis' && formData.emojis
-      ? `Emojis (${formData.emojis})`
-      : animationNames[formData.backgroundAnimation || 'none'];
-
-
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
             <div className="w-full lg:w-1/2">
@@ -290,39 +276,33 @@ export default function CreateNoteForm() {
                         )}
                         {step === 4 && (
                             <div className="space-y-8 animate-in fade-in">
-                                <FormField
-                                    control={form.control}
-                                    name="images"
-                                    render={() => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
-                                                    <Upload className="w-8 h-8 text-neutral-500" />
-                                                    <span className="mt-2 text-sm text-neutral-400">Clique para adicionar fotos</span>
-                                                    <span className="text-xs text-neutral-500">PNG, JPG, JPEG, GIF (máx. 8 fotos)</span>
-                                                    <Input
-                                                        id="image-upload"
-                                                        type="file"
-                                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                                        accept="image/png, image/jpeg, image/gif"
-                                                        multiple
-                                                        onChange={handleFileChange}
-                                                    />
+                                <FormItem>
+                                    <FormControl>
+                                        <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
+                                            <Upload className="w-8 h-8 text-neutral-500" />
+                                            <span className="mt-2 text-sm text-neutral-400">Clique para adicionar fotos</span>
+                                            <span className="text-xs text-neutral-500">PNG, JPG, JPEG, GIF (máx. 8 fotos)</span>
+                                            <Input
+                                                id="image-upload"
+                                                type="file"
+                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                                accept="image/png, image/jpeg, image/gif"
+                                                multiple
+                                                onChange={handleFileChange}
+                                            />
+                                        </div>
+                                    </FormControl>
+                                    {images && images.length > 0 && (
+                                        <div className="mt-4 grid grid-cols-4 gap-2">
+                                            {images.map((src, index) => (
+                                                <div key={index} className="relative aspect-square">
+                                                    <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
                                                 </div>
-                                            </FormControl>
-                                            {formData.images && formData.images.length > 0 && (
-                                                <div className="mt-4 grid grid-cols-4 gap-2">
-                                                    {formData.images.map((src, index) => (
-                                                        <div key={index} className="relative aspect-square">
-                                                            <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            <FormMessage />
-                                        </FormItem>
+                                            ))}
+                                        </div>
                                     )}
-                                />
+                                    <FormMessage />
+                                </FormItem>
                             </div>
                         )}
                         {step === 5 && (
@@ -558,12 +538,6 @@ export default function CreateNoteForm() {
                                 />
                             </div>
                         )}
-                        {step === 9 && (
-                            <div className="space-y-4 animate-in fade-in text-center">
-                                <p className="text-lg text-white">Tudo pronto!</p>
-                                <p className='text-neutral-300'>Sua página está prestes a ser criada com as informações ao lado. Clique em "Criar Minha Página" para finalizar.</p>
-                            </div>
-                        )}
                         
                         <div className="flex items-center justify-between gap-4 mt-8">
                            <div>
@@ -598,11 +572,11 @@ export default function CreateNoteForm() {
                                 <h1 className="font-headline text-2xl font-bold text-red-500">{formData.title || "Seu título aparecerá aqui"}</h1>
                                 {formData.startDate && <RelationshipCounter startDate={formData.startDate} />}
                                 <p className="font-body text-sm whitespace-pre-wrap">{formData.loveNote || "Sua mensagem aparecerá aqui."}</p>
-                                {formData.images && formData.images.length > 0 && (
+                                {images && images.length > 0 && (
                                     <div className="mt-4 w-full">
                                         <Carousel className="w-full max-w-xs mx-auto">
                                             <CarouselContent>
-                                                {formData.images.map((src, index) => (
+                                                {images.map((src, index) => (
                                                     <CarouselItem key={index}>
                                                         <Image src={src} alt={`Preview ${index + 1}`} width={200} height={200} className="rounded-md object-cover w-full aspect-square" />
                                                     </CarouselItem>

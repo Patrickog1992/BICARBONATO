@@ -29,7 +29,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
-import RelationshipCounter from './relationship-counter';
 import {
   Carousel,
   CarouselContent,
@@ -45,7 +44,6 @@ const formSchema = z.object({
   loveNote: z.string().min(1, { message: 'A sinopse não pode estar vazia.' }),
   musicUrl: z.string().optional(),
   startDate: z.date().optional(),
-  images: z.array(z.string()).optional(),
   email: z.string().min(1, { message: 'O e-mail é obrigatório.' }).email({ message: 'Por favor, insira um e-mail válido.' }),
   phone: z.string().optional(),
   plan: z.string({ required_error: 'Por favor, selecione um plano.' }),
@@ -58,8 +56,9 @@ export default function CreateNetflixNoteForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [step, setStep] = useState(1);
-    const totalSteps = 8; // Removed animation step
+    const totalSteps = 7; // No animation step
     const { toast } = useToast();
+    const [images, setImages] = useState<string[]>([]);
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
@@ -68,7 +67,6 @@ export default function CreateNetflixNoteForm() {
             loveNote: '',
             musicUrl: '',
             startDate: undefined,
-            images: [],
             email: '',
             phone: '',
             plan: 'forever',
@@ -80,18 +78,13 @@ export default function CreateNetflixNoteForm() {
     async function onSubmit(values: FormData) {
         setIsSubmitting(true);
         try {
+            const { startDate, ...restOfValues } = values;
             const noteData = {
-                title: values.title,
-                loveNote: values.loveNote,
-                musicUrl: values.musicUrl,
-                startDate: values.startDate,
-                // images: values.images, // Temporarily disabled to avoid firestore size limit issues
-                email: values.email,
-                phone: values.phone,
-                plan: values.plan,
+                ...restOfValues,
                 theme: 'netflix',
-            }
-            const noteId = await addNote(noteData);
+                images: images,
+            };
+            const noteId = await addNote(noteData, startDate);
             router.push(`/note/${noteId}`);
         } catch (error) {
              console.error('Error creating note:', error);
@@ -109,8 +102,7 @@ export default function CreateNetflixNoteForm() {
         const files = event.target.files;
         if (!files) return;
 
-        const currentImages = form.getValues('images') || [];
-        if (currentImages.length + files.length > 8) {
+        if (images.length + files.length > 8) {
             toast({
                 variant: 'destructive',
                 title: 'Limite de fotos excedido',
@@ -122,8 +114,7 @@ export default function CreateNetflixNoteForm() {
         Array.from(files).forEach(file => {
             const reader = new FileReader();
             reader.onloadend = () => {
-                const newImages = [...(form.getValues('images') || []), reader.result as string];
-                form.setValue('images', newImages, { shouldValidate: true });
+                setImages(prevImages => [...prevImages, reader.result as string]);
             };
             reader.readAsDataURL(file);
         });
@@ -133,8 +124,8 @@ export default function CreateNetflixNoteForm() {
         let fieldsToValidate: (keyof FormData)[] = [];
         if (step === 1) fieldsToValidate = ['title'];
         if (step === 2) fieldsToValidate = ['loveNote'];
-        if (step === 6) fieldsToValidate = ['email'];
-        if (step === 7) fieldsToValidate = ['plan'];
+        if (step === 5) fieldsToValidate = ['email'];
+        if (step === 6) fieldsToValidate = ['plan'];
 
         const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
         if (isValid) {
@@ -162,8 +153,8 @@ export default function CreateNetflixNoteForm() {
     const isNextDisabled =
       (step === 1 && (!form.watch('title') || !!form.formState.errors.title)) ||
       (step === 2 && (!form.watch('loveNote') || !!form.formState.errors.loveNote)) ||
-      (step === 6 && (!form.watch('email') || !!form.formState.errors.email)) ||
-      (step === 7 && !form.watch('plan'));
+      (step === 5 && (!form.watch('email') || !!form.formState.errors.email)) ||
+      (step === 6 && !form.watch('plan'));
 
     return (
         <div className="flex flex-col lg:flex-row justify-between lg:gap-24 gap-12 w-full">
@@ -269,39 +260,33 @@ export default function CreateNetflixNoteForm() {
                         )}
                         {step === 4 && ( // Images / Episodes
                             <div className="space-y-8 animate-in fade-in">
-                                <FormField
-                                    control={form.control}
-                                    name="images"
-                                    render={() => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
-                                                    <Upload className="w-8 h-8 text-neutral-500" />
-                                                    <span className="mt-2 text-sm text-neutral-400">Clique para adicionar os episódios</span>
-                                                    <span className="text-xs text-neutral-500">PNG, JPG, JPEG, GIF (máx. 8 fotos)</span>
-                                                    <Input
-                                                        id="image-upload"
-                                                        type="file"
-                                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                                        accept="image/png, image/jpeg, image/gif"
-                                                        multiple
-                                                        onChange={handleFileChange}
-                                                    />
+                                <FormItem>
+                                    <FormControl>
+                                        <div className="relative w-full h-48 border-2 border-dashed border-neutral-700 rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-neutral-500 transition-colors">
+                                            <Upload className="w-8 h-8 text-neutral-500" />
+                                            <span className="mt-2 text-sm text-neutral-400">Clique para adicionar os episódios</span>
+                                            <span className="text-xs text-neutral-500">PNG, JPG, JPEG, GIF (máx. 8 fotos)</span>
+                                            <Input
+                                                id="image-upload"
+                                                type="file"
+                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                                accept="image/png, image/jpeg, image/gif"
+                                                multiple
+                                                onChange={handleFileChange}
+                                            />
+                                        </div>
+                                    </FormControl>
+                                    {images && images.length > 0 && (
+                                        <div className="mt-4 grid grid-cols-4 gap-2">
+                                            {images.map((src, index) => (
+                                                <div key={index} className="relative aspect-square">
+                                                    <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
                                                 </div>
-                                            </FormControl>
-                                            {formData.images && formData.images.length > 0 && (
-                                                <div className="mt-4 grid grid-cols-4 gap-2">
-                                                    {formData.images.map((src, index) => (
-                                                        <div key={index} className="relative aspect-square">
-                                                            <Image src={src} alt={`Preview ${index + 1}`} fill className="rounded-md object-cover" />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            <FormMessage />
-                                        </FormItem>
+                                            ))}
+                                        </div>
                                     )}
-                                />
+                                    <FormMessage />
+                                </FormItem>
                             </div>
                         )}
                         {step === 5 && ( // Music URL
@@ -446,12 +431,6 @@ export default function CreateNetflixNoteForm() {
                                 />
                             </div>
                         )}
-                        {step === 8 && ( // Review
-                            <div className="space-y-4 animate-in fade-in text-center">
-                                <p className="text-lg text-white">Tudo pronto!</p>
-                                <p className='text-neutral-300'>Sua página está prestes a ser criada com as informações ao lado. Clique em "Criar Minha Página" para finalizar.</p>
-                            </div>
-                        )}
                         
                         <div className="flex items-center justify-between gap-4 mt-8">
                            <div>
@@ -483,8 +462,8 @@ export default function CreateNetflixNoteForm() {
                       <CardContent className="rounded-[2rem] overflow-auto w-full h-full bg-black p-0">
                           <div className="text-white bg-black w-full h-full p-0 overflow-y-auto">
                               <div className="relative">
-                                  {formData.images && formData.images.length > 0 ? (
-                                    <Image src={formData.images[0]} alt="Hero" width={270} height={150} className="w-full h-[150px] object-cover" />
+                                  {images && images.length > 0 ? (
+                                    <Image src={images[0]} alt="Hero" width={270} height={150} className="w-full h-[150px] object-cover" />
                                   ) : (
                                     <div className="w-full h-[150px] bg-neutral-800 flex items-center justify-center text-neutral-500">
                                       <p>Episódio Principal</p>
@@ -522,11 +501,11 @@ export default function CreateNetflixNoteForm() {
                                     </div>
                                 )}
                                 
-                                {formData.images && formData.images.length > 0 && (
+                                {images && images.length > 0 && (
                                     <div className="pt-2">
                                       <h2 className="text-lg font-bold mb-2">Episódios</h2>
                                       <div className="grid grid-cols-3 gap-2">
-                                        {formData.images.map((src, index) => (
+                                        {images.map((src, index) => (
                                           <div key={index} className="relative aspect-video rounded-md overflow-hidden">
                                             <Image src={src} alt={`Episódio ${index + 1}`} fill className="object-cover" />
                                             <div className="absolute inset-0 bg-black/20"></div>
