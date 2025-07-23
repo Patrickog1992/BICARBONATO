@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import Image from 'next/image';
 import { CheckCircle, ShieldCheck, Sparkles, Star, Tag, ShoppingCart } from 'lucide-react';
 import { Logo } from '@/components/logo';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 export default function MorangoDoAmorLandingPage() {
   const checkoutUrl = 'https://checkout.kirvano.com/';
@@ -25,13 +26,18 @@ export default function MorangoDoAmorLandingPage() {
   const carouselItems = [
     {
       title: "Morango do Amor",
-      image: "https://placehold.co/600x400.png",
-      hint: "strawberry chocolate"
+      images: [
+        { src: "https://i.imgur.com/51TfRvQ.jpeg", hint: "strawberry chocolate" },
+        { src: "https://i.imgur.com/mBU4YdP.jpeg", hint: "strawberry chocolate glaze" },
+        { src: "https://i.imgur.com/mwkmztE.jpeg", hint: "strawberry candy" },
+      ]
     },
     {
       title: "Morango do Amor Pistache",
-      image: "https://placehold.co/600x400.png",
-      hint: "strawberry pistachio"
+      images: [
+        { src: "https://i.imgur.com/ROcx2Af.jpeg", hint: "strawberry pistachio" },
+        { src: "https://i.imgur.com/px24kLU.jpeg", hint: "strawberry pistachio candy" },
+      ]
     }
   ]
 
@@ -112,14 +118,24 @@ export default function MorangoDoAmorLandingPage() {
                   <div key={index} className="p-1">
                     <Card className='bg-green-50 dark:bg-green-800 border-red-200 dark:border-red-900'>
                       <CardContent className="flex flex-col items-center justify-center p-6 gap-4">
-                        <Image 
-                            src={item.image}
-                            alt={item.title}
-                            width={500} 
-                            height={300} 
-                            className="rounded-2xl shadow-2xl"
-                            data-ai-hint={item.hint}
-                        />
+                        <Carousel className="w-full max-w-xs">
+                          <CarouselContent>
+                            {item.images.map((image, imgIndex) => (
+                              <CarouselItem key={imgIndex}>
+                                <Image
+                                  src={image.src}
+                                  alt={`${item.title} - Imagem ${imgIndex + 1}`}
+                                  width={500}
+                                  height={300}
+                                  className="rounded-2xl shadow-2xl object-cover aspect-[4/3]"
+                                  data-ai-hint={image.hint}
+                                />
+                              </CarouselItem>
+                            ))}
+                          </CarouselContent>
+                          <CarouselPrevious />
+                          <CarouselNext />
+                        </Carousel>
                         <h3 className='text-2xl font-bold'>{item.title}</h3>
                       </CardContent>
                     </Card>
@@ -227,3 +243,5 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
+
+    
