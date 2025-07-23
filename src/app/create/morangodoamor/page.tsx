@@ -142,7 +142,7 @@ export default function MorangoDoAmorLandingPage() {
   );
 
   return (
-    <div className="bg-green-50 dark:bg-green-950 text-red-700 dark:text-red-300 font-sans">
+    <div className="bg-green-50 dark:bg-green-950 text-red-700 dark:text-red-300 font-sans overflow-x-hidden">
       <SalesPopup />
       {currentDate && (
         <div className="bg-red-600 text-white text-center p-2 text-sm font-bold animate-in fade-in">
@@ -370,3 +370,5 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
+
+    
