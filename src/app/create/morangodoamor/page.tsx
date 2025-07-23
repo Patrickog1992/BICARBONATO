@@ -7,13 +7,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import Image from 'next/image';
 import { CheckCircle, ShieldCheck, Sparkles, Star, Tag, ShoppingCart } from 'lucide-react';
 import { Logo } from '@/components/logo';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
 
 export default function MorangoDoAmorLandingPage() {
   const checkoutUrl = 'https://checkout.kirvano.com/';
@@ -108,37 +101,31 @@ export default function MorangoDoAmorLandingPage() {
           </div>
         </section>
 
-        {/* Recipe Photo Carousel */}
+        {/* Recipe Photo Section */}
         <section className="py-20 px-4 bg-green-100 dark:bg-green-900">
-          <div className="container mx-auto max-w-3xl text-center">
+          <div className="container mx-auto max-w-5xl text-center">
              <h2 className="text-3xl md:text-4xl font-bold mb-8">
                 Essa é a aparência do Morango do Amor que você vai aprender a fazer!
              </h2>
-             <Carousel className="w-full max-w-lg mx-auto">
-                <CarouselContent>
-                  {carouselItems.map((item, index) => (
-                    <CarouselItem key={index}>
-                      <div className="p-1">
-                        <Card className='bg-green-50 dark:bg-green-800 border-red-200 dark:border-red-900'>
-                          <CardContent className="flex flex-col items-center justify-center p-6 gap-4">
-                            <Image 
-                                src={item.image}
-                                alt={item.title}
-                                width={500} 
-                                height={300} 
-                                className="rounded-2xl shadow-2xl"
-                                data-ai-hint={item.hint}
-                            />
-                            <h3 className='text-2xl font-bold'>{item.title}</h3>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className='left-0' />
-                <CarouselNext className='right-0'/>
-              </Carousel>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {carouselItems.map((item, index) => (
+                  <div key={index} className="p-1">
+                    <Card className='bg-green-50 dark:bg-green-800 border-red-200 dark:border-red-900'>
+                      <CardContent className="flex flex-col items-center justify-center p-6 gap-4">
+                        <Image 
+                            src={item.image}
+                            alt={item.title}
+                            width={500} 
+                            height={300} 
+                            className="rounded-2xl shadow-2xl"
+                            data-ai-hint={item.hint}
+                        />
+                        <h3 className='text-2xl font-bold'>{item.title}</h3>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+             </div>
           </div>
         </section>
 
@@ -240,5 +227,3 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
-
-    
