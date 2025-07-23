@@ -43,7 +43,7 @@ export default function MorangoDoAmorLandingPage() {
               A Receita Mais Desejada do Brasil Está Aqui!
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-700 dark:text-red-300 mb-6">
-              Aprenda a criar o Morango do Amor — o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
+              Aprenda a criar o morango do amor — o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
             </p>
             <div className="flex justify-center items-center mb-8">
               <Image 
