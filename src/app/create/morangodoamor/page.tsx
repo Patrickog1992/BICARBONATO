@@ -47,7 +47,7 @@ export default function MorangoDoAmorLandingPage() {
             </p>
             <div className="flex justify-center items-center mb-8">
               <Image 
-                src="https://placehold.co/600x400.png" 
+                src="https://i.imgur.com/KgS9usy.png" 
                 alt="Morango do Amor" 
                 width={600} 
                 height={400} 
