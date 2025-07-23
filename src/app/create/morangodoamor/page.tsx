@@ -56,19 +56,11 @@ export default function MorangoDoAmorLandingPage() {
                 priority
               />
             </div>
-            <div className="flex flex-col items-center gap-4">
-              <div className="text-2xl font-semibold text-red-500 dark:text-red-400">
-                De <span className="line-through">R$37,00</span> por apenas
-              </div>
-              <div className="text-5xl font-bold text-red-600 dark:text-red-500">
-                R$19,90!
-              </div>
-              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 mt-4">
-                  <ShoppingCart className="mr-2"/> Quero a Receita Agora!
-                </Button>
-              </a>
-            </div>
+            <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
+              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <ShoppingCart className="mr-2"/> Quero a Receita Agora!
+              </Button>
+            </a>
           </div>
         </section>
 
@@ -145,13 +137,25 @@ export default function MorangoDoAmorLandingPage() {
                 </div>
             </div>
         </section>
-
-        {/* Guarantee / Urgency */}
-        <section className="py-12 px-4">
+        
+        {/* Urgency Section */}
+        <section className="py-20 px-4 text-center bg-white dark:bg-black">
           <div className="container mx-auto max-w-4xl">
             <div className="border-2 border-dashed border-red-500 bg-red-50 dark:bg-red-900/20 text-center p-8 rounded-2xl">
-              <h2 className="text-3xl font-bold text-red-600 dark:text-red-400">🚨 PROMOÇÃO POR TEMPO LIMITADO!</h2>
-              <p className="text-xl mt-4">De <span className="line-through">R$37,00</span> por apenas <span className="font-bold">R$19,90</span> só hoje!</p>
+              <div className="flex flex-col items-center gap-4">
+                <h2 className="text-3xl font-bold text-red-600 dark:text-red-400">🚨 PROMOÇÃO POR TEMPO LIMITADO!</h2>
+                <div className="text-2xl font-semibold text-red-500 dark:text-red-400">
+                  De <span className="line-through">R$37,00</span> por apenas
+                </div>
+                <div className="text-5xl font-bold text-red-600 dark:text-red-500">
+                  R$19,90!
+                </div>
+                <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 mt-4">
+                    <ShoppingCart className="mr-2"/> Quero a Receita Agora!
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
         </section>
