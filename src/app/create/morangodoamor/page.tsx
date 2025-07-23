@@ -39,7 +39,7 @@ export default function MorangoDoAmorLandingPage() {
             <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
               Receita Original
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400 uppercase">
               A Receita Mais Desejada do Brasil Está Aqui!
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-700 dark:text-red-300 mb-6">
