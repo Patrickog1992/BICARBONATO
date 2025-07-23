@@ -36,10 +36,10 @@ export default function MorangoDoAmorLandingPage() {
         {/* Hero Section */}
         <section className="bg-green-100 dark:bg-green-900 text-center py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
+            <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
               Receita Original
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400 uppercase">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-700 dark:text-red-400 uppercase">
               A Receita Mais Desejada do Brasil Está Aqui!
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-600 dark:text-red-400 mb-6">
