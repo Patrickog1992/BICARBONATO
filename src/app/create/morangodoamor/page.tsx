@@ -1,17 +1,200 @@
-import CreateMorangoNoteForm from '@/components/create-morango-note-form';
-import { Logo } from '@/components/logo';
-import Link from 'next/link';
 
-export default function CreateMorangoPage() {
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import Image from 'next/image';
+import { CheckCircle, ShieldCheck, Sparkles, Star, Tag, ShoppingCart } from 'lucide-react';
+import { Logo } from '@/components/logo';
+
+export default function MorangoDoAmorLandingPage() {
+  const checkoutUrl = 'https://checkout.kirvano.com/';
+
+  const testimonials = [
+    { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana!", rating: 5 },
+    { name: "Jéssica L., SP", text: "A receita é fácil, o brilho é surreal. Todo mundo pergunta como fiz!", rating: 5 },
+  ];
+  
+  const faqItems = [
+    { question: "Eu preciso de curso de confeitaria para fazer?", answer: "Não! Essa receita é simples, com ingredientes fáceis e qualquer pessoa consegue fazer." },
+    { question: "Como recebo o acesso?", answer: "Você receberá acesso imediato à receita completa por e-mail após a confirmação do pagamento." },
+    { question: "Posso revender o doce?", answer: "Sim! Essa receita é ideal para gerar renda extra vendendo, seja para amigos, em feiras ou por encomenda." },
+  ];
+
+  const StarRating = ({ rating }: { rating: number }) => (
+    <div className="flex gap-0.5 text-yellow-400">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className={`h-5 w-5 ${i < rating ? 'fill-current' : 'text-gray-300'}`} />
+      ))}
+    </div>
+  );
+
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen bg-black p-4 sm:p-8 text-white">
-      <header className="w-full container mx-auto px-4 py-4">
-        <Link href="/">
-          <Logo />
-        </Link>
-      </header>
-      <main className="w-full container mx-auto mt-8">
-        <CreateMorangoNoteForm />
+    <div className="bg-pink-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 font-sans">
+      <main className="w-full">
+        {/* Hero Section */}
+        <section className="bg-white dark:bg-black text-center py-16 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="mb-4 inline-block bg-pink-100 dark:bg-pink-900/50 text-pink-700 dark:text-pink-300 text-sm font-semibold px-4 py-1 rounded-full">
+              Receita Original
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
+              🍓 A Receita Secreta do Morango do Amor!
+            </h1>
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-neutral-600 dark:text-neutral-300 mb-6">
+              Aprenda o passo a passo do doce mais desejado do Brasil e surpreenda com um brilho que conquista corações!
+            </p>
+            <div className="flex justify-center items-center mb-8">
+              <Image 
+                src="https://placehold.co/600x400.png" 
+                alt="Morango do Amor" 
+                width={600} 
+                height={400} 
+                className="rounded-2xl shadow-2xl shadow-pink-200/50 dark:shadow-red-900/50"
+                data-ai-hint="strawberry chocolate"
+                priority
+              />
+            </div>
+            <div className="flex flex-col items-center gap-4">
+              <div className="text-2xl font-semibold text-neutral-500 dark:text-neutral-400">
+                De <span className="line-through">R$37,00</span> por apenas
+              </div>
+              <div className="text-5xl font-bold text-red-600 dark:text-red-500">
+                R$19,90!
+              </div>
+              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 mt-4">
+                  <ShoppingCart className="mr-2"/> Quero a Receita Agora!
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Everyone Wants This */}
+        <section className="py-20 px-4 bg-pink-50 dark:bg-neutral-950">
+          <div className="container mx-auto max-w-5xl text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">Por que Todo Mundo Quer Esse Morango?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="flex flex-col items-center">
+                <Sparkles className="h-12 w-12 text-pink-500 mb-4" />
+                <h3 className="font-bold text-xl mb-2">Brilho Hipnotizante</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">Uma calda de vidro perfeita que não derrete e encanta a todos.</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <Tag className="h-12 w-12 text-pink-500 mb-4" />
+                <h3 className="font-bold text-xl mb-2">Ingredientes Acessíveis</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">Você encontra tudo o que precisa em qualquer supermercado.</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <CheckCircle className="h-12 w-12 text-pink-500 mb-4" />
+                <h3 className="font-bold text-xl mb-2">Perfeito para Vender</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">Uma oportunidade de negócio deliciosa e com alto lucro.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Recipe Photo */}
+        <section className="py-20 px-4 bg-white dark:bg-black">
+          <div className="container mx-auto max-w-3xl text-center">
+             <h2 className="text-3xl md:text-4xl font-bold mb-8">
+                Essa é a aparência do Morango do Amor que você vai aprender a fazer!
+             </h2>
+             <Image 
+                src="https://placehold.co/600x400.png"
+                alt="Morango do Amor pronto" 
+                width={600} 
+                height={400} 
+                className="rounded-2xl shadow-2xl mx-auto"
+                data-ai-hint="strawberry chocolate"
+             />
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="py-20 px-4 bg-pink-50 dark:bg-neutral-950">
+          <div className="container mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">O que você garante com a receita:</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-left max-w-xl mx-auto">
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Receita testada e <strong>aprovada</strong>!</span></div>
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Acesso <strong>vitalício</strong> ao conteúdo</span></div>
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Serve para festas, casamentos ou vendas</span></div>
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Não precisa de utensílios caros</span></div>
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Receita pronta em <strong>minutos</strong>!</span></div>
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Suporte para tirar dúvidas</span></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 px-4 bg-white dark:bg-black">
+            <div className="container mx-auto max-w-5xl text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-12">Quem já fez, aprova!</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {testimonials.map((testimonial, index) => (
+                        <Card key={index} className="bg-pink-50 dark:bg-neutral-900 border-pink-200 dark:border-neutral-800 p-6 text-left">
+                            <CardContent className="p-0">
+                                <StarRating rating={testimonial.rating} />
+                                <p className="mt-4 text-lg italic">“{testimonial.text}”</p>
+                                <p className="mt-4 font-bold">— {testimonial.name}</p>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        {/* Guarantee / Urgency */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="border-2 border-dashed border-red-500 bg-red-50 dark:bg-red-900/20 text-center p-8 rounded-2xl">
+              <h2 className="text-3xl font-bold text-red-600 dark:text-red-400">🚨 PROMOÇÃO POR TEMPO LIMITADO!</h2>
+              <p className="text-xl mt-4">De <span className="line-through">R$37,00</span> por apenas <span className="font-bold">R$19,90</span> só hoje!</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-20 px-4 text-center bg-white dark:bg-black">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
+            <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
+              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-10 py-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                Sim, quero aprender agora!
+              </Button>
+            </a>
+            <div className="flex items-center justify-center gap-2 mt-4 text-sm text-neutral-500">
+              <ShieldCheck className="w-4 h-4"/>
+              <span>Compra 100% segura com garantia</span>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 px-4 bg-pink-50 dark:bg-neutral-950">
+            <div className="container mx-auto max-w-3xl text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-12">Perguntas Frequentes</h2>
+                <Accordion type="single" collapsible className="w-full text-left">
+                    {faqItems.map((item, index) => (
+                        <AccordionItem value={`item-${index+1}`} key={index} className="bg-white dark:bg-neutral-900 rounded-lg mb-4 px-6 border-b-0">
+                            <AccordionTrigger className="hover:no-underline font-semibold text-lg">{item.question}</AccordionTrigger>
+                            <AccordionContent className="text-neutral-600 dark:text-neutral-300 pb-4">
+                                {item.answer}
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
+            </div>
+        </section>
+        
+        <footer className="bg-white dark:bg-black border-t border-pink-100 dark:border-neutral-900">
+          <div className="container mx-auto px-4 py-6 text-center text-sm text-neutral-500">
+            <p>Copyright © 2024 - Morango do Amor. Todos os direitos reservados.</p>
+          </div>
+        </footer>
+
       </main>
     </div>
   );
