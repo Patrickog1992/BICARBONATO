@@ -8,9 +8,19 @@ import Image from 'next/image';
 import { CheckCircle, ShieldCheck, Sparkles, Star, Tag, ShoppingCart } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { useEffect, useState } from 'react';
 
 export default function MorangoDoAmorLandingPage() {
   const checkoutUrl = 'https://checkout.kirvano.com/';
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }));
+  }, []);
 
   const testimonials = [
     { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana!", rating: 5 },
@@ -51,6 +61,11 @@ export default function MorangoDoAmorLandingPage() {
 
   return (
     <div className="bg-green-50 dark:bg-green-950 text-red-700 dark:text-red-300 font-sans">
+      {currentDate && (
+        <div className="bg-red-600 text-white text-center p-2 text-sm font-bold animate-in fade-in">
+          SOMENTE HOJE ({currentDate}) ESSA PROMOÇÃO ESTÁ VÁLIDA
+        </div>
+      )}
       <main className="w-full">
         {/* Hero Section */}
         <section className="bg-green-100 dark:bg-green-900 text-center py-16 px-4">
@@ -243,5 +258,3 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
-
-    
