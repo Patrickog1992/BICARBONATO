@@ -13,6 +13,56 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Autoplay from "embla-carousel-autoplay"
 
 
+const SalesPopup = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [sale, setSale] = useState({ name: '', location: '' });
+
+  const salesData = [
+    { name: "Ana P.", location: "Belo Horizonte, MG" },
+    { name: "João V.", location: "Rio de Janeiro, RJ" },
+    { name: "Carla S.", location: "Salvador, BA" },
+    { name: "Mariana F.", location: "São Paulo, SP" },
+    { name: "Pedro L.", location: "Curitiba, PR" },
+  ];
+
+  useEffect(() => {
+    const showRandomPopup = () => {
+      const randomSale = salesData[Math.floor(Math.random() * salesData.length)];
+      setSale(randomSale);
+      setIsVisible(true);
+
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 5000); // Popup stays visible for 5 seconds
+    };
+
+    const interval = setInterval(() => {
+      showRandomPopup();
+    }, 8000); // New popup appears every 8 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed bottom-4 left-4 z-50 animate-slide-in-up">
+      <div className="bg-red-600 text-white rounded-lg p-4 shadow-lg max-w-xs">
+        <div className="flex items-center gap-3">
+            <div className="bg-white/20 p-2 rounded-full">
+                <ShoppingCart className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="font-bold text-sm">{sale.name} de {sale.location}</p>
+              <p className="text-xs">acabou de comprar a receita!</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 export default function MorangoDoAmorLandingPage() {
   const checkoutUrl = 'https://checkout.kirvano.com/';
   const [currentDate, setCurrentDate] = useState('');
@@ -76,6 +126,7 @@ export default function MorangoDoAmorLandingPage() {
 
   return (
     <div className="bg-green-50 dark:bg-green-950 text-red-700 dark:text-red-300 font-sans">
+      <SalesPopup />
       {currentDate && (
         <div className="bg-red-600 text-white text-center p-2 text-sm font-bold animate-in fade-in">
           SOMENTE HOJE ({currentDate}) ESSA PROMOÇÃO ESTÁ VÁLIDA
@@ -302,5 +353,3 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
-
-    
