@@ -59,7 +59,7 @@
  
 @layer utilities {
   .text-stroke {
-    -webkit-text-stroke: 1px hsl(var(--primary) / 0.8);
+    -webkit-text-stroke: 1px hsl(var(--foreground));
   }
   .text-stroke-foreground {
     -webkit-text-stroke: 1px hsl(var(--foreground));
