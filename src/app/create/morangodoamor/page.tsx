@@ -208,7 +208,7 @@ export default function MorangoDoAmorLandingPage() {
                       {testimonials.map((testimonial, index) => (
                           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                               <div className="p-1">
-                                  <Card className="bg-white dark:bg-green-800 border-red-200 dark:border-red-900 p-6 text-left flex flex-col h-full">
+                                  <Card className="bg-white text-gray-800 p-6 text-left flex flex-col h-full">
                                       <CardContent className="p-0 flex-grow">
                                           <div className="flex items-center mb-4">
                                             <Avatar>
@@ -216,11 +216,11 @@ export default function MorangoDoAmorLandingPage() {
                                                 <AvatarFallback>{testimonial.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
                                             </Avatar>
                                             <div className="ml-4">
-                                              <p className="font-bold text-red-800 dark:text-red-300">{testimonial.name}</p>
+                                              <p className="font-bold text-red-800">{testimonial.name}</p>
                                               <HeartRating rating={testimonial.rating} />
                                             </div>
                                           </div>
-                                          <p className="text-lg italic text-red-700 dark:text-red-400">“{testimonial.text}”</p>
+                                          <p className="text-lg italic text-red-700">“{testimonial.text}”</p>
                                       </CardContent>
                                       <div className="flex items-center gap-4 mt-4 text-red-500">
                                          <div className="flex items-center gap-1">
