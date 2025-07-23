@@ -332,7 +332,7 @@ export default function MorangoDoAmorLandingPage() {
                 </CardContent>
             </Card>
             <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-10 py-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg sm:text-xl font-bold px-8 sm:px-10 py-6 sm:py-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
                 Sim, quero a receita completa agora!
               </Button>
             </a>
@@ -370,5 +370,7 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
+
+    
 
     
