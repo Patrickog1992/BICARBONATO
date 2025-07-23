@@ -206,9 +206,10 @@ export default function MorangoDoAmorLandingPage() {
         </section>
         
         {/* Video Section */}
-        <section className="py-12 bg-green-50 dark:bg-green-950">
-            <div className="container mx-auto max-w-2xl">
-                <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl shadow-red-200/50 dark:shadow-red-900/50">
+        <section className="py-12 px-4 bg-green-50 dark:bg-green-950">
+            <div className="container mx-auto max-w-4xl text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-8">VEJA O VÍDEO</h2>
+                <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-red-200/50 dark:shadow-red-900/50">
                     <iframe 
                         src="https://www.youtube.com/embed/fY_KXefVtNo" 
                         title="YouTube video player" 
@@ -387,3 +388,5 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
+
+    
