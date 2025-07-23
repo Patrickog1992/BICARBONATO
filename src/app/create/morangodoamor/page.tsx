@@ -156,7 +156,7 @@ export default function MorangoDoAmorLandingPage() {
             <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
               Receita Original
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 uppercase">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-600 uppercase">
               A RECEITA MAIS DESEJADA DO BRASIL ESTÁ AQUI!
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-600 dark:text-red-400 mb-6 font-bold">
@@ -184,7 +184,7 @@ export default function MorangoDoAmorLandingPage() {
         {/* Why Everyone Wants This */}
         <section className="py-20 px-4 bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">Por que Todo Mundo Quer Esse Morango?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">Por que todo mundo quer esse morango?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center">
                 <Sparkles className="h-12 w-12 text-red-500 mb-4" />
@@ -204,6 +204,23 @@ export default function MorangoDoAmorLandingPage() {
             </div>
           </div>
         </section>
+        
+        {/* Video Section */}
+        <section className="py-12 bg-green-50 dark:bg-green-950">
+            <div className="container mx-auto max-w-2xl">
+                <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl shadow-red-200/50 dark:shadow-red-900/50">
+                    <iframe 
+                        src="https://www.youtube.com/embed/fY_KXefVtNo" 
+                        title="YouTube video player" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                        className="w-full h-full"
+                    ></iframe>
+                </div>
+            </div>
+        </section>
+
 
         {/* Recipe Photo Section */}
         <section className="py-20 px-4 bg-green-100 dark:bg-green-900">
@@ -370,11 +387,3 @@ export default function MorangoDoAmorLandingPage() {
     </div>
   );
 }
-
-    
-
-    
-
-    
-
-    
