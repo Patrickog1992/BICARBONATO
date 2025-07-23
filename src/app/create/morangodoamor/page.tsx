@@ -64,7 +64,7 @@ const SalesPopup = () => {
 
 
 export default function MorangoDoAmorLandingPage() {
-  const checkoutUrl = 'https://checkout.kirvano.com/';
+  const checkoutUrl = 'https://pay.kirvano.com/986afe47-563a-4c8c-8434-547f6ade0dbd';
   const [currentDate, setCurrentDate] = useState('');
   const autoplayPlugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
   const [likes, setLikes] = useState<number[]>([]);
@@ -89,6 +89,23 @@ export default function MorangoDoAmorLandingPage() {
     // Generate random numbers for likes and hearts on the client side to avoid hydration mismatch
     setLikes(testimonials.map(() => Math.floor(Math.random() * 200) + 20));
     setHearts(testimonials.map(() => Math.floor(Math.random() * 80) + 10));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          if (href) {
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({
+                  behavior: 'smooth'
+              });
+            }
+          }
+      });
+    });
+
   }, []); // Empty dependency array ensures this runs only once on the client after mount
 
   
@@ -156,7 +173,7 @@ export default function MorangoDoAmorLandingPage() {
                 priority
               />
             </div>
-            <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
+            <a href="#oferta">
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
                 <ShoppingCart className="mr-2"/> Quero a Receita Agora!
               </Button>
@@ -295,7 +312,7 @@ export default function MorangoDoAmorLandingPage() {
         </section>
         
         {/* Final CTA / Urgency Section */}
-        <section className="py-20 px-4 text-center bg-green-50 dark:bg-green-950">
+        <section id="oferta" className="py-20 px-4 text-center bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-red-600 dark:text-red-400">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
             <Card className="relative overflow-hidden border-2 border-red-500 bg-red-50 dark:bg-red-900/20 p-8 rounded-2xl max-w-md mx-auto mb-8 shadow-2xl">
