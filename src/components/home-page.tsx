@@ -167,7 +167,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Temas CodeLove</h2>
             <p className="max-w-2xl mx-auto text-neutral-300 mb-12">Escolha o tema ideal para a página personalizada.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl hover:scale-105 transition-transform duration-300">
                       <div className="w-[120px] h-18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
@@ -203,6 +203,25 @@ export default function HomePage() {
                       <div className="flex gap-4 mt-4">
                         <Button variant="outline" className="w-full" disabled>Experimentar agora</Button>
                         <Button className="w-full" asChild><Link href="/create/netflix">Criar página</Link></Button>
+                      </div>
+                  </div>
+                </div>
+                 <div className="flex flex-col items-center gap-4">
+                  <div className="relative mx-auto border-neutral-800 bg-neutral-900 border-[8px] rounded-[2.5rem] h-[550px] w-[270px] shadow-xl hover:scale-105 transition-transform duration-300">
+                      <div className="w-[120px] h-18px] bg-neutral-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                      <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[100px] rounded-s-lg"></div>
+                      <div className="h-[40px] w-[3px] bg-neutral-800 absolute -start-[11px] top-[150px] rounded-s-lg"></div>
+                      <div className="h-[54px] w-[3px] bg-neutral-800 absolute -end-[11px] top-[120px] rounded-e-lg"></div>
+                      <div className="rounded-[2rem] overflow-hidden w-full h-full bg-black">
+                          <Image src="https://i.imgur.com/P5nCMAJ.gif" className="w-full h-full object-contain" alt="Tema Morango do Amor" width={270} height={550} data-ai-hint="strawberry" />
+                      </div>
+                  </div>
+                   <div className="text-center mt-2">
+                      <h3 className="font-bold text-xl mb-2">Morango do Amor</h3>
+                      <p className="text-neutral-400 max-w-xs">Tema doce e apaixonado com animação de morangos.</p>
+                      <div className="flex gap-4 mt-4">
+                        <Button variant="outline" className="w-full" disabled>Experimentar agora</Button>
+                        <Button className="w-full" asChild><Link href="/create/morangodoamor">Criar página</Link></Button>
                       </div>
                   </div>
                 </div>
