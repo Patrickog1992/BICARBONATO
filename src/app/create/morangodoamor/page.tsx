@@ -40,10 +40,10 @@ export default function MorangoDoAmorLandingPage() {
               Receita Original
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400">
-              🍓 A Receita Secreta do Morango do Amor!
+              A Receita Mais Desejada do Brasil Está Aqui!
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-700 dark:text-red-300 mb-6">
-              Aprenda o passo a passo do doce mais desejado do Brasil e surpreenda com um brilho que conquista corações!
+              Aprenda a criar o Morango do Amor — o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
             </p>
             <div className="flex justify-center items-center mb-8">
               <Image 
