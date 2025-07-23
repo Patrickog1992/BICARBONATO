@@ -244,7 +244,7 @@ export default function MorangoDoAmorLandingPage() {
         </section>
         
         {/* Final CTA / Urgency Section */}
-        <section className="py-20 px-4 text-center bg-white dark:bg-black">
+        <section className="py-20 px-4 text-center bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-red-600 dark:text-red-400">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
             <Card className="border-2 border-dashed border-red-500 bg-red-50 dark:bg-red-900/20 p-8 rounded-2xl max-w-md mx-auto mb-8">
