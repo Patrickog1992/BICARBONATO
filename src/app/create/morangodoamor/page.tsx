@@ -46,8 +46,8 @@ const SalesPopup = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 z-50 animate-slide-in-up">
-      <div className="bg-red-600 text-white rounded-lg p-4 shadow-lg max-w-xs">
+    <div className="fixed bottom-4 right-4 z-50 animate-slide-in-up">
+      <div className="bg-red-600 text-white rounded-lg p-3 shadow-lg max-w-xs">
         <div className="flex items-center gap-3">
             <div className="bg-white/20 p-2 rounded-full">
                 <ShoppingCart className="h-5 w-5" />
