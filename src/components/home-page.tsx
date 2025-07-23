@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -39,7 +40,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-green-950 text-white">
       <div className="bg-gradient-to-r from-primary via-rose-800 to-pink-500 text-white text-center p-2 text-sm font-medium">
         ✨ Apenas hoje 09/07/2025 - Todos os planos com 50% de desconto, aproveite!
       </div>
@@ -62,8 +63,8 @@ export default function HomePage() {
       </header>
       
       <main>
-        <section id="inicio" className="bg-black bg-grid-neutral-800/20 relative">
-          <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]"></div>
+        <section id="inicio" className="bg-green-950 bg-grid-neutral-800/20 relative">
+          <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-green-950 [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]"></div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pt-32 pb-20">
               <div className="lg:w-1/2 text-center lg:text-left">
@@ -112,7 +113,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="como-funciona" className="py-24 bg-gradient-to-b from-black via-neutral-950 to-black relative">
+        <section id="como-funciona" className="py-24 bg-gradient-to-b from-green-950 via-green-900 to-green-950 relative">
           <div className="absolute inset-0 bg-grid-small-white/[0.05]"></div>
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Como funciona?</h2>
@@ -163,7 +164,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="temas" className="py-24 bg-neutral-950">
+      <section id="temas" className="py-24 bg-green-900">
         <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Temas CodeLove</h2>
             <p className="max-w-2xl mx-auto text-neutral-300 mb-12">Escolha o tema ideal para a página personalizada.</p>
@@ -255,7 +256,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="planos" className="py-24 bg-neutral-950">
+      <section id="planos" className="py-24 bg-green-900">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Planos</h2>
           <p className="max-w-2xl mx-auto text-neutral-300 mb-12">Escolha o plano ideal para sua página personalizada.</p>
