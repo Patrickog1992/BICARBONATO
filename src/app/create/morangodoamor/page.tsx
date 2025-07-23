@@ -89,7 +89,7 @@ export default function MorangoDoAmorLandingPage() {
               Receita Original
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-700 dark:text-red-400 uppercase">
-              A Receita Mais Desejada do Brasil Está Aqui!
+              A RECEITA MAIS DESEJADA DO BRASIL ESTÁ AQUI!
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-600 dark:text-red-400 mb-6">
               Aprenda a criar o morango do amor — o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
@@ -243,32 +243,21 @@ export default function MorangoDoAmorLandingPage() {
             </div>
         </section>
         
-        {/* Urgency Section */}
+        {/* Final CTA / Urgency Section */}
         <section className="py-20 px-4 text-center bg-white dark:bg-black">
-          <div className="container mx-auto max-w-4xl">
-            <div className="border-2 border-dashed border-red-500 bg-red-50 dark:bg-red-900/20 text-center p-8 rounded-2xl">
-              <div className="flex flex-col items-center gap-4">
-                <h2 className="text-3xl font-bold text-red-600 dark:text-red-400">🚨 PROMOÇÃO POR TEMPO LIMITADO!</h2>
-                <div className="text-2xl font-semibold text-red-500 dark:text-red-400">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-red-600 dark:text-red-400">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
+            <Card className="border-2 border-dashed border-red-500 bg-red-50 dark:bg-red-900/20 p-8 rounded-2xl max-w-md mx-auto mb-8">
+              <CardContent className="p-0 flex flex-col items-center gap-4">
+                <h3 className="text-2xl font-bold text-red-600 dark:text-red-400">🚨 PROMOÇÃO POR TEMPO LIMITADO!</h3>
+                <div className="text-xl font-semibold text-red-500 dark:text-red-400">
                   De <span className="line-through">R$37,00</span> por apenas
                 </div>
                 <div className="text-5xl font-bold text-red-600 dark:text-red-500">
                   R$19,90!
                 </div>
-                <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 mt-4">
-                    <ShoppingCart className="mr-2"/> Quero a Receita Agora!
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-20 px-4 text-center bg-green-100 dark:bg-green-900">
-          <div className="container mx-auto max-w-3xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
+              </CardContent>
+            </Card>
             <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-10 py-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
                 Sim, quero aprender agora!
@@ -276,7 +265,7 @@ export default function MorangoDoAmorLandingPage() {
             </a>
             <div className="flex items-center justify-center gap-2 mt-4 text-sm text-red-600 dark:text-red-400">
               <ShieldCheck className="w-4 h-4"/>
-              <span>Compra 100% segura com garantia</span>
+              <span>Compra segura, aceitamos todas as bandeiras de cartão</span>
             </div>
           </div>
         </section>
