@@ -45,7 +45,7 @@ export default function MorangoDoAmorLandingPage() {
     {
       title: "Morango do Amor Pistache",
       images: [
-        { src: "https://i.imgur.com/ROcx2Af.jpeg", hint: "strawberry pistachio" },
+        { src: "https://i.imgur.com/yd9axSu.jpeg", hint: "strawberry pistachio" },
         { src: "https://i.imgur.com/px24kLU.jpeg", hint: "strawberry pistachio candy" },
       ]
     }
