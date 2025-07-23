@@ -76,6 +76,10 @@ export default {
             '0%': { transform: 'translateY(100%)', opacity: '0' },
             '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        'pulse-strong': {
+            '0%, 100%': { transform: 'scale(1)' },
+            '50%': { transform: 'scale(1.05)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -83,8 +87,11 @@ export default {
         'scroll': 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
         'float': 'float 6s ease-in-out infinite',
         'slide-in-up': 'slide-in-up 0.5s ease-out forwards',
+        'pulse-strong': 'pulse-strong 2s infinite',
       },
     },
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
+
+    
