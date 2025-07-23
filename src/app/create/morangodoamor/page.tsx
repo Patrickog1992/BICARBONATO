@@ -31,7 +31,7 @@ export default function MorangoDoAmorLandingPage() {
   );
 
   return (
-    <div className="bg-green-50 dark:bg-green-950 text-red-800 dark:text-red-200 font-sans">
+    <div className="bg-green-50 dark:bg-green-950 text-red-700 dark:text-red-300 font-sans">
       <main className="w-full">
         {/* Hero Section */}
         <section className="bg-green-100 dark:bg-green-900 text-center py-16 px-4">
@@ -42,7 +42,7 @@ export default function MorangoDoAmorLandingPage() {
             <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400 uppercase">
               A Receita Mais Desejada do Brasil Está Aqui!
             </h1>
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-700 dark:text-red-300 mb-6">
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-600 dark:text-red-400 mb-6">
               Aprenda a criar o morango do amor — o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
             </p>
             <div className="flex justify-center items-center mb-8">
@@ -72,17 +72,17 @@ export default function MorangoDoAmorLandingPage() {
               <div className="flex flex-col items-center">
                 <Sparkles className="h-12 w-12 text-red-500 mb-4" />
                 <h3 className="font-bold text-xl mb-2">Brilho Hipnotizante</h3>
-                <p className="text-red-700 dark:text-red-400">Uma calda de vidro perfeita que não derrete e encanta a todos.</p>
+                <p className="text-red-600 dark:text-red-400">Uma calda de vidro perfeita que não derrete e encanta a todos.</p>
               </div>
               <div className="flex flex-col items-center">
                 <Tag className="h-12 w-12 text-red-500 mb-4" />
                 <h3 className="font-bold text-xl mb-2">Ingredientes Acessíveis</h3>
-                <p className="text-red-700 dark:text-red-400">Você encontra tudo o que precisa em qualquer supermercado.</p>
+                <p className="text-red-600 dark:text-red-400">Você encontra tudo o que precisa em qualquer supermercado.</p>
               </div>
               <div className="flex flex-col items-center">
                 <CheckCircle className="h-12 w-12 text-red-500 mb-4" />
                 <h3 className="font-bold text-xl mb-2">Perfeito para Vender</h3>
-                <p className="text-red-700 dark:text-red-400">Uma oportunidade de negócio deliciosa e com alto lucro.</p>
+                <p className="text-red-600 dark:text-red-400">Uma oportunidade de negócio deliciosa e com alto lucro.</p>
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@ export default function MorangoDoAmorLandingPage() {
                     {faqItems.map((item, index) => (
                         <AccordionItem value={`item-${index+1}`} key={index} className="bg-green-100 dark:bg-green-900 rounded-lg mb-4 px-6 border-b-0">
                             <AccordionTrigger className="hover:no-underline font-semibold text-lg">{item.question}</AccordionTrigger>
-                            <AccordionContent className="text-red-700 dark:text-red-300 pb-4">
+                            <AccordionContent className="text-red-600 dark:text-red-400 pb-4">
                                 {item.answer}
                             </AccordionContent>
                         </AccordionItem>
