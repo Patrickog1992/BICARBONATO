@@ -247,20 +247,25 @@ export default function MorangoDoAmorLandingPage() {
         <section className="py-20 px-4 text-center bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-red-600 dark:text-red-400">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
-            <Card className="border-2 border-dashed border-red-500 bg-red-50 dark:bg-red-900/20 p-8 rounded-2xl max-w-md mx-auto mb-8">
-              <CardContent className="p-0 flex flex-col items-center gap-4">
-                <h3 className="text-2xl font-bold text-red-600 dark:text-red-400">🚨 PROMOÇÃO POR TEMPO LIMITADO!</h3>
-                <div className="text-xl font-semibold text-red-500 dark:text-red-400">
-                  De <span className="line-through">R$37,00</span> por apenas
-                </div>
-                <div className="text-5xl font-bold text-red-600 dark:text-red-500">
-                  R$19,90!
-                </div>
-              </CardContent>
+            <Card className="relative overflow-hidden border-2 border-red-500 bg-red-50 dark:bg-red-900/20 p-8 rounded-2xl max-w-md mx-auto mb-8 shadow-2xl">
+                <div className="absolute inset-0 opacity-10 dark:opacity-20" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ef4444' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")".replace('🍓', '%F0%9F%8D%93')}}></div>
+                <CardContent className="relative p-0 flex flex-col items-center gap-4">
+                    <h3 className="text-xl font-bold text-red-600 dark:text-red-400">Acesso Imediato a Tudo Isso:</h3>
+                    <ul className="text-left space-y-2 my-4 text-red-700 dark:text-red-300">
+                        <li className="flex items-center gap-2"><CheckCircle className="text-green-500 w-5 h-5"/><span>Passo a passo <strong>à prova de erros</strong></span></li>
+                        <li className="flex items-center gap-2"><CheckCircle className="text-green-500 w-5 h-5"/><span>Técnica do <strong>brilho de vidro</strong></span></li>
+                        <li className="flex items-center gap-2"><CheckCircle className="text-green-500 w-5 h-5"/><span>Acesso <strong>vitalício e imediato</strong></span></li>
+                        <li className="flex items-center gap-2"><CheckCircle className="text-green-500 w-5 h-5"/><span>Bônus: Guia de <strong>precificação</strong></span></li>
+                    </ul>
+                    <div className="bg-red-500 text-white font-bold py-2 px-6 rounded-lg w-full">
+                        <div className="text-md">De <span className="line-through">R$37,00</span> por apenas</div>
+                        <div className="text-4xl">R$19,90!</div>
+                    </div>
+                </CardContent>
             </Card>
             <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-10 py-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
-                Sim, quero aprender agora!
+                Sim, quero a receita completa agora!
               </Button>
             </a>
             <div className="flex items-center justify-center gap-2 mt-4 text-sm text-red-600 dark:text-red-400">
