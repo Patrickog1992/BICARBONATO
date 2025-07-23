@@ -31,18 +31,18 @@ export default function MorangoDoAmorLandingPage() {
   );
 
   return (
-    <div className="bg-pink-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 font-sans">
+    <div className="bg-green-50 dark:bg-green-950 text-red-800 dark:text-red-200 font-sans">
       <main className="w-full">
         {/* Hero Section */}
-        <section className="bg-white dark:bg-black text-center py-16 px-4">
+        <section className="bg-green-100 dark:bg-green-900 text-center py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <div className="mb-4 inline-block bg-pink-100 dark:bg-pink-900/50 text-pink-700 dark:text-pink-300 text-sm font-semibold px-4 py-1 rounded-full">
+            <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
               Receita Original
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400">
               🍓 A Receita Secreta do Morango do Amor!
             </h1>
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-neutral-600 dark:text-neutral-300 mb-6">
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-700 dark:text-red-300 mb-6">
               Aprenda o passo a passo do doce mais desejado do Brasil e surpreenda com um brilho que conquista corações!
             </p>
             <div className="flex justify-center items-center mb-8">
@@ -51,13 +51,13 @@ export default function MorangoDoAmorLandingPage() {
                 alt="Morango do Amor" 
                 width={600} 
                 height={400} 
-                className="rounded-2xl shadow-2xl shadow-pink-200/50 dark:shadow-red-900/50"
+                className="rounded-2xl shadow-2xl shadow-red-200/50 dark:shadow-red-900/50"
                 data-ai-hint="strawberry chocolate"
                 priority
               />
             </div>
             <div className="flex flex-col items-center gap-4">
-              <div className="text-2xl font-semibold text-neutral-500 dark:text-neutral-400">
+              <div className="text-2xl font-semibold text-red-500 dark:text-red-400">
                 De <span className="line-through">R$37,00</span> por apenas
               </div>
               <div className="text-5xl font-bold text-red-600 dark:text-red-500">
@@ -73,31 +73,31 @@ export default function MorangoDoAmorLandingPage() {
         </section>
 
         {/* Why Everyone Wants This */}
-        <section className="py-20 px-4 bg-pink-50 dark:bg-neutral-950">
+        <section className="py-20 px-4 bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-5xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-12">Por que Todo Mundo Quer Esse Morango?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center">
-                <Sparkles className="h-12 w-12 text-pink-500 mb-4" />
+                <Sparkles className="h-12 w-12 text-red-500 mb-4" />
                 <h3 className="font-bold text-xl mb-2">Brilho Hipnotizante</h3>
-                <p className="text-neutral-600 dark:text-neutral-400">Uma calda de vidro perfeita que não derrete e encanta a todos.</p>
+                <p className="text-red-700 dark:text-red-400">Uma calda de vidro perfeita que não derrete e encanta a todos.</p>
               </div>
               <div className="flex flex-col items-center">
-                <Tag className="h-12 w-12 text-pink-500 mb-4" />
+                <Tag className="h-12 w-12 text-red-500 mb-4" />
                 <h3 className="font-bold text-xl mb-2">Ingredientes Acessíveis</h3>
-                <p className="text-neutral-600 dark:text-neutral-400">Você encontra tudo o que precisa em qualquer supermercado.</p>
+                <p className="text-red-700 dark:text-red-400">Você encontra tudo o que precisa em qualquer supermercado.</p>
               </div>
               <div className="flex flex-col items-center">
-                <CheckCircle className="h-12 w-12 text-pink-500 mb-4" />
+                <CheckCircle className="h-12 w-12 text-red-500 mb-4" />
                 <h3 className="font-bold text-xl mb-2">Perfeito para Vender</h3>
-                <p className="text-neutral-600 dark:text-neutral-400">Uma oportunidade de negócio deliciosa e com alto lucro.</p>
+                <p className="text-red-700 dark:text-red-400">Uma oportunidade de negócio deliciosa e com alto lucro.</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Recipe Photo */}
-        <section className="py-20 px-4 bg-white dark:bg-black">
+        <section className="py-20 px-4 bg-green-100 dark:bg-green-900">
           <div className="container mx-auto max-w-3xl text-center">
              <h2 className="text-3xl md:text-4xl font-bold mb-8">
                 Essa é a aparência do Morango do Amor que você vai aprender a fazer!
@@ -114,7 +114,7 @@ export default function MorangoDoAmorLandingPage() {
         </section>
 
         {/* Benefits Section */}
-        <section className="py-20 px-4 bg-pink-50 dark:bg-neutral-950">
+        <section className="py-20 px-4 bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-3xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-12">O que você garante com a receita:</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-left max-w-xl mx-auto">
@@ -129,12 +129,12 @@ export default function MorangoDoAmorLandingPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 px-4 bg-white dark:bg-black">
+        <section className="py-20 px-4 bg-green-100 dark:bg-green-900">
             <div className="container mx-auto max-w-5xl text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-12">Quem já fez, aprova!</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="bg-pink-50 dark:bg-neutral-900 border-pink-200 dark:border-neutral-800 p-6 text-left">
+                        <Card key={index} className="bg-green-50 dark:bg-green-800 border-red-200 dark:border-red-900 p-6 text-left">
                             <CardContent className="p-0">
                                 <StarRating rating={testimonial.rating} />
                                 <p className="mt-4 text-lg italic">“{testimonial.text}”</p>
@@ -157,7 +157,7 @@ export default function MorangoDoAmorLandingPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-20 px-4 text-center bg-white dark:bg-black">
+        <section className="py-20 px-4 text-center bg-green-100 dark:bg-green-900">
           <div className="container mx-auto max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Pronta para encantar e lucrar com o doce mais viral do momento?</h2>
             <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
@@ -165,7 +165,7 @@ export default function MorangoDoAmorLandingPage() {
                 Sim, quero aprender agora!
               </Button>
             </a>
-            <div className="flex items-center justify-center gap-2 mt-4 text-sm text-neutral-500">
+            <div className="flex items-center justify-center gap-2 mt-4 text-sm text-red-600 dark:text-red-400">
               <ShieldCheck className="w-4 h-4"/>
               <span>Compra 100% segura com garantia</span>
             </div>
@@ -173,14 +173,14 @@ export default function MorangoDoAmorLandingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 px-4 bg-pink-50 dark:bg-neutral-950">
+        <section className="py-20 px-4 bg-green-50 dark:bg-green-950">
             <div className="container mx-auto max-w-3xl text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-12">Perguntas Frequentes</h2>
                 <Accordion type="single" collapsible className="w-full text-left">
                     {faqItems.map((item, index) => (
-                        <AccordionItem value={`item-${index+1}`} key={index} className="bg-white dark:bg-neutral-900 rounded-lg mb-4 px-6 border-b-0">
+                        <AccordionItem value={`item-${index+1}`} key={index} className="bg-green-100 dark:bg-green-900 rounded-lg mb-4 px-6 border-b-0">
                             <AccordionTrigger className="hover:no-underline font-semibold text-lg">{item.question}</AccordionTrigger>
-                            <AccordionContent className="text-neutral-600 dark:text-neutral-300 pb-4">
+                            <AccordionContent className="text-red-700 dark:text-red-300 pb-4">
                                 {item.answer}
                             </AccordionContent>
                         </AccordionItem>
@@ -189,8 +189,8 @@ export default function MorangoDoAmorLandingPage() {
             </div>
         </section>
         
-        <footer className="bg-white dark:bg-black border-t border-pink-100 dark:border-neutral-900">
-          <div className="container mx-auto px-4 py-6 text-center text-sm text-neutral-500">
+        <footer className="bg-green-100 dark:bg-green-900 border-t border-red-100 dark:border-red-900">
+          <div className="container mx-auto px-4 py-6 text-center text-sm text-red-600 dark:text-red-400">
             <p>Copyright © 2024 - Morango do Amor. Todos os direitos reservados.</p>
           </div>
         </footer>
