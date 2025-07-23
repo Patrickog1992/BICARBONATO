@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
-import { CheckCircle, ShieldCheck, Sparkles, Star, Tag, ShoppingCart } from 'lucide-react';
+import { CheckCircle, ShieldCheck, Sparkles, Star, Tag, ShoppingCart, Heart, ThumbsUp } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useEffect, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 
 export default function MorangoDoAmorLandingPage() {
   const checkoutUrl = 'https://checkout.kirvano.com/';
@@ -23,8 +25,12 @@ export default function MorangoDoAmorLandingPage() {
   }, []);
 
   const testimonials = [
-    { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana!", rating: 5 },
-    { name: "Jéssica L., SP", text: "A receita é fácil, o brilho é surreal. Todo mundo pergunta como fiz!", rating: 5 },
+    { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana! A receita é um sucesso absoluto.", rating: 5, image: "https://i.imgur.com/6hNipoh.jpeg" },
+    { name: "Jéssica L., SP", text: "A receita é fácil, o brilho é surreal. Todo mundo pergunta como fiz!", rating: 5, image: "https://i.imgur.com/0lbIxMI.jpeg" },
+    { name: "Ana P., MG", text: "Nunca pensei que conseguiria fazer um doce tão lindo. Minha família amou!", rating: 5, image: "https://i.imgur.com/73dp13S.jpeg" },
+    { name: "Carlos S., BA", text: "Fiz para uma festa e foi o maior sucesso. A calda ficou perfeita, crocante e brilhante.", rating: 5, image: "https://i.imgur.com/jBQXdE6.png" },
+    { name: "Beatriz M., RS", text: "Comecei a vender e já estou com a agenda cheia! O lucro é ótimo e a receita é muito prática.", rating: 5, image: "https://i.imgur.com/gK2xTvn.png" },
+    { name: "Ricardo F., CE", text: "Simplesmente a melhor receita que já testei. O passo a passo é muito claro e não tem erro.", rating: 5, image: "https://i.imgur.com/eBOMfM4.png" },
   ];
   
   const faqItems = [
@@ -50,11 +56,11 @@ export default function MorangoDoAmorLandingPage() {
       ]
     }
   ]
-
-  const StarRating = ({ rating }: { rating: number }) => (
-    <div className="flex gap-0.5 text-yellow-400">
+  
+  const HeartRating = ({ rating }: { rating: number }) => (
+    <div className="flex gap-0.5 text-red-500">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`h-5 w-5 ${i < rating ? 'fill-current' : 'text-gray-300'}`} />
+        <Heart key={i} className={`h-5 w-5 ${i < rating ? 'fill-current' : 'text-red-200'}`} />
       ))}
     </div>
   );
@@ -179,14 +185,32 @@ export default function MorangoDoAmorLandingPage() {
         <section className="py-20 px-4 bg-green-100 dark:bg-green-900">
             <div className="container mx-auto max-w-5xl text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-12">Quem já fez, aprova!</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className="bg-green-50 dark:bg-green-800 border-red-200 dark:border-red-900 p-6 text-left">
-                            <CardContent className="p-0">
-                                <StarRating rating={testimonial.rating} />
-                                <p className="mt-4 text-lg italic">“{testimonial.text}”</p>
-                                <p className="mt-4 font-bold">— {testimonial.name}</p>
+                        <Card key={index} className="bg-green-50 dark:bg-green-800 border-red-200 dark:border-red-900 p-6 text-left flex flex-col">
+                            <CardContent className="p-0 flex-grow">
+                                <div className="flex items-center mb-4">
+                                  <Avatar>
+                                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                                      <AvatarFallback>{testimonial.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                                  </Avatar>
+                                  <div className="ml-4">
+                                    <p className="font-bold text-red-800 dark:text-red-300">{testimonial.name}</p>
+                                    <HeartRating rating={testimonial.rating} />
+                                  </div>
+                                </div>
+                                <p className="text-lg italic text-red-700 dark:text-red-400">“{testimonial.text}”</p>
                             </CardContent>
+                            <div className="flex items-center gap-4 mt-4 text-red-500">
+                               <div className="flex items-center gap-1">
+                                   <ThumbsUp className="w-5 h-5"/>
+                                   <span className="text-sm font-semibold">123</span>
+                               </div>
+                                <div className="flex items-center gap-1">
+                                   <Heart className="w-5 h-5"/>
+                                   <span className="text-sm font-semibold">45</span>
+                               </div>
+                            </div>
                         </Card>
                     ))}
                 </div>
