@@ -17,14 +17,8 @@ export default function MorangoDoAmorLandingPage() {
   const checkoutUrl = 'https://checkout.kirvano.com/';
   const [currentDate, setCurrentDate] = useState('');
   const autoplayPlugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
-
-  useEffect(() => {
-    setCurrentDate(new Date().toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    }));
-  }, []);
+  const [likes, setLikes] = useState<number[]>([]);
+  const [hearts, setHearts] = useState<number[]>([]);
 
   const testimonials = [
     { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana! A receita é um sucesso absoluto.", rating: 5, image: "https://i.imgur.com/kKzKmA0.png" },
@@ -34,6 +28,19 @@ export default function MorangoDoAmorLandingPage() {
     { name: "Beatriz M., RS", text: "Comecei a vender e já estou com a agenda cheia! O lucro é ótimo e a receita é muito prática.", rating: 5, image: "https://i.imgur.com/thS9xwe.jpeg" },
     { name: "Ricardo F., CE", text: "Simplesmente a melhor receita que já testei. O passo a passo é muito claro e não tem erro.", rating: 5, image: "https://i.imgur.com/SVV6zrv.png" },
   ];
+  
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }));
+    
+    // Generate random numbers for likes and hearts on the client side to avoid hydration mismatch
+    setLikes(testimonials.map(() => Math.floor(Math.random() * 200) + 20));
+    setHearts(testimonials.map(() => Math.floor(Math.random() * 80) + 10));
+  }, []); // Empty dependency array ensures this runs only once on the client after mount
+
   
   const faqItems = [
     { question: "Eu preciso de curso de confeitaria para fazer?", answer: "Não! Essa receita é simples, com ingredientes fáceis e qualquer pessoa consegue fazer." },
@@ -218,11 +225,11 @@ export default function MorangoDoAmorLandingPage() {
                                       <div className="flex items-center gap-4 mt-4 text-red-500">
                                          <div className="flex items-center gap-1">
                                              <ThumbsUp className="w-5 h-5"/>
-                                             <span className="text-sm font-semibold">{Math.floor(Math.random() * 200) + 20}</span>
+                                             <span className="text-sm font-semibold">{likes[index] ?? '...'}</span>
                                          </div>
                                           <div className="flex items-center gap-1">
                                              <Heart className="w-5 h-5"/>
-                                             <span className="text-sm font-semibold">{Math.floor(Math.random() * 80) + 10}</span>
+                                             <span className="text-sm font-semibold">{hearts[index] ?? '...'}</span>
                                          </div>
                                       </div>
                                   </Card>
