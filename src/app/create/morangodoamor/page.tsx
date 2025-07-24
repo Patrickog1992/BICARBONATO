@@ -156,8 +156,8 @@ export default function MorangoDoAmorLandingPage() {
             <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
               Receita Original
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-red-600 dark:text-red-400 uppercase">
-              A RECEITA MAIS DESEJADA DO BRASIL ESTÁ AQUI!
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-red-600 dark:text-red-400">
+              Transforme morangos em renda: fature mais de R$3.000 por semana com a receita que viralizou no Brasil.
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-600 dark:text-red-400 mb-6 font-bold">
               Aprenda a criar o morango do amor gourmet o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
