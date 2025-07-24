@@ -54,7 +54,7 @@ const SalesPopup = () => {
             </div>
             <div>
               <p className="font-bold text-sm">{sale.name} de {sale.location}</p>
-              <p className="text-xs">acabou de comprar a receita!</p>
+              <p className="text-xs">acabou de comprar o método!</p>
             </div>
         </div>
       </div>
@@ -71,12 +71,12 @@ export default function MorangoDoAmorLandingPage() {
   const [hearts, setHearts] = useState<number[]>([]);
 
   const testimonials = [
-    { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana! A receita é um sucesso absoluto.", rating: 5, image: "https://i.imgur.com/kKzKmA0.png" },
-    { name: "Jéssica L., SP", text: "A receita é fácil, o brilho é surreal. Todo mundo pergunta como fiz!", rating: 5, image: "https://i.imgur.com/VhoVk3r.png" },
+    { name: "Maria de Fátima, RJ", text: "Vendi mais de 200 morangos em menos de uma semana! O método é um sucesso absoluto.", rating: 5, image: "https://i.imgur.com/kKzKmA0.png" },
+    { name: "Jéssica L., SP", text: "O método é fácil, o brilho é surreal. Todo mundo pergunta como fiz!", rating: 5, image: "https://i.imgur.com/VhoVk3r.png" },
     { name: "Ana P., MG", text: "Nunca pensei que conseguiria fazer um doce tão lindo. Minha família amou!", rating: 5, image: "https://i.imgur.com/GtzSNiz.jpeg" },
     { name: "Carlos S., BA", text: "Fiz para uma festa e foi o maior sucesso. A calda ficou perfeita, crocante e brilhante.", rating: 5, image: "https://i.imgur.com/Fo0ktY8.jpeg" },
-    { name: "Beatriz M., RS", text: "Comecei a vender e já estou com a agenda cheia! O lucro é ótimo e a receita é muito prática.", rating: 5, image: "https://i.imgur.com/thS9xwe.jpeg" },
-    { name: "Ricardo F., CE", text: "Simplesmente a melhor receita que já testei. O passo a passo é muito claro e não tem erro.", rating: 5, image: "https://i.imgur.com/SVV6zrv.png" },
+    { name: "Beatriz M., RS", text: "Comecei a vender e já estou com a agenda cheia! O lucro é ótimo e o método é muito prático.", rating: 5, image: "https://i.imgur.com/thS9xwe.jpeg" },
+    { name: "Ricardo F., CE", text: "Simplesmente o melhor método que já testei. O passo a passo é muito claro e não tem erro.", rating: 5, image: "https://i.imgur.com/SVV6zrv.png" },
   ];
   
   useEffect(() => {
@@ -110,9 +110,9 @@ export default function MorangoDoAmorLandingPage() {
 
   
   const faqItems = [
-    { question: "Eu preciso de curso de confeitaria para fazer?", answer: "Não! Essa receita é simples, com ingredientes fáceis e qualquer pessoa consegue fazer." },
-    { question: "Como recebo o acesso?", answer: "Você receberá acesso imediato à receita completa por e-mail após a confirmação do pagamento." },
-    { question: "Posso revender o doce?", answer: "Sim! Essa receita é ideal para gerar renda extra vendendo, seja para amigos, em feiras ou por encomenda." },
+    { question: "Eu preciso de curso de confeitaria para fazer?", answer: "Não! Esse método é simples, com ingredientes fáceis e qualquer pessoa consegue fazer." },
+    { question: "Como recebo o acesso?", answer: "Você receberá acesso imediato ao método completo por e-mail após a confirmação do pagamento." },
+    { question: "Posso revender o doce?", answer: "Sim! Esse método é ideal para gerar renda extra vendendo, seja para amigos, em feiras ou por encomenda." },
   ];
 
   const carouselItems = [
@@ -154,10 +154,10 @@ export default function MorangoDoAmorLandingPage() {
         <section className="bg-green-100 dark:bg-green-900 text-center py-16 px-4">
           <div className="container mx-auto max-w-4xl">
             <div className="mb-4 inline-block bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-300 text-sm font-semibold px-4 py-1 rounded-full">
-              Receita Original
+              Método Original
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-red-600 dark:text-red-400">
-              Transforme morangos em renda: fature mais de R$3.000 por semana com a receita que viralizou no Brasil.
+              Transforme morangos em renda: fature mais de R$3.000 por semana com o método que viralizou no Brasil.
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-red-600 dark:text-red-400 mb-6 font-bold">
               Aprenda a criar o morango do amor gourmet o doce com brilho de vidro que conquistou a internet e está gerando renda extra para milhares de pessoas!
@@ -175,7 +175,7 @@ export default function MorangoDoAmorLandingPage() {
             </div>
             <a href="#oferta">
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-8 py-7 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 animate-pulse-strong">
-                <ShoppingCart className="mr-2"/> Quero a Receita Agora!
+                <ShoppingCart className="mr-2"/> Quero o Método Agora!
               </Button>
             </a>
           </div>
@@ -264,9 +264,9 @@ export default function MorangoDoAmorLandingPage() {
         {/* Benefits Section */}
         <section className="py-20 px-4 bg-green-50 dark:bg-green-950">
           <div className="container mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">O que você garante com a receita:</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">O que você garante com o método:</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-left max-w-xl mx-auto">
-              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Receita testada e <strong>aprovada</strong>!</span></div>
+              <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Método testado e <strong>aprovado</strong>!</span></div>
               <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Acesso <strong>vitalício</strong> ao conteúdo</span></div>
               <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Serve para festas, casamentos ou vendas</span></div>
               <div className="flex items-center gap-3"><CheckCircle className="text-green-500 flex-shrink-0 w-6 h-6"/><span>Não precisa de utensílios caros</span></div>
@@ -351,7 +351,7 @@ export default function MorangoDoAmorLandingPage() {
             </Card>
             <a href={checkoutUrl} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white text-base sm:text-xl font-bold px-6 sm:px-10 py-5 sm:py-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 animate-pulse-strong">
-                Sim, quero a receita completa agora!
+                Sim, quero o método completo agora!
               </Button>
             </a>
             <div className="flex items-center justify-center gap-2 mt-4 text-sm text-red-600 dark:text-red-400">
