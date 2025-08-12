@@ -392,7 +392,7 @@ export default function CasamentoDosSonhosPage() {
                     </CardContent>
                     <CardFooter className="p-0 pt-6 flex-col items-center">
                        <Button asChild className="w-full bg-[#C99B5C] text-white hover:bg-[#b88a4e]">
-                         <a href="https://pay.kirvano.com/42731ff0-482a-48ed-9487-a73ae6d06996">QUERO O PLANO COMPLETO</a>
+                         <a href="https://pay.kirvano.com/4fb8b1a1-3006-42cc-8606-0c0a872a3ef5">QUERO O PLANO COMPLETO</a>
                        </Button>
                       <p className="mt-4 text-xs font-bold uppercase text-[#2A2F36]/80 text-center">APROVEITE AGORA, VOCÊ NÃO VAI ENCONTRAR ESSE PREÇO DEPOIS</p>
                     </CardFooter>
@@ -473,3 +473,5 @@ export default function CasamentoDosSonhosPage() {
             </footer>
         </div>
     );
+
+    
