@@ -143,17 +143,17 @@ export default function CasamentoDosSonhosPage() {
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl md:text-4xl font-headline font-bold mb-12">O que é o Método 3C?</h2>
                     <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-                        <Card className="bg-white shadow-lg text-center">
+                        <Card className="bg-white shadow-lg text-center p-4">
                             <CardHeader><CardTitle className="font-headline text-2xl text-[#C99B5C]">Cortar</CardTitle></CardHeader>
-                            <CardContent className="text-[#2A2F36]/80">Aprenda a eliminar desperdícios e itens que só incham a conta sem aumentar a emoção do dia. (ex: displays de buffet redundantes, opções caras de logística etc.)</CardContent>
+                            <CardContent className="text-[#2A2F36]/80">Aprenda a eliminar desperdícios e itens que só incham a conta sem aumentar a emoção do dia.</CardContent>
                         </Card>
-                         <Card className="bg-white shadow-lg text-center">
+                         <Card className="bg-white shadow-lg text-center p-4">
                             <CardHeader><CardTitle className="font-headline text-2xl text-[#7FBFAE]">Criar</CardTitle></CardHeader>
-                            <CardContent className="text-[#2A2F36]/80">Substituições de alto impacto: DIY estratégico, fornecedores locais e decorações híbridas que parecem caras e custam pouco.</CardContent>
+                            <CardContent className="text-[#2A2F36]/80">Substituições de alto impacto: DIY estratégico, fornecedores locais e decorações que parecem caras e custam pouco.</CardContent>
                         </Card>
-                         <Card className="bg-white shadow-lg text-center">
+                         <Card className="bg-white shadow-lg text-center p-4">
                             <CardHeader><CardTitle className="font-headline text-2xl text-[#C99B5C]">Combinar</CardTitle></CardHeader>
-                            <CardContent className="text-[#2A2F36]/80">Como sincronizar data, horário e fornecedor para descontos e sinergias (ex: pacote foto+vídeo + horário da tarde reduz custo de buffet).</CardContent>
+                            <CardContent className="text-[#2A2F36]/80">Como sincronizar data, horário e fornecedor para descontos incríveis e sinergias.</CardContent>
                         </Card>
                     </div>
                 </div>
@@ -224,7 +224,7 @@ export default function CasamentoDosSonhosPage() {
                     <Carousel className="w-full max-w-4xl mx-auto">
                         <CarouselContent>
                             {testimonials.map((testimonial, index) => (
-                                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                                <CarouselItem key={index}>
                                     <div className="p-2 h-full">
                                         <Card className="bg-white shadow-lg p-6 flex flex-col h-full">
                                             <CardContent className="p-0 flex-grow">
@@ -258,7 +258,7 @@ export default function CasamentoDosSonhosPage() {
                 <p className="mt-4 text-lg text-[#2A2F36]/80">Comprando o Método 3C agora, você garante acesso a estes materiais que aceleram seu resultado:</p>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                   {bonuses.map((bonus, index) => (
-                    <div key={index} className={`flex items-center gap-4 p-4 rounded-lg bg-white shadow-sm border border-gray-100 ${index >= 3 ? 'lg:col-start-2' : ''} ${index === 3 ? 'lg:col-start-1 lg:col-end-2' : ''} ${index === 4 ? 'lg:col-start-2 lg:col-end-4' : ''}`}>
+                    <div key={index} className="flex items-center gap-4 p-4 rounded-lg bg-white shadow-sm border border-gray-100">
                       {bonus.icon}
                       <div>
                         <p className="font-bold">{bonus.title}</p>
@@ -268,9 +268,9 @@ export default function CasamentoDosSonhosPage() {
                   ))}
                 </div>
                 <div className="mt-12">
-                   <Card className="bg-[#F6E9E6] max-w-md mx-auto p-6 text-center shadow-lg border-[#C99B5C]/30">
-                        <p className="font-bold text-xl">Valor total dos bônus: <span className="line-through">R$ {totalBonusValue},00</span></p>
-                        <p className="text-2xl font-bold text-[#7FBFAE] mt-2">Hoje saem de GRAÇA para você!</p>
+                   <Card className="bg-white max-w-md mx-auto p-6 text-center shadow-lg border-2 border-[#C99B5C]">
+                        <p className="font-bold text-xl text-[#2A2F36]">Valor total dos bônus: <span className="line-through">R$ {totalBonusValue},00</span></p>
+                        <p className="text-2xl font-bold text-[#C99B5C] mt-2">Hoje saem de GRAÇA para você!</p>
                     </Card>
                 </div>
               </div>
@@ -282,30 +282,30 @@ export default function CasamentoDosSonhosPage() {
                 <h2 className="text-3xl md:text-4xl font-headline font-bold">Escolha o plano perfeito para o seu sonho</h2>
                 <p className="mt-4 text-lg text-[#2A2F36]/80 max-w-2xl mx-auto">Acesso imediato para começar a planejar hoje mesmo.</p>
                 <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12 items-stretch">
-                  <Card className="border-2 border-[#2A2F36]/10 p-6 flex flex-col">
-                    <CardHeader>
+                  <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white">
+                    <CardHeader className="p-0">
                       <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
-                      <CardDescription>O essencial para começar a economizar.</CardDescription>
+                      <CardDescription className="pt-2">O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow space-y-4">
+                    <CardContent className="flex-grow space-y-4 pt-6 px-0">
                       <p className="text-4xl font-bold font-sans">R$10</p>
                       <ul className="text-left space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Acesso por 6 meses</span></li>
                       </ul>
                     </CardContent>
-                    <CardFooter>
+                    <CardFooter className="p-0 pt-6">
                       <Button variant="outline" className="w-full border-[#C99B5C] text-[#C99B5C] hover:bg-[#F6E9E6] hover:text-[#C99B5C]">QUERO O PLANO BÁSICO</Button>
                     </CardFooter>
                   </Card>
 
-                  <Card className="border-2 border-[#C99B5C] p-6 relative flex flex-col shadow-2xl">
+                  <Card className="border-2 border-[#C99B5C] p-8 relative flex flex-col shadow-2xl bg-white">
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#C99B5C] text-white px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
-                    <CardHeader>
-                      <CardTitle className="font-headline text-2xl">Plano Completo</CardTitle>
-                      <CardDescription>Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
+                    <CardHeader className="p-0">
+                      <CardTitle className="font-headline text-2xl pt-2">Plano Completo</CardTitle>
+                      <CardDescription className="pt-2">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow space-y-4">
+                    <CardContent className="flex-grow space-y-4 pt-6 px-0">
                       <p className="text-4xl font-bold font-sans">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
                        <ul className="text-left space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
@@ -314,7 +314,7 @@ export default function CasamentoDosSonhosPage() {
                         <li className="flex items-center gap-2"><Sparkles className="w-5 h-5 text-[#C99B5C]" /><span>Acesso Vitalício e Atualizações</span></li>
                       </ul>
                     </CardContent>
-                    <CardFooter>
+                    <CardFooter className="p-0 pt-6">
                       <Button className="w-full bg-[#C99B5C] text-white hover:bg-[#b88a4e]">QUERO O PLANO COMPLETO</Button>
                     </CardFooter>
                   </Card>
@@ -400,4 +400,5 @@ export default function CasamentoDosSonhosPage() {
     
 
     
+
 
