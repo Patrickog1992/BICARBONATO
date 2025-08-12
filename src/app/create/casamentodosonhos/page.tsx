@@ -21,9 +21,13 @@ const poppins = Poppins({
 
 export default function CasamentoDosSonhosPage() {
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+    const [currentDate, setCurrentDate] = useState('');
     const autoplayPlugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
     useEffect(() => {
+        const today = new Date();
+        setCurrentDate(today.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
         const timer = setInterval(() => {
             setTimeLeft(prev => {
                 let { hours, minutes, seconds } = prev;
@@ -70,6 +74,11 @@ export default function CasamentoDosSonhosPage() {
 
     return (
         <div className={`${poppins.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans`}>
+            {currentDate && (
+                <div className="bg-[#C99B5C] text-white text-center p-2 text-sm font-bold">
+                    Hoje é {currentDate}, é o último dia para receber essa oferta
+                </div>
+            )}
             {/* Hero Section */}
             <section className="relative bg-[#F6E9E6] overflow-hidden">
                 <div className="container mx-auto px-6 py-20 text-center relative z-10">
@@ -394,4 +403,5 @@ export default function CasamentoDosSonhosPage() {
             </footer>
         </div>
     );
-}
+
+    
