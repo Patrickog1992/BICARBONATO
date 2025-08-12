@@ -67,11 +67,11 @@ export default function CasamentoDosSonhosPage() {
                     <div className="flex justify-center mb-6">
                         <Gem className="w-16 h-16 text-[#C99B5C]" />
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight normal-case">
+                    <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight">
                         Método 3C — o guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-[#2A2F36]/80 max-w-3xl mx-auto">
-                        Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna.
+                        Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna, Mesmo com pouco tempo e muitos convidados!
                     </p>
                     <div className="mt-10">
                         <Button size="lg" className="bg-[#C99B5C] text-white font-bold text-lg px-10 py-8 rounded-lg shadow-lg hover:bg-[#b88a4e] transform hover:scale-105 transition-transform duration-300">
