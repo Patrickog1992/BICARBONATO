@@ -46,9 +46,9 @@ export default function CasamentoDosSonhosPage() {
     ];
     
     const testimonials = [
-        { name: "Aline & Marcos", location: "Florianópolis, SC", text: "Me casei com 150 convidados e gastei R$6.697,70! Achei que seria impossível, mas o método mostrou o caminho. Cortamos o que não era essencial, criamos uma decoração linda e combinamos fornecedores. Mágico!", image: "https://i.imgur.com/EUrq0St.jpeg", dataAiHint: 'happy couple' },
-        { name: "Juliana & Pedro", location: "Belo Horizonte, MG", text: "Economizamos mais de 10 mil reais! O guia de negociação e os templates de contrato nos salvaram de várias armadilhas. O casamento foi mais lindo do que sonhávamos.", image: "https://i.imgur.com/h8ZCd8q.jpeg", dataAiHint: 'smiling couple' },
-        { name: "Beatriz & Tiago", location: "São Paulo, SP", text: "Sem o Método 3C, teríamos adiado o casamento por mais um ano. Conseguimos organizar tudo em 4 meses e com um orçamento que cabia no nosso bolso. Gratidão!", image: "https://i.imgur.com/0bOhq1p.jpeg", dataAiHint: 'wedding couple' },
+        { name: "Aline & Marcos", location: "Florianópolis, SC", text: "Me casei com 150 convidados e gastei R$6.697,70! Achei que seria impossível, mas o método mostrou o caminho. Cortamos o que não era essencial, criamos uma decoração linda e combinamos fornecedores. Mágico!", image: "https://i.imgur.com/6hNipoh.jpeg", dataAiHint: 'happy couple' },
+        { name: "Juliana & Pedro", location: "Belo Horizonte, MG", text: "Economizamos mais de 10 mil reais! O guia de negociação e os templates de contrato nos salvaram de várias armadilhas. O casamento foi mais lindo do que sonhávamos.", image: "https://i.imgur.com/0lbIxMI.jpeg", dataAiHint: 'smiling couple' },
+        { name: "Beatriz & Tiago", location: "São Paulo, SP", text: "Sem o Método 3C, teríamos adiado o casamento por mais um ano. Conseguimos organizar tudo em 4 meses e com um orçamento que cabia no nosso bolso. Gratidão!", image: "https://i.imgur.com/73dp13S.jpeg", dataAiHint: 'wedding couple' },
     ];
 
     const bonuses = [
@@ -400,3 +400,4 @@ export default function CasamentoDosSonhosPage() {
     
 
     
+
