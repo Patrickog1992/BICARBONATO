@@ -25,6 +25,7 @@ export default function CasamentoDosSonhosPage() {
     const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
     const [currentDate, setCurrentDate] = useState('');
     const autoplayPlugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+    const testimonialsAutoplayPlugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -120,7 +121,7 @@ export default function CasamentoDosSonhosPage() {
                         <Gem className="w-16 h-16 text-[#C99B5C]" />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight">
-                        Método 3C : o guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
+                        Método 3C : O guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-[#2A2F36]/80 max-w-3xl mx-auto">
                         Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna, Mesmo com pouco tempo e muitos convidados!
@@ -272,7 +273,13 @@ export default function CasamentoDosSonhosPage() {
             <section className="py-20 bg-[#F6E9E6]">
                 <div className="container mx-auto px-6">
                     <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">Histórias Reais de Noivas Reais</h2>
-                    <Carousel className="w-full max-w-4xl mx-auto">
+                    <Carousel 
+                        className="w-full max-w-4xl mx-auto"
+                        plugins={[testimonialsAutoplayPlugin.current]}
+                        onMouseEnter={() => testimonialsAutoplayPlugin.current.stop()}
+                        onMouseLeave={() => testimonialsAutoplayPlugin.current.play()}
+                        opts={{ loop: true }}
+                    >
                         <CarouselContent>
                             {testimonials.map((testimonial, index) => (
                                 <CarouselItem key={index}>
