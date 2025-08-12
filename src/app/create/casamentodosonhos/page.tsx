@@ -20,7 +20,7 @@ const poppins = Poppins({
 });
 
 export default function CasamentoDosSonhosPage() {
-    const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 15, seconds: 0 });
     const [currentDate, setCurrentDate] = useState('');
     const autoplayPlugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
@@ -30,11 +30,23 @@ export default function CasamentoDosSonhosPage() {
 
         const timer = setInterval(() => {
             setTimeLeft(prev => {
+                if (prev.hours === 0 && prev.minutes === 0 && prev.seconds === 0) {
+                    clearInterval(timer);
+                    return prev;
+                }
+
                 let { hours, minutes, seconds } = prev;
+                
                 seconds--;
-                if (seconds < 0) { seconds = 59; minutes--; }
-                if (minutes < 0) { minutes = 59; hours--; }
-                if (hours < 0) { hours = 23; }
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                }
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                }
+
                 return { hours, minutes, seconds };
             });
         }, 1000);
@@ -315,9 +327,9 @@ export default function CasamentoDosSonhosPage() {
                       <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow space-y-4 pt-6 px-0">
-                      <p className="text-4xl font-bold font-sans">R$10</p>
-                      <ul className="text-left space-y-2 text-[#2A2F36]/80">
+                    <CardContent className="flex-grow space-y-4 pt-6 px-0 text-left text-[#2A2F36]">
+                      <p className="text-4xl font-bold font-sans text-center">R$10</p>
+                      <ul className="space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Acesso por 6 meses</span></li>
                       </ul>
@@ -333,9 +345,9 @@ export default function CasamentoDosSonhosPage() {
                       <CardTitle className="font-headline text-2xl pt-2">Plano Completo</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow space-y-4 pt-6 px-0">
-                      <p className="text-4xl font-bold font-sans">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
-                       <ul className="text-left space-y-2 text-[#2A2F36]/80">
+                    <CardContent className="flex-grow space-y-4 pt-6 px-0 text-left text-[#2A2F36]">
+                      <p className="text-4xl font-bold font-sans text-center">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
+                       <ul className="space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Todos os 5 Bônus Exclusivos</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Templates Prontos (Contratos, E-mails)</span></li>
