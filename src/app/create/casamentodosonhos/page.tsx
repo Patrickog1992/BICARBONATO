@@ -22,19 +22,24 @@ const poppins = Poppins({
 });
 
 export default function CasamentoDosSonhosPage() {
-    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 15, seconds: 0 });
+    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
     const [currentDate, setCurrentDate] = useState('');
     const autoplayPlugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
+        setIsClient(true);
+    
         const today = new Date();
         setCurrentDate(today.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+        setTimeLeft({ hours: 0, minutes: 15, seconds: 0 });
 
         const timer = setInterval(() => {
             setTimeLeft(prev => {
                 if (prev.hours === 0 && prev.minutes === 0 && prev.seconds === 0) {
                     clearInterval(timer);
-                    return prev;
+                    return { hours: 0, minutes: 0, seconds: 0 };
                 }
 
                 let { hours, minutes, seconds } = prev;
@@ -105,7 +110,7 @@ export default function CasamentoDosSonhosPage() {
 
     return (
         <div className={`${poppins.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans`}>
-            {currentDate && (
+            {isClient && currentDate && (
                 <div className="bg-[#C99B5C] text-white text-center p-2 text-sm font-bold">
                     Hoje é {currentDate}, é o último dia para receber essa oferta
                 </div>
@@ -134,11 +139,17 @@ export default function CasamentoDosSonhosPage() {
                         <p className="font-bold text-[#C99B5C]">OFERTA POR TEMPO LIMITADO</p>
                         <p className="text-sm">Vagas limitadas para a turma com bônus!</p>
                         <div className="flex justify-center gap-4 mt-2 text-2xl font-bold font-sans">
-                            <div>{String(timeLeft.hours).padStart(2, '0')} <span className="text-sm font-normal">HRS</span></div>
-                            <div>:</div>
-                            <div>{String(timeLeft.minutes).padStart(2, '0')} <span className="text-sm font-normal">MIN</span></div>
-                            <div>:</div>
-                            <div>{String(timeLeft.seconds).padStart(2, '0')} <span className="text-sm font-normal">SEG</span></div>
+                            {isClient ? (
+                                <>
+                                    <div>{String(timeLeft.hours).padStart(2, '0')} <span className="text-sm font-normal">HRS</span></div>
+                                    <div>:</div>
+                                    <div>{String(timeLeft.minutes).padStart(2, '0')} <span className="text-sm font-normal">MIN</span></div>
+                                    <div>:</div>
+                                    <div>{String(timeLeft.seconds).padStart(2, '0')} <span className="text-sm font-normal">SEG</span></div>
+                                </>
+                            ) : (
+                                <span>Carregando...</span>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -324,7 +335,7 @@ export default function CasamentoDosSonhosPage() {
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-[#2A2F36]">Escolha o plano perfeito para o seu sonho</h2>
                 <p className="mt-4 text-lg text-[#2A2F36]/80 max-w-2xl mx-auto">Acesso imediato para começar a planejar hoje mesmo.</p>
                 <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12 items-stretch">
-                  <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white text-[#2A2F36]">
+                  <Card className="border-2 p-8 flex flex-col bg-white text-[#2A2F36] border-gray-200">
                     <CardHeader className="p-0">
                       <CardTitle className="font-headline text-2xl text-[#2A2F36]">Plano Básico</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">O essencial para começar a economizar.</CardDescription>
@@ -341,7 +352,7 @@ export default function CasamentoDosSonhosPage() {
                         <AlertDialogTrigger asChild>
                            <Button variant="outline" className="w-full border-[#C99B5C] text-[#C99B5C] hover:bg-[#F6E9E6] hover:text-[#C99B5C]">QUERO O PLANO BÁSICO</Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className="bg-white text-[#2A2F36]">
                             <AlertDialogHeader>
                                 <AlertDialogTitle className="text-center text-green-600 font-bold text-2xl">VOCÊ LIBEROU UM DESCONTO DE 30%!</AlertDialogTitle>
                                 <AlertDialogDescription className="text-center text-lg text-[#2A2F36]">
@@ -473,5 +484,5 @@ export default function CasamentoDosSonhosPage() {
             </footer>
         </div>
     );
-
+}
     
