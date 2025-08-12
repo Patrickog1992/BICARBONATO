@@ -38,6 +38,23 @@ export default function CasamentoDosSonhosPage() {
                 return { hours, minutes, seconds };
             });
         }, 1000);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                if (href) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
         return () => clearInterval(timer);
     }, []);
 
@@ -92,9 +109,11 @@ export default function CasamentoDosSonhosPage() {
                         Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna, Mesmo com pouco tempo e muitos convidados!
                     </p>
                     <div className="mt-10">
-                        <Button size="lg" className="bg-[#C99B5C] text-white font-bold text-lg px-10 py-8 rounded-lg shadow-lg hover:bg-[#b88a4e] transform hover:scale-105 transition-transform duration-300">
-                            QUERO COMEÇAR AGORA
-                        </Button>
+                        <a href="#planos">
+                            <Button size="lg" className="bg-[#C99B5C] text-white font-bold text-lg px-10 py-8 rounded-lg shadow-lg hover:bg-[#b88a4e] transform hover:scale-105 transition-transform duration-300">
+                                QUERO COMEÇAR AGORA
+                            </Button>
+                        </a>
                         <p className="mt-4 text-sm text-[#2A2F36]/70">Acesso imediato + garantia de 7 dias.</p>
                     </div>
                     <div className="mt-12 bg-white/50 backdrop-blur-sm rounded-lg p-4 max-w-md mx-auto shadow-md border border-gray-200 text-[#2A2F36]">
@@ -270,7 +289,7 @@ export default function CasamentoDosSonhosPage() {
                     <div key={index} className="flex items-center gap-4 p-4 rounded-lg bg-white shadow-sm border border-gray-100">
                       {bonus.icon}
                       <div>
-                        <p className="font-bold">{bonus.title}</p>
+                        <p className="font-bold text-[#2A2F36]">{bonus.title}</p>
                         <p className="text-sm text-gray-500 line-through">Valor R${bonus.value},00</p>
                       </div>
                     </div>
@@ -288,16 +307,16 @@ export default function CasamentoDosSonhosPage() {
             {/* Pricing Section */}
             <section id="planos" className="py-20 bg-white">
               <div className="container mx-auto px-6 text-center">
-                <h2 className="text-3xl md:text-4xl font-headline font-bold">Escolha o plano perfeito para o seu sonho</h2>
+                <h2 className="text-3xl md:text-4xl font-headline font-bold text-[#2A2F36]">Escolha o plano perfeito para o seu sonho</h2>
                 <p className="mt-4 text-lg text-[#2A2F36]/80 max-w-2xl mx-auto">Acesso imediato para começar a planejar hoje mesmo.</p>
                 <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12 items-stretch">
-                  <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white">
+                  <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white text-[#2A2F36]">
                     <CardHeader className="p-0">
-                      <CardTitle className="font-headline text-2xl text-[#2A2F36]">Plano Básico</CardTitle>
+                      <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4 pt-6 px-0">
-                      <p className="text-4xl font-bold font-sans text-[#2A2F36]">R$10</p>
+                      <p className="text-4xl font-bold font-sans">R$10</p>
                       <ul className="text-left space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Acesso por 6 meses</span></li>
@@ -308,14 +327,14 @@ export default function CasamentoDosSonhosPage() {
                     </CardFooter>
                   </Card>
 
-                  <Card className="border-2 border-[#C99B5C] p-8 relative flex flex-col shadow-2xl bg-white">
+                  <Card className="border-2 border-[#C99B5C] p-8 relative flex flex-col shadow-2xl bg-white text-[#2A2F36]">
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#C99B5C] text-white px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
                     <CardHeader className="p-0">
-                      <CardTitle className="font-headline text-2xl pt-2 text-[#2A2F36]">Plano Completo</CardTitle>
+                      <CardTitle className="font-headline text-2xl pt-2">Plano Completo</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4 pt-6 px-0">
-                      <p className="text-4xl font-bold font-sans text-[#2A2F36]">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
+                      <p className="text-4xl font-bold font-sans">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
                        <ul className="text-left space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Todos os 5 Bônus Exclusivos</span></li>
@@ -343,20 +362,20 @@ export default function CasamentoDosSonhosPage() {
                             <Image src="https://i.imgur.com/Tsh7t80.jpeg" width={600} height={400} alt="Casal Aline e Marcos" className="rounded-lg shadow-xl" data-ai-hint="happy couple wedding" />
                         </div>
                         <div className="md:w-1/2">
-                            <h2 className="text-3xl font-headline font-bold">Como a Aline aplicou o Método 3C na prática</h2>
+                            <h2 className="text-3xl font-headline font-bold text-[#2A2F36]">Como a Aline aplicou o Método 3C na prática</h2>
                             <p className="mt-4 text-[#2A2F36]/80">A Aline seguiu o método à risca. Veja como foi simples:</p>
                             <ul className="mt-6 space-y-4">
                                 <li className="flex items-start gap-3">
                                     <span className="font-bold text-[#C99B5C] text-2xl">1.</span>
-                                    <div><h4 className="font-bold">Cortou a lista de convidados</h4><p className="text-sm text-[#2A2F36]/70">De 200 para 150 pessoas, focando em quem realmente importava.</p></div>
+                                    <div><h4 className="font-bold text-[#2A2F36]">Cortou a lista de convidados</h4><p className="text-sm text-[#2A2F36]/70">De 200 para 150 pessoas, focando em quem realmente importava.</p></div>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="font-bold text-[#7FBFAE] text-2xl">2.</span>
-                                    <div><h4 className="font-bold">Criou a própria decoração</h4><p className="text-sm text-[#2A2F36]/70">Usou o guia de DIY para as mesas e cerimônia, economizando R$2.500.</p></div>
+                                    <div><h4 className="font-bold text-[#2A2F36]">Criou a própria decoração</h4><p className="text-sm text-[#2A2F36]/70">Usou o guia de DIY para as mesas e cerimônia, economizando R$2.500.</p></div>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="font-bold text-[#C99B5C] text-2xl">3.</span>
-                                    <div><h4 className="font-bold">Combinou fornecedores</h4><p className="text-sm text-[#2A2F36]/70">Fechou um pacote de foto e vídeo com 20% de desconto e casou em uma sexta-feira, reduzindo o custo do buffet.</p></div>
+                                    <div><h4 className="font-bold text-[#2A2F36]">Combinou fornecedores</h4><p className="text-sm text-[#2A2F36]/70">Fechou um pacote de foto e vídeo com 20% de desconto e casou em uma sexta-feira, reduzindo o custo do buffet.</p></div>
                                 </li>
                             </ul>
                         </div>
@@ -368,11 +387,11 @@ export default function CasamentoDosSonhosPage() {
             {/* FAQ Section */}
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6 max-w-3xl">
-                    <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">Perguntas Frequentes</h2>
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12 text-[#2A2F36]">Perguntas Frequentes</h2>
                     <Accordion type="single" collapsible className="w-full">
                         {faqItems.map((item, index) => (
                             <AccordionItem value={`item-${index+1}`} key={index} className="border-b border-gray-200">
-                                <AccordionTrigger className="hover:no-underline font-bold text-lg text-left">{item.question}</AccordionTrigger>
+                                <AccordionTrigger className="hover:no-underline font-bold text-lg text-left text-[#2A2F36]">{item.question}</AccordionTrigger>
                                 <AccordionContent className="text-[#2A2F36]/80 pb-4">
                                     {item.answer}
                                 </AccordionContent>
