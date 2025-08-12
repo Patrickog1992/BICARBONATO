@@ -91,7 +91,7 @@ export default function CasamentoDosSonhosPage() {
                         </div>
                     </div>
                 </div>
-                <Image src="https://placehold.co/1920x1080.png" alt="Noiva sorrindo" layout="fill" objectFit="cover" className="opacity-10" data-ai-hint="bride smiling" />
+                <Image src="https://i.imgur.com/BwO8MRY.jpeg" alt="Noiva sorrindo" layout="fill" objectFit="cover" className="opacity-10" data-ai-hint="bride smiling" />
             </section>
 
             {/* Problem Section */}
@@ -362,3 +362,5 @@ export default function CasamentoDosSonhosPage() {
     );
 }
 
+
+    
