@@ -293,7 +293,7 @@ export default function CasamentoDosSonhosPage() {
                 <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12 items-stretch">
                   <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white">
                     <CardHeader className="p-0">
-                      <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
+                      <CardTitle className="font-headline text-2xl text-[#2A2F36]">Plano Básico</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4 pt-6 px-0">
@@ -311,7 +311,7 @@ export default function CasamentoDosSonhosPage() {
                   <Card className="border-2 border-[#C99B5C] p-8 relative flex flex-col shadow-2xl bg-white">
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#C99B5C] text-white px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
                     <CardHeader className="p-0">
-                      <CardTitle className="font-headline text-2xl pt-2">Plano Completo</CardTitle>
+                      <CardTitle className="font-headline text-2xl pt-2 text-[#2A2F36]">Plano Completo</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4 pt-6 px-0">
@@ -403,6 +403,3 @@ export default function CasamentoDosSonhosPage() {
             </footer>
         </div>
     );
-
-    
-    
