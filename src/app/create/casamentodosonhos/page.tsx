@@ -12,6 +12,8 @@ import { useEffect, useState, useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Poppins } from 'next/font/google';
 import Autoplay from "embla-carousel-autoplay"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import Link from 'next/link';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -335,7 +337,35 @@ export default function CasamentoDosSonhosPage() {
                       </ul>
                     </CardContent>
                     <CardFooter className="p-0 pt-6">
-                      <Button variant="outline" className="w-full border-[#C99B5C] text-[#C99B5C] hover:bg-[#F6E9E6] hover:text-[#C99B5C]">QUERO O PLANO BÁSICO</Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                           <Button variant="outline" className="w-full border-[#C99B5C] text-[#C99B5C] hover:bg-[#F6E9E6] hover:text-[#C99B5C]">QUERO O PLANO BÁSICO</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle className="text-center text-green-600 font-bold text-2xl">VOCÊ LIBEROU UM DESCONTO DE 30%!</AlertDialogTitle>
+                                <AlertDialogDescription className="text-center text-lg text-[#2A2F36]">
+                                    Para levar o <strong className="font-bold">PLANO COMPLETO</strong> de <span className="line-through">R$37</span> por apenas: 
+                                    <p className="text-3xl font-bold text-[#C99B5C] my-2">R$25</p>
+                                    ou 3x de R$8,82.
+                                    <br/>
+                                    <span className="font-bold">APROVEITE!</span> Você vai receber <strong className="font-bold">TODOS OS BÔNUS</strong>, atualizações e acesso <strong className="font-bold">VITALÍCIO</strong>. 👇
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="sm:flex-col sm:space-x-0 gap-2">
+                                <AlertDialogAction asChild>
+                                  <a href="https://pay.kirvano.com/42731ff0-482a-48ed-9487-a73ae6d06996" className="w-full bg-[#C99B5C] text-white hover:bg-[#b88a4e]">
+                                    VOU APROVEITAR O DESCONTO!
+                                  </a>
+                                </AlertDialogAction>
+                                <AlertDialogCancel asChild>
+                                   <a href="https://pay.kirvano.com/53954f78-2de3-4144-9b88-80539a805159" className="w-full">
+                                    Não, quero o básico de R$10
+                                   </a>
+                                </AlertDialogCancel>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </CardFooter>
                   </Card>
 
