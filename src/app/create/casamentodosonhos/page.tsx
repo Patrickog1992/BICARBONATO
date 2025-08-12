@@ -5,33 +5,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
-import { CheckCircle, Award, Heart, Gift, BookOpen, Calendar, Clock, Star, Lock, Phone, Mail, ShoppingCart, Users, BadgeCheck, FileText, Palette, Sparkles, ChevronRight } from 'lucide-react';
+import { CheckCircle, Award, Heart, Gift, BookOpen, Calendar, Clock, Star, Lock, Phone, Mail, ShoppingCart, Users, BadgeCheck, FileText, Palette, Sparkles, ChevronRight, Ring } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useEffect, useState, useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Playfair_Display, Montserrat } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-playfair-display',
-});
-
-const montserrat = Montserrat({
+const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
-  variable: '--font-montserrat',
+  variable: '--font-poppins',
 });
-
-const WeddingRingsIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#C99B5C]">
-        <path d="M12 20a6 6 0 0 1-6-6 6 6 0 0 1 6-6V4a8 8 0 0 0-8 8 8 8 0 0 0 8 8z" />
-        <path d="M18 12a6 6 0 0 1-6 6 6 6 0 0 1-6-6h4a2 2 0 0 0 2 2 2 2 0 0 0 2-2z" />
-        <path d="M12 12V8a2 2 0 0 1 2 2 2 2 0 0 1-2 2z"/>
-        <path d="M18 4a6 6 0 0 0-6 6h4a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-4a6 6 0 0 0 6-6z"/>
-    </svg>
-);
 
 export default function CasamentoDosSonhosPage() {
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
@@ -75,15 +60,15 @@ export default function CasamentoDosSonhosPage() {
     const totalBonusValue = bonuses.reduce((sum, bonus) => sum + bonus.value, 0);
 
     return (
-        <div className={`${playfairDisplay.variable} ${montserrat.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans`}>
+        <div className={`${poppins.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans`}>
             {/* Hero Section */}
             <section className="relative bg-[#F6E9E6] overflow-hidden">
                 <div className="container mx-auto px-6 py-20 text-center relative z-10">
                     <div className="flex justify-center mb-6">
-                        <WeddingRingsIcon />
+                        <Ring className="w-16 h-16 text-[#C99B5C]" />
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-bold font-serif text-[#2A2F36] max-w-4xl mx-auto leading-tight">
-                        Método 3C — O Guia Oficial para ter o Casamento dos Seus Sonhos gastando até 70% menos
+                    <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight normal-case">
+                        Método 3C — O guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-[#2A2F36]/80 max-w-3xl mx-auto">
                         Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna.
@@ -112,7 +97,7 @@ export default function CasamentoDosSonhosPage() {
             {/* Problem Section */}
             <section className="py-20 bg-[#FBF8F6]">
                 <div className="container mx-auto px-6 text-center max-w-3xl">
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold">Está sem tempo, sem assessoria e com pouco dinheiro? Sei como é.</h2>
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold">Está sem tempo, sem assessoria e com pouco dinheiro? Sei como é.</h2>
                     <p className="mt-6 text-lg text-[#2A2F36]/80">
                         Organizar um casamento pode ser um turbilhão de emoções: o sonho de um dia perfeito misturado ao pesadelo dos orçamentos que não fecham, fornecedores caros e a falta de uma orientação clara. A correria do dia a dia transforma o que deveria ser prazeroso em uma fonte de estresse.
                     </p>
@@ -122,18 +107,18 @@ export default function CasamentoDosSonhosPage() {
             {/* Method Section */}
             <section className="py-20 bg-[#F6E9E6]">
                 <div className="container mx-auto px-6 text-center">
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold mb-12">O que é o Método 3C?</h2>
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold mb-12">O que é o Método 3C?</h2>
                     <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
                         <Card className="bg-white shadow-lg text-center">
-                            <CardHeader><CardTitle className="font-serif text-2xl text-[#C99B5C]">Cortar</CardTitle></CardHeader>
+                            <CardHeader><CardTitle className="font-headline text-2xl text-[#C99B5C]">Cortar</CardTitle></CardHeader>
                             <CardContent className="text-[#2A2F36]/80">Aprenda a eliminar desperdícios e itens que só incham a conta sem aumentar a emoção do dia. (ex: displays de buffet redundantes, opções caras de logística etc.)</CardContent>
                         </Card>
                          <Card className="bg-white shadow-lg text-center">
-                            <CardHeader><CardTitle className="font-serif text-2xl text-[#7FBFAE]">Criar</CardTitle></CardHeader>
+                            <CardHeader><CardTitle className="font-headline text-2xl text-[#7FBFAE]">Criar</CardTitle></CardHeader>
                             <CardContent className="text-[#2A2F36]/80">Substituições de alto impacto: DIY estratégico, fornecedores locais e decorações híbridas que parecem caras e custam pouco.</CardContent>
                         </Card>
                          <Card className="bg-white shadow-lg text-center">
-                            <CardHeader><CardTitle className="font-serif text-2xl text-[#C99B5C]">Combinar</CardTitle></CardHeader>
+                            <CardHeader><CardTitle className="font-headline text-2xl text-[#C99B5C]">Combinar</CardTitle></CardHeader>
                             <CardContent className="text-[#2A2F36]/80">Como sincronizar data, horário e fornecedor para descontos e sinergias (ex: pacote foto+vídeo + horário da tarde reduz custo de buffet).</CardContent>
                         </Card>
                     </div>
@@ -144,7 +129,7 @@ export default function CasamentoDosSonhosPage() {
             <section className="py-20 bg-[#FBF8F6]">
               <div className="container mx-auto px-6 max-w-4xl">
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-serif font-bold">O que está dentro do Método 3C</h2>
+                  <h2 className="text-3xl md:text-4xl font-headline font-bold">O que está dentro do Método 3C</h2>
                   <p className="mt-4 text-lg text-[#2A2F36]/80">Módulos práticos para um planejamento sem estresse.</p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8">
@@ -152,21 +137,21 @@ export default function CasamentoDosSonhosPage() {
                     <div className="flex items-start gap-4">
                       <div className="bg-[#F6E9E6] p-3 rounded-full"><CheckCircle className="w-6 h-6 text-[#7FBFAE]" /></div>
                       <div>
-                        <h3 className="font-bold text-xl font-serif">Planejamento Rápido</h3>
+                        <h3 className="font-bold text-xl font-headline">Planejamento Rápido</h3>
                         <p className="text-[#2A2F36]/80">Checklists, orçamento realista e lista de convidados inteligente.</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="bg-[#F6E9E6] p-3 rounded-full"><CheckCircle className="w-6 h-6 text-[#7FBFAE]" /></div>
                       <div>
-                        <h3 className="font-bold text-xl font-serif">Cortar com Intenção</h3>
+                        <h3 className="font-bold text-xl font-headline">Cortar com Intenção</h3>
                         <p className="text-[#2A2F36]/80">Saiba exatamente o que reduzir e por que, sem sacrificar o sonho.</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="bg-[#F6E9E6] p-3 rounded-full"><CheckCircle className="w-6 h-6 text-[#7FBFAE]" /></div>
                       <div>
-                        <h3 className="font-bold text-xl font-serif">Criar com Estilo</h3>
+                        <h3 className="font-bold text-xl font-headline">Criar com Estilo</h3>
                         <p className="text-[#2A2F36]/80">Decoração, vestido e flores alternativas que encantam e economizam.</p>
                       </div>
                     </div>
@@ -175,21 +160,21 @@ export default function CasamentoDosSonhosPage() {
                      <div className="flex items-start gap-4">
                       <div className="bg-[#F6E9E6] p-3 rounded-full"><CheckCircle className="w-6 h-6 text-[#7FBFAE]" /></div>
                       <div>
-                        <h3 className="font-bold text-xl font-serif">Combinar para Economizar</h3>
+                        <h3 className="font-bold text-xl font-headline">Combinar para Economizar</h3>
                         <p className="text-[#2A2F36]/80">Negocie pacotes, datas e horários para descontos incríveis.</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="bg-[#F6E9E6] p-3 rounded-full"><CheckCircle className="w-6 h-6 text-[#7FBFAE]" /></div>
                       <div>
-                        <h3 className="font-bold text-xl font-serif">Execução em Pouco Tempo</h3>
+                        <h3 className="font-bold text-xl font-headline">Execução em Pouco Tempo</h3>
                         <p className="text-[#2A2F36]/80">O cronograma perfeito para o dia D, sem assessoria.</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="bg-[#F6E9E6] p-3 rounded-full"><CheckCircle className="w-6 h-6 text-[#7FBFAE]" /></div>
                       <div>
-                        <h3 className="font-bold text-xl font-serif">Modelos Práticos</h3>
+                        <h3 className="font-bold text-xl font-headline">Modelos Práticos</h3>
                         <p className="text-[#2A2F36]/80">Templates de e-mails, contratos e checklists prontos para usar.</p>
                       </div>
                     </div>
@@ -201,7 +186,7 @@ export default function CasamentoDosSonhosPage() {
             {/* Testimonials Section */}
             <section className="py-20 bg-[#F6E9E6]">
                 <div className="container mx-auto px-6">
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-12">Histórias Reais de Noivas Reais</h2>
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">Histórias Reais de Noivas Reais</h2>
                     <Carousel className="w-full max-w-4xl mx-auto">
                         <CarouselContent>
                             {testimonials.map((testimonial, index) => (
@@ -235,7 +220,7 @@ export default function CasamentoDosSonhosPage() {
             {/* Bonuses Section */}
             <section className="py-20 bg-[#FBF8F6]">
               <div className="container mx-auto px-6 text-center max-w-4xl">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold">Leve <span className="text-[#C99B5C]">5 Bônus Exclusivos</span> Hoje</h2>
+                <h2 className="text-3xl md:text-4xl font-headline font-bold">Leve <span className="text-[#C99B5C]">5 Bônus Exclusivos</span> Hoje</h2>
                 <p className="mt-4 text-lg text-[#2A2F36]/80">Comprando o Método 3C agora, você garante acesso a estes materiais que aceleram seu resultado:</p>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                   {bonuses.map((bonus, index) => (
@@ -260,12 +245,12 @@ export default function CasamentoDosSonhosPage() {
             {/* Pricing Section */}
             <section id="planos" className="py-20 bg-white">
               <div className="container mx-auto px-6 text-center">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold">Escolha o plano perfeito para o seu sonho</h2>
+                <h2 className="text-3xl md:text-4xl font-headline font-bold">Escolha o plano perfeito para o seu sonho</h2>
                 <p className="mt-4 text-lg text-[#2A2F36]/80 max-w-2xl mx-auto">Acesso imediato para começar a planejar hoje mesmo.</p>
                 <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12 items-stretch">
                   <Card className="border-2 border-[#2A2F36]/10 p-6 flex flex-col">
                     <CardHeader>
-                      <CardTitle className="font-serif text-2xl">Plano Básico</CardTitle>
+                      <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
                       <CardDescription>O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4">
@@ -283,7 +268,7 @@ export default function CasamentoDosSonhosPage() {
                   <Card className="border-2 border-[#C99B5C] p-6 relative flex flex-col shadow-2xl">
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#C99B5C] text-white px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
                     <CardHeader>
-                      <CardTitle className="font-serif text-2xl">Plano Completo</CardTitle>
+                      <CardTitle className="font-headline text-2xl">Plano Completo</CardTitle>
                       <CardDescription>Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4">
@@ -315,7 +300,7 @@ export default function CasamentoDosSonhosPage() {
                             <Image src="https://placehold.co/600x400.png" width={600} height={400} alt="Casal Aline e Marcos" className="rounded-lg shadow-xl" data-ai-hint="happy couple wedding" />
                         </div>
                         <div className="md:w-1/2">
-                            <h2 className="text-3xl font-serif font-bold">Como a Aline aplicou o Método 3C na prática</h2>
+                            <h2 className="text-3xl font-headline font-bold">Como a Aline aplicou o Método 3C na prática</h2>
                             <p className="mt-4 text-[#2A2F36]/80">A Aline seguiu o método à risca. Veja como foi simples:</p>
                             <ul className="mt-6 space-y-4">
                                 <li className="flex items-start gap-3">
@@ -340,7 +325,7 @@ export default function CasamentoDosSonhosPage() {
             {/* FAQ Section */}
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6 max-w-3xl">
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-12">Perguntas Frequentes</h2>
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">Perguntas Frequentes</h2>
                     <Accordion type="single" collapsible className="w-full">
                         {faqItems.map((item, index) => (
                             <AccordionItem value={`item-${index+1}`} key={index} className="border-b border-gray-200">
@@ -359,7 +344,7 @@ export default function CasamentoDosSonhosPage() {
                 <div className="container mx-auto px-6 py-12">
                     <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
                          <div>
-                            <h3 className="font-serif text-2xl font-bold">Método 3C</h3>
+                            <h3 className="font-headline text-2xl font-bold">Método 3C</h3>
                             <p className="text-sm text-gray-400 mt-2">Casamento Completo e Econômico.</p>
                         </div>
                         <div className="flex gap-8">
