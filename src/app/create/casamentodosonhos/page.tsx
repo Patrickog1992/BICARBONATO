@@ -88,7 +88,7 @@ export default function CasamentoDosSonhosPage() {
                         </Button>
                         <p className="mt-4 text-sm text-[#2A2F36]/70">Acesso imediato + garantia de 7 dias.</p>
                     </div>
-                    <div className="mt-12 bg-white/50 backdrop-blur-sm rounded-lg p-4 max-w-md mx-auto shadow-md border border-gray-200">
+                    <div className="mt-12 bg-white/50 backdrop-blur-sm rounded-lg p-4 max-w-md mx-auto shadow-md border border-gray-200 text-[#2A2F36]">
                         <p className="font-bold text-[#C99B5C]">OFERTA POR TEMPO LIMITADO</p>
                         <p className="text-sm">Vagas limitadas para a turma com bônus!</p>
                         <div className="flex justify-center gap-4 mt-2 text-2xl font-bold font-sans">
