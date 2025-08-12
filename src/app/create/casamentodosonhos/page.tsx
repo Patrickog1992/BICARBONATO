@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
-import { CheckCircle, Award, Heart, Gift, BookOpen, Calendar, Clock, Star, Lock, Phone, Mail, ShoppingCart, Users, BadgeCheck, FileText, Palette, Sparkles, ChevronRight, Ring } from 'lucide-react';
+import { CheckCircle, Award, Heart, Gift, BookOpen, Calendar, Clock, Star, Lock, Phone, Mail, ShoppingCart, Users, BadgeCheck, FileText, Palette, Sparkles, ChevronRight, Gem } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useEffect, useState, useRef } from 'react';
@@ -65,10 +65,10 @@ export default function CasamentoDosSonhosPage() {
             <section className="relative bg-[#F6E9E6] overflow-hidden">
                 <div className="container mx-auto px-6 py-20 text-center relative z-10">
                     <div className="flex justify-center mb-6">
-                        <Ring className="w-16 h-16 text-[#C99B5C]" />
+                        <Gem className="w-16 h-16 text-[#C99B5C]" />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight normal-case">
-                        Método 3C — O guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
+                        Método 3C — o guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-[#2A2F36]/80 max-w-3xl mx-auto">
                         Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna.
