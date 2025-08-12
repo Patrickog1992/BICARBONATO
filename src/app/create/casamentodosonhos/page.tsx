@@ -331,7 +331,7 @@ export default function CasamentoDosSonhosPage() {
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
                         <div className="md:w-1/2">
-                            <Image src="https://i.imgur.com/zWbL32p.png" width={600} height={400} alt="Casal Aline e Marcos" className="rounded-lg shadow-xl" data-ai-hint="happy couple wedding" />
+                            <Image src="https://i.imgur.com/Tsh7t80.jpeg" width={600} height={400} alt="Casal Aline e Marcos" className="rounded-lg shadow-xl" data-ai-hint="happy couple wedding" />
                         </div>
                         <div className="md:w-1/2">
                             <h2 className="text-3xl font-headline font-bold">Como a Aline aplicou o Método 3C na prática</h2>
@@ -395,12 +395,3 @@ export default function CasamentoDosSonhosPage() {
         </div>
     );
 }
-
-
-    
-
-    
-
-
-
-
