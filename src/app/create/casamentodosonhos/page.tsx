@@ -326,11 +326,11 @@ export default function CasamentoDosSonhosPage() {
                 <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto mt-12 items-stretch">
                   <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white text-[#2A2F36]">
                     <CardHeader className="p-0">
-                      <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
+                      <CardTitle className="font-headline text-2xl text-[#2A2F36]">Plano Básico</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow space-y-4 pt-6 px-0 text-left text-[#2A2F36]">
-                      <p className="text-4xl font-bold font-sans text-center">R$10</p>
+                    <CardContent className="flex-grow space-y-4 pt-6 px-0 text-left">
+                      <p className="text-4xl font-bold font-sans text-center text-[#2A2F36]">R$10</p>
                       <ul className="space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Acesso por 6 meses</span></li>
@@ -372,20 +372,29 @@ export default function CasamentoDosSonhosPage() {
                   <Card className="border-2 border-[#C99B5C] p-8 relative flex flex-col shadow-2xl bg-white text-[#2A2F36]">
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#C99B5C] text-white px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
                     <CardHeader className="p-0">
-                      <CardTitle className="font-headline text-2xl pt-2">Plano Completo</CardTitle>
+                      <CardTitle className="font-headline text-2xl pt-2 text-[#2A2F36]">Plano Completo</CardTitle>
                       <CardDescription className="pt-2 text-[#2A2F36]/80">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow space-y-4 pt-6 px-0 text-left text-[#2A2F36]">
-                      <p className="text-4xl font-bold font-sans text-center">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
-                       <ul className="space-y-2 text-[#2A2F36]/80">
-                        <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
-                        <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Todos os 5 Bônus Exclusivos</span></li>
-                        <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Templates Prontos (Contratos, E-mails)</span></li>
-                        <li className="flex items-center gap-2"><Sparkles className="w-5 h-5 text-[#C99B5C]" /><span>Acesso Vitalício e Atualizações</span></li>
+                    <CardContent className="flex-grow space-y-4 pt-6 px-0 text-left">
+                      <p className="text-4xl font-bold font-sans text-center text-[#2A2F36]">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
+                       <ul className="space-y-2 text-sm text-[#2A2F36]/80">
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>O Ebook Completo: Os Segredos do Casamento Econômico 3.0</span></li>
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>Checklist + Planner: Tudo que precisa ser organizado em ordem cronológica.</span></li>
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>O Enxoval de Casa Nova: A lista completa de itens para a sua casa.</span></li>
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>Como escolher sua paleta de cores em minutos: O passo a passo descomplicado.</span></li>
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>O Guia da data perfeita: Segredos que o mercado de casamentos esconde de você sobre a escolha do grande dia.</span></li>
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>Tudo sobre casamento civil.</span></li>
+                            <li className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE] mt-1 flex-shrink-0" /><span>Bônus Surpresa.</span></li>
+                            <li className="flex items-start gap-2"><Sparkles className="w-5 h-5 text-[#C99B5C] mt-1 flex-shrink-0" /><span>Acesso Vitalício.</span></li>
+                            <li className="flex items-start gap-2"><Sparkles className="w-5 h-5 text-[#C99B5C] mt-1 flex-shrink-0" /><span>Atualizações.</span></li>
+                            <li className="flex items-start gap-2"><Sparkles className="w-5 h-5 text-[#C99B5C] mt-1 flex-shrink-0" /><span>7 dias de Garantia.</span></li>
                       </ul>
                     </CardContent>
-                    <CardFooter className="p-0 pt-6">
-                      <Button className="w-full bg-[#C99B5C] text-white hover:bg-[#b88a4e]">QUERO O PLANO COMPLETO</Button>
+                    <CardFooter className="p-0 pt-6 flex-col items-center">
+                       <Button asChild className="w-full bg-[#C99B5C] text-white hover:bg-[#b88a4e]">
+                         <a href="https://pay.kirvano.com/42731ff0-482a-48ed-9487-a73ae6d06996">QUERO O PLANO COMPLETO</a>
+                       </Button>
+                      <p className="mt-4 text-xs font-bold uppercase text-[#2A2F36]/80 text-center">APROVEITE AGORA, VOCÊ NÃO VAI ENCONTRAR ESSE PREÇO DEPOIS</p>
                     </CardFooter>
                   </Card>
                 </div>
