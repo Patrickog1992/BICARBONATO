@@ -294,10 +294,10 @@ export default function CasamentoDosSonhosPage() {
                   <Card className="border-2 border-gray-200 p-8 flex flex-col bg-white">
                     <CardHeader className="p-0">
                       <CardTitle className="font-headline text-2xl">Plano Básico</CardTitle>
-                      <CardDescription className="pt-2">O essencial para começar a economizar.</CardDescription>
+                      <CardDescription className="pt-2 text-[#2A2F36]/80">O essencial para começar a economizar.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4 pt-6 px-0">
-                      <p className="text-4xl font-bold font-sans">R$10</p>
+                      <p className="text-4xl font-bold font-sans text-[#2A2F36]">R$10</p>
                       <ul className="text-left space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Acesso por 6 meses</span></li>
@@ -312,10 +312,10 @@ export default function CasamentoDosSonhosPage() {
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#C99B5C] text-white px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
                     <CardHeader className="p-0">
                       <CardTitle className="font-headline text-2xl pt-2">Plano Completo</CardTitle>
-                      <CardDescription className="pt-2">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
+                      <CardDescription className="pt-2 text-[#2A2F36]/80">Tudo que você precisa para um casamento dos sonhos e econômico.</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-4 pt-6 px-0">
-                      <p className="text-4xl font-bold font-sans">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
+                      <p className="text-4xl font-bold font-sans text-[#2A2F36]">R$37 <span className="text-base font-normal text-gray-500">ou 5x de R$8,05</span></p>
                        <ul className="text-left space-y-2 text-[#2A2F36]/80">
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Ebook Método 3C Completo</span></li>
                         <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#7FBFAE]" /><span>Todos os 5 Bônus Exclusivos</span></li>
@@ -404,4 +404,5 @@ export default function CasamentoDosSonhosPage() {
         </div>
     );
 
+    
     
