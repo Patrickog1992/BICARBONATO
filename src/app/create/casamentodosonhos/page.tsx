@@ -46,9 +46,9 @@ export default function CasamentoDosSonhosPage() {
     ];
     
     const testimonials = [
-        { name: "Aline & Marcos", location: "Florianópolis, SC", text: "Me casei com 150 convidados e gastei R$6.697,70! Achei que seria impossível, mas o método mostrou o caminho. Cortamos o que não era essencial, criamos uma decoração linda e combinamos fornecedores. Mágico!", image: "https://placehold.co/100x100.png", dataAiHint: 'happy couple' },
-        { name: "Juliana & Pedro", location: "Belo Horizonte, MG", text: "Economizamos mais de 10 mil reais! O guia de negociação e os templates de contrato nos salvaram de várias armadilhas. O casamento foi mais lindo do que sonhávamos.", image: "https://placehold.co/100x100.png", dataAiHint: 'smiling couple' },
-        { name: "Beatriz & Tiago", location: "São Paulo, SP", text: "Sem o Método 3C, teríamos adiado o casamento por mais um ano. Conseguimos organizar tudo em 4 meses e com um orçamento que cabia no nosso bolso. Gratidão!", image: "https://placehold.co/100x100.png", dataAiHint: 'wedding couple' },
+        { name: "Aline & Marcos", location: "Florianópolis, SC", text: "Me casei com 150 convidados e gastei R$6.697,70! Achei que seria impossível, mas o método mostrou o caminho. Cortamos o que não era essencial, criamos uma decoração linda e combinamos fornecedores. Mágico!", image: "https://i.imgur.com/EUrq0St.jpeg", dataAiHint: 'happy couple' },
+        { name: "Juliana & Pedro", location: "Belo Horizonte, MG", text: "Economizamos mais de 10 mil reais! O guia de negociação e os templates de contrato nos salvaram de várias armadilhas. O casamento foi mais lindo do que sonhávamos.", image: "https://i.imgur.com/h8ZCd8q.jpeg", dataAiHint: 'smiling couple' },
+        { name: "Beatriz & Tiago", location: "São Paulo, SP", text: "Sem o Método 3C, teríamos adiado o casamento por mais um ano. Conseguimos organizar tudo em 4 meses e com um orçamento que cabia no nosso bolso. Gratidão!", image: "https://i.imgur.com/0bOhq1p.jpeg", dataAiHint: 'wedding couple' },
     ];
 
     const bonuses = [
@@ -331,7 +331,7 @@ export default function CasamentoDosSonhosPage() {
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
                         <div className="md:w-1/2">
-                            <Image src="https://placehold.co/600x400.png" width={600} height={400} alt="Casal Aline e Marcos" className="rounded-lg shadow-xl" data-ai-hint="happy couple wedding" />
+                            <Image src="https://i.imgur.com/zWbL32p.png" width={600} height={400} alt="Casal Aline e Marcos" className="rounded-lg shadow-xl" data-ai-hint="happy couple wedding" />
                         </div>
                         <div className="md:w-1/2">
                             <h2 className="text-3xl font-headline font-bold">Como a Aline aplicou o Método 3C na prática</h2>
