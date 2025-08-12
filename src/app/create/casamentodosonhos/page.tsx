@@ -11,6 +11,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useEffect, useState, useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Poppins } from 'next/font/google';
+import Autoplay from "embla-carousel-autoplay"
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,6 +21,7 @@ const poppins = Poppins({
 
 export default function CasamentoDosSonhosPage() {
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+    const autoplayPlugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -56,6 +58,13 @@ export default function CasamentoDosSonhosPage() {
         { icon: <Calendar className="w-6 h-6 text-[#C99B5C]" />, title: "Calendário da Data Perfeita", value: 59 },
         { icon: <Gift className="w-6 h-6 text-[#C99B5C]" />, title: "Guia do Enxoval Completo", value: 27 },
     ];
+    
+    const socialProofImages = [
+        { src: "https://i.imgur.com/TQUloME.jpeg", alt: "Casamento decorado", hint: "wedding decoration" },
+        { src: "https://i.imgur.com/EUrq0St.jpeg", alt: "Noivos se beijando", hint: "bride groom kissing" },
+        { src: "https://i.imgur.com/0bOhq1p.jpeg", alt: "Mesa de casamento posta", hint: "wedding table setting" },
+        { src: "https://i.imgur.com/h8ZCd8q.jpeg", alt: "Detalhe da decoração de casamento", hint: "wedding detail" },
+    ];
 
     const totalBonusValue = bonuses.reduce((sum, bonus) => sum + bonus.value, 0);
 
@@ -68,7 +77,7 @@ export default function CasamentoDosSonhosPage() {
                         <Gem className="w-16 h-16 text-[#C99B5C]" />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight">
-                        Método 3C — o guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
+                        Método 3c — o guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
                     </h1>
                     <p className="mt-6 text-lg md:text-xl text-[#2A2F36]/80 max-w-3xl mx-auto">
                         Aprenda o sistema prático de <strong className="text-[#C99B5C]">Cortar, Criar e Combinar</strong> que já ajudou dezenas de noivas a casar bonito sem gastar uma fortuna, Mesmo com pouco tempo e muitos convidados!
@@ -101,6 +110,31 @@ export default function CasamentoDosSonhosPage() {
                     <p className="mt-6 text-lg text-[#2A2F36]/80">
                         Organizar um casamento pode ser um turbilhão de emoções: o sonho de um dia perfeito misturado ao pesadelo dos orçamentos que não fecham, fornecedores caros e a falta de uma orientação clara. A correria do dia a dia transforma o que deveria ser prazeroso em uma fonte de estresse.
                     </p>
+                </div>
+            </section>
+            
+            {/* Social Proof Carousel */}
+            <section className="py-12 bg-white">
+                <div className="container mx-auto px-6 text-center">
+                    <h3 className="text-2xl font-headline font-bold">Casamentos reais, sonhos realizados</h3>
+                    <p className="mt-2 text-md text-[#2A2F36]/70 max-w-2xl mx-auto">Veja como o Método 3C transforma orçamentos apertados em celebrações inesquecíveis.</p>
+                     <Carousel 
+                        opts={{ align: "start", loop: true }}
+                        plugins={[autoplayPlugin.current]}
+                        onMouseEnter={() => autoplayPlugin.current.stop()}
+                        onMouseLeave={() => autoplayPlugin.current.play()}
+                        className="w-full max-w-6xl mx-auto mt-8"
+                    >
+                        <CarouselContent>
+                            {socialProofImages.map((image, index) => (
+                                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                                    <div className="p-2">
+                                        <Image src={image.src} alt={image.alt} width={600} height={400} className="rounded-lg shadow-lg object-cover aspect-[4/3]" data-ai-hint={image.hint} />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </Carousel>
                 </div>
             </section>
 
@@ -362,5 +396,7 @@ export default function CasamentoDosSonhosPage() {
     );
 }
 
+
+    
 
     
