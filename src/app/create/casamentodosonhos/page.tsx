@@ -33,30 +33,28 @@ export default function CasamentoDosSonhosPage() {
         const today = new Date();
         setCurrentDate(today.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
-        setTimeLeft({ hours: 0, minutes: 15, seconds: 0 });
+        const targetTime = new Date();
+        targetTime.setMinutes(targetTime.getMinutes() + 15);
 
-        const timer = setInterval(() => {
-            setTimeLeft(prev => {
-                if (prev.hours === 0 && prev.minutes === 0 && prev.seconds === 0) {
-                    clearInterval(timer);
-                    return { hours: 0, minutes: 0, seconds: 0 };
-                }
+        const updateTimer = () => {
+            const now = new Date();
+            const difference = targetTime.getTime() - now.getTime();
 
-                let { hours, minutes, seconds } = prev;
-                
-                seconds--;
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                }
-                if (minutes < 0) {
-                    minutes = 59;
-                    hours--;
-                }
+            if (difference <= 0) {
+                setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+                clearInterval(timer);
+                return;
+            }
 
-                return { hours, minutes, seconds };
-            });
-        }, 1000);
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            setTimeLeft({ hours, minutes, seconds });
+        };
+        
+        const timer = setInterval(updateTimer, 1000);
+        updateTimer(); // Initial call to avoid 1s delay
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -357,7 +355,7 @@ export default function CasamentoDosSonhosPage() {
                                 <AlertDialogTitle className="text-center text-green-600 font-bold text-2xl">VOCÊ LIBEROU UM DESCONTO DE 30%!</AlertDialogTitle>
                                 <AlertDialogDescription className="text-center text-lg text-[#2A2F36]">
                                     Para levar o <strong className="font-bold">PLANO COMPLETO</strong> de <span className="line-through">R$37</span> por apenas: 
-                                    <p className="text-3xl font-bold text-[#C99B5C] my-2">R$25</p>
+                                    <div className="text-3xl font-bold text-[#C99B5C] my-2">R$25</div>
                                     ou 3x de R$8,82.
                                     <br/>
                                     <span className="font-bold">APROVEITE!</span> Você vai receber <strong className="font-bold">TODOS OS BÔNUS</strong>, atualizações e acesso <strong className="font-bold">VITALÍCIO</strong>. 👇
