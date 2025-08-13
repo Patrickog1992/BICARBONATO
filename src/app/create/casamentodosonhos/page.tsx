@@ -288,7 +288,7 @@ export default function CasamentoDosSonhosPage() {
             <section className="py-20 bg-[#FBF8F6]">
               <div className="container mx-auto px-6 max-w-4xl">
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-headline font-bold">O que está dentro do Método 3C</h2>
+                  <h2 className="text-3xl md:text-4xl font-headline font-bold">O que você vai aprender no Método 3C</h2>
                   <p className="mt-4 text-lg text-[#2A2F36]/80">Módulos práticos para um planejamento sem estresse.</p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8">
@@ -609,4 +609,3 @@ export default function CasamentoDosSonhosPage() {
     
 
     
-
