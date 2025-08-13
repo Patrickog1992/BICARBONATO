@@ -208,10 +208,18 @@ export default function CasamentoDosSonhosPage() {
             {/* Problem Section */}
             <section className="py-20 bg-[#FBF8F6]">
                 <div className="container mx-auto px-6 text-center max-w-3xl">
-                    <h2 className="text-3xl md:text-4xl font-headline font-bold">Está sem tempo, sem assessoria e com pouco dinheiro? Sei como é.</h2>
-                    <p className="mt-6 text-lg text-[#2A2F36]/80">
-                        Organizar um casamento pode ser um turbilhão de emoções: o sonho de um dia perfeito misturado ao pesadelo dos orçamentos que não fecham, fornecedores caros e a falta de uma orientação clara. A correria do dia a dia transforma o que deveria ser prazeroso em uma fonte de estresse.
-                    </p>
+                    <h2 className="text-3xl md:text-4xl font-headline font-bold">Como ter o casamento e a festa dos seus sonhos economizando?</h2>
+                    <div className="mt-6 text-lg text-[#2A2F36]/80 space-y-4">
+                        <p>Quais são os elementos realmente essenciais para um casamento?</p>
+                        <p>Como organizar tudo sem contratar assessoria?</p>
+                        <p>Como preparar cada detalhe mesmo com pouco tempo disponível?</p>
+                        <p className="mt-4 font-bold">Essas são dúvidas comuns e as respostas para elas podem fazer você economizar muito.</p>
+                        <p className="mt-4">Agora, imagine se eu disser que é possível realizar um casamento completo gastando menos de R$ 7 mil, sem perder qualidade em nenhum detalhe.</p>
+                        <p>O melhor é que você não precisa abrir mão de ter um vestido incrível, um cardápio delicioso para encantar os convidados ou registros fotográficos e em vídeo que eternizem o momento.</p>
+                        <p>Tudo o que você precisa é seguir um método criado por quem conhece profundamente os segredos e bastidores desse mercado.</p>
+                        <p>O sucesso de uma festa depende de vários fatores e de uma boa organização.</p>
+                        <p>E é exatamente aí que entra a nossa proposta: mostrar como você pode economizar e organizar tudo do zero de forma simples, prática e com resultados surpreendentes.</p>
+                    </div>
                 </div>
             </section>
             
@@ -540,6 +548,8 @@ export default function CasamentoDosSonhosPage() {
         </div>
     );
 }
+    
+
     
 
     
