@@ -248,6 +248,14 @@ export default function CasamentoDosSonhosPage() {
                 </div>
             </section>
 
+            <section className="py-20 bg-[#FBF8F6]">
+                <div className="container mx-auto px-6 text-center max-w-3xl space-y-4 text-lg text-[#2A2F36]/80">
+                    <p>Esse é exatamente o MESMO processo que eu e minhas noivinhas usamos para fazer casamentos dos sonhos por menos de 7K reais.</p>
+                    <p>Esse é um processo que apesar de ser muito valioso e secreto é MUITO SIMPLES de ser replicado.</p>
+                    <p>E ainda, você poderá fazer isso sem precisar de nenhum conhecimento na área de eventos.</p>
+                </div>
+            </section>
+
             {/* Method Section */}
             <section className="py-20 bg-[#F6E9E6]">
                 <div className="container mx-auto px-6 text-center">
