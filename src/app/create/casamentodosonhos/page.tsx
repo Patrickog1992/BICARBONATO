@@ -55,9 +55,8 @@ export default function CasamentoDosSonhosPage() {
         };
         
         const timer = setInterval(updateTimer, 1000);
-        updateTimer(); // Initial call to avoid 1s delay
+        updateTimer(); 
 
-        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -108,7 +107,7 @@ export default function CasamentoDosSonhosPage() {
     const totalBonusValue = bonuses.reduce((sum, bonus) => sum + bonus.value, 0);
 
     return (
-        <div className={`${poppins.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans`}>
+        <div className={`${poppins.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans overflow-x-hidden`}>
             {isClient && currentDate && (
                 <div className="bg-[#C99B5C] text-white text-center p-2 text-sm font-bold">
                     Hoje é {currentDate}, é o último dia para receber essa oferta
