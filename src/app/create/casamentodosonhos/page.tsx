@@ -44,19 +44,17 @@ const SalesPopup = () => {
       }, 5000); // Popup stays visible for 5 seconds
     };
 
-    const interval = setInterval(() => {
-      showRandomPopup();
-    }, 8000); // New popup appears every 8 seconds
-
-    return () => clearInterval(interval);
+    const intervalId = setInterval(showRandomPopup, 8000); // New popup appears every 8 seconds
+    
+    return () => clearInterval(intervalId);
   }, []);
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-16 duration-500">
+    <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-12 duration-500">
       <div className="bg-[#2A2F36] text-white rounded-lg p-2.5 shadow-lg max-w-[280px] border border-gray-700">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
             <div className="bg-[#C99B5C]/20 p-1.5 rounded-full">
                 <ShoppingCart className="h-4 w-4 text-[#C99B5C]" />
             </div>
@@ -93,7 +91,7 @@ export default function CasamentoDosSonhosPage() {
 
             if (difference <= 0) {
                 setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
-                clearInterval(timer);
+                // No need to clear interval here, it will be cleared on unmount
                 return;
             }
 
@@ -107,22 +105,31 @@ export default function CasamentoDosSonhosPage() {
         const timer = setInterval(updateTimer, 1000);
         updateTimer(); 
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                if (href) {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
+        const smoothScrollHandler = function (e: Event) {
+            e.preventDefault();
+            const anchor = e.currentTarget as HTMLAnchorElement;
+            const href = anchor.getAttribute('href');
+            if (href) {
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
-            });
+            }
+        };
+
+        const anchors = document.querySelectorAll('a[href^="#"]');
+        anchors.forEach(anchor => {
+            anchor.addEventListener('click', smoothScrollHandler);
         });
         
-        return () => clearInterval(timer);
+        return () => {
+            clearInterval(timer);
+            anchors.forEach(anchor => {
+                anchor.removeEventListener('click', smoothScrollHandler);
+            });
+        };
     }, []);
 
     const faqItems = [
@@ -165,7 +172,7 @@ export default function CasamentoDosSonhosPage() {
                 </div>
             )}
             {/* Hero Section */}
-            <section className="relative bg-[#F6E9E6] overflow-hidden">
+            <section className="relative bg-[#F6E9E6]">
                 <div className="container mx-auto px-6 py-20 text-center relative z-10">
                     <div className="flex justify-center mb-6">
                         <Image src="https://i.imgur.com/fUtlcSW.png" alt="Alianças" width={100} height={100} />
@@ -487,6 +494,47 @@ export default function CasamentoDosSonhosPage() {
               </div>
             </section>
             
+            <section className="py-20 bg-[#FBF8F6]">
+                <div className="container mx-auto px-6 max-w-3xl text-center space-y-6 text-[#2A2F36]/80">
+                    <h2 className="text-3xl font-bold font-headline text-[#2A2F36]">Não leu tudo? Vou Resumir para Você...</h2>
+                    <p>Se a ideia de fazer um casamento gastando menos de 7k reais é uma meta boa para você…</p>
+                    <p>Eu realmente acredito que adquirir esse manual é uma decisão inteligente.</p>
+                    <p>Não posso garantir que você vai alcançar esse resultado.</p>
+                    <p>Mas garanto que você terá acesso aos exatos segredos que eu e milhares de noivinhas seguiram para alcançar essa meta de economia.</p>
+                    <p>A proposta é simples e clara: Estou te apresentando uma oportunidade de poupar um valor expressivo no seu sonho aplicando as minhas estratégias e meu conhecimento em eventos.</p>
+                    <p>Estou falando de um modelo que você pode tranquilamente replicar, e ter o casamento que sempre sonhou gastando pouco.</p>
+                    <p>Estou falando de um manual que servirá como o seu guia oficial pra realizar esse sonho.</p>
+                    <p>Felizmente, adquirindo seu acesso hoje você garante 91% de desconto e + 5 bônus exclusivos.</p>
+                    <p>Pagamento único, sem pegadinhas e 7 dias de garantia.</p>
+                    <div className="pt-4">
+                        <a href="#planos">
+                            <Button size="lg" className="bg-[#C99B5C] text-white font-bold text-lg px-10 py-7">EU QUERO!</Button>
+                        </a>
+                    </div>
+
+                    <div className="pt-12 space-y-4">
+                        <h3 className="text-2xl font-bold font-headline text-[#2A2F36]">Legal... mas se é tão bom, por que está tão barato?</h3>
+                        <p>Ahhh, eu sei que isso passou pela sua cabeça.</p>
+                        <p>Se você prestar atenção, o valor de R$10 e R$37 não parece ser um valor aleatório para cobrar em um produto (e de fato não é).</p>
+                        <p><strong className='text-[#2A2F36]'>Razão número 01:</strong> O valor não se torna um obstáculo para ninguém.</p>
+                        <p><strong className='text-[#2A2F36]'>Razão número 02:</strong> Proteção contra curiosos.</p>
+                        <p>Mesmo que o investimento seja baixo, o simples fato de cobrar já afasta curiosos em busca de “soluções gratuitas” na internet.</p>
+                        <p>E quem gosta do produto, nos segue e nos acompanha nas redes sociais ajudando ainda mais no engajamento do nosso negócio.</p>
+                        <p>Sem pegadinhas, sem letras miúdas ou nada do tipo.</p>
+                    </div>
+
+                    <div className="pt-12 space-y-4">
+                        <h3 className="text-2xl font-bold font-headline text-[#2A2F36]">Em quanto tempo eu irei receber meu acesso?</h3>
+                        <p>Logo após a aprovação do seu pagamento, você irá receber no seu e-mail de compra os seus dados de acesso.</p>
+                        <h3 className="text-2xl font-bold font-headline text-[#2A2F36] pt-8">O pagamento é único?</h3>
+                        <h3 className="text-2xl font-bold font-headline text-[#2A2F36]">E se eu não gostar?</h3>
+                        <p>Sim! O pagamento é único (NÃO é mensal).</p>
+                        <p>Ah, se você não gostar dos conteúdos tem reembolso.</p>
+                        <p>Ou seja, você não corre nenhum risco.</p>
+                    </div>
+                </div>
+            </section>
+
             {/* Case Study Section */}
             <section className="py-20 bg-[#F6E9E6]">
                 <div className="container mx-auto px-6">
@@ -561,3 +609,4 @@ export default function CasamentoDosSonhosPage() {
     
 
     
+
