@@ -21,6 +21,56 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
+const SalesPopup = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [sale, setSale] = useState({ name: '', location: '' });
+
+  const salesData = [
+    { name: "Fernanda M.", location: "São Paulo, SP" },
+    { name: "Lucas R.", location: "Curitiba, PR" },
+    { name: "Mariana C.", location: "Rio de Janeiro, RJ" },
+    { name: "Rafael T.", location: "Salvador, BA" },
+    { name: "Beatriz A.", location: "Belo Horizonte, MG" },
+  ];
+
+  useEffect(() => {
+    const showRandomPopup = () => {
+      const randomSale = salesData[Math.floor(Math.random() * salesData.length)];
+      setSale(randomSale);
+      setIsVisible(true);
+
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 5000); // Popup stays visible for 5 seconds
+    };
+
+    const interval = setInterval(() => {
+      showRandomPopup();
+    }, 8000); // New popup appears every 8 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-16 duration-500">
+      <div className="bg-[#2A2F36] text-white rounded-lg p-3 shadow-lg max-w-xs border border-gray-700">
+        <div className="flex items-center gap-3">
+            <div className="bg-[#C99B5C]/20 p-2 rounded-full">
+                <ShoppingCart className="h-5 w-5 text-[#C99B5C]" />
+            </div>
+            <div>
+              <p className="font-bold text-sm text-white">{sale.name} de {sale.location}</p>
+              <p className="text-xs text-gray-300">acabou de garantir o acesso!</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 export default function CasamentoDosSonhosPage() {
     const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
     const [currentDate, setCurrentDate] = useState('');
@@ -108,6 +158,7 @@ export default function CasamentoDosSonhosPage() {
 
     return (
         <div className={`${poppins.variable} bg-[#FBF8F6] text-[#2A2F36] font-sans overflow-x-hidden`}>
+            <SalesPopup />
             {isClient && currentDate && (
                 <div className="bg-[#C99B5C] text-white text-center p-2 text-sm font-bold">
                     Hoje é {currentDate}, é o último dia para receber essa oferta
