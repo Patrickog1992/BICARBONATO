@@ -55,14 +55,14 @@ const SalesPopup = () => {
 
   return (
     <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-16 duration-500">
-      <div className="bg-[#2A2F36] text-white rounded-lg p-3 shadow-lg max-w-xs border border-gray-700">
-        <div className="flex items-center gap-3">
-            <div className="bg-[#C99B5C]/20 p-2 rounded-full">
-                <ShoppingCart className="h-5 w-5 text-[#C99B5C]" />
+      <div className="bg-[#2A2F36] text-white rounded-lg p-2.5 shadow-lg max-w-[280px] border border-gray-700">
+        <div className="flex items-center gap-2.5">
+            <div className="bg-[#C99B5C]/20 p-1.5 rounded-full">
+                <ShoppingCart className="h-4 w-4 text-[#C99B5C]" />
             </div>
             <div>
-              <p className="font-bold text-sm text-white">{sale.name} de {sale.location}</p>
-              <p className="text-xs text-gray-300">acabou de garantir o acesso!</p>
+              <p className="font-bold text-xs text-white">{sale.name} de {sale.location}</p>
+              <p className="text-[11px] text-gray-300">acabou de garantir o acesso!</p>
             </div>
         </div>
       </div>
@@ -540,4 +540,6 @@ export default function CasamentoDosSonhosPage() {
         </div>
     );
 }
+    
+
     
