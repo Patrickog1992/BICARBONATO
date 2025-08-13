@@ -168,10 +168,7 @@ export default function CasamentoDosSonhosPage() {
             <section className="relative bg-[#F6E9E6] overflow-hidden">
                 <div className="container mx-auto px-6 py-20 text-center relative z-10">
                     <div className="flex justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-16 text-[#C99B5C]">
-                          <path d="M15.8 8.7a5.3 5.3 0 1 0-8.6 0"/>
-                          <path d="M12.7 12.6a5.3 5.3 0 1 0-8.6 0"/>
-                        </svg>
+                        <Image src="https://i.imgur.com/fUtlcSW.png" alt="Alianças" width={100} height={100} />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-bold font-headline text-[#2A2F36] max-w-4xl mx-auto leading-tight">
                         Método 3C : O guia oficial para ter o casamento dos seus sonhos gastando até 7 mil reais
