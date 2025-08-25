@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} dark`} suppressHydrationWarning>
-      <body className="font-body antialiased min-h-screen">
+      <body>
         {children}
         <Toaster />
         <Script id="meta-pixel" strategy="afterInteractive">
@@ -48,3 +48,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+    

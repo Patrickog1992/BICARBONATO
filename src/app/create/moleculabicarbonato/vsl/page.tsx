@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ThumbsUp, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Script from 'next/script';
 
 export default function VSLPage() {
   const [currentDate, setCurrentDate] = useState('');
@@ -58,12 +59,13 @@ export default function VSLPage() {
             </h1>
         </div>
 
-        {/* VSL Video Placeholder */}
-        <div className="aspect-video bg-gray-100 mb-4 rounded-lg flex items-center justify-center border border-gray-200">
-          <p className="text-gray-500 text-lg">Seu vídeo VSL aqui</p>
-        </div>
+        <div id="vid_68ac96e7195a057df62e1153" style={{display: 'block', margin: '0 auto', width: '100%', maxWidth: '400px'}}/>
+        <Script 
+          src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68ac96e7195a057df62e1153/player.js" 
+          strategy="afterInteractive" 
+        />
 
-        <div className="text-center mb-12">
+        <div className="text-center my-8">
           <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
         </div>
         
@@ -105,3 +107,5 @@ export default function VSLPage() {
     </div>
   );
 }
+
+    
