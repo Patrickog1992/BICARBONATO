@@ -65,10 +65,6 @@ export default function VSLPage() {
           src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68ac96e7195a057df62e1153/player.js" 
           strategy="afterInteractive" 
         />
-
-        <div className="text-center my-8">
-          <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
-        </div>
         
         <div className="text-center my-10 animate-in fade-in duration-500">
             <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white font-bold text-xl px-10 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse">
@@ -76,6 +72,10 @@ export default function VSLPage() {
             </Button>
         </div>
 
+        <div className="text-center my-8">
+          <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
+        </div>
+        
         <div className="my-12 flex justify-center">
             <Image src="https://i.imgur.com/pc0IljQ.png" alt="Selo de garantia" width={500} height={100} data-ai-hint="guarantee seal" />
         </div>
