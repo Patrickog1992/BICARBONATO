@@ -58,7 +58,7 @@ export default function VSLPage() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
                 INCRÍVEL ! Ator da industria pornô revela :<br/>
                 O ingrediente caseiro secreto usado para aumentar em até 9 cm o tamanho do PÊNIS !
             </h1>
@@ -80,6 +80,10 @@ export default function VSLPage() {
                     <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} data-ai-hint={uni.hint} />
                 ))}
             </div>
+        </div>
+
+        <div className="my-12 flex justify-center">
+            <Image src="https://i.imgur.com/pc0IljQ.png" alt="Selo de garantia" width={500} height={100} data-ai-hint="guarantee seal" />
         </div>
 
 
