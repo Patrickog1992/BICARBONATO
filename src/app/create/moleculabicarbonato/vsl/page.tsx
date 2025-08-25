@@ -78,7 +78,7 @@ export default function VSLPage() {
             <h2 className="text-2xl font-bold mb-6 text-gray-900">Referências Científicas</h2>
             <div className="flex flex-wrap justify-center items-center gap-2 opacity-70">
                 {universities.map(uni => (
-                    <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} data-ai-hint={uni.hint} className="mx-4" />
+                    <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} data-ai-hint={uni.hint} />
                 ))}
             </div>
         </div>
@@ -120,5 +120,3 @@ export default function VSLPage() {
     </div>
   );
 }
-
-    
