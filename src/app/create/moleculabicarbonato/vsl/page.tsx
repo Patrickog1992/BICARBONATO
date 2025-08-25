@@ -34,10 +34,10 @@ export default function VSLPage() {
     { name: "Diego Silva", text: "Já fazia três anos que eu não conseguia levantar o mastro tentei de tudo gel massagem e nada funcionava. So esse metodo que conseguiu me salva só não use muito senão não tem quem faça descer o meninão!!", likes: 18, image: "https://i.imgur.com/fQsRwi9.png" },
     { name: "João paulo", text: "Valeu, vou testar também!", likes: 14, image: "https://i.imgur.com/vo1rj2z.png" },
     { name: "Otavio Neto", text: "Fazia tempo que estava procurando isso, sorte que achei de novo", likes: 5, image: "https://i.imgur.com/2LUcY7N.png" },
-    { name: "Eduardo Machado", text: "Quero agradecer a Rogério, que me mostrou esse método e me deixou duro de um jeito que nunca fiquei na vida, me sinto até um adolescente novamente!", likes: 1, image: "https://i.imgur.com/sn5RI1e.jpeg" },
-    { name: "José Carvalho", text: "eu sofria com a mesma coisa que vocês Minha esposa já tava pra me deixar Esse truque do bicarbonato foi minha única tentativa que deu certo, você vai ver como funciona.", likes: 152, image: "https://i.imgur.com/E1w9zPj.jpeg" },
-    { name: "José Antônio", text: "No início eu não acreditei, mas os resultados falam por si. Lutando com a disfunção e noites mal sucedidas, o tratamento foi o único que me deu alívio", likes: 2, image: "https://i.imgur.com/QfJtgio.jpeg" },
-    { name: "Fernando Luiz Almeida", text: "Pagaria até um milhão por esse tratamento se soubesse que ia me fazer tão bem assim", likes: 1, image: "https://i.imgur.com/cGzrRGs.jpeg" },
+    { name: "Eduardo Machado", text: "Quero agradecer a Rogério, que me mostrou esse método e me deixou duro de um jeito que nunca fiquei na vida, me sinto até um adolescente novamente!", likes: 1, image: "https://i.imgur.com/XhmOQQF.png" },
+    { name: "José Carvalho", text: "eu sofria com a mesma coisa que vocês Minha esposa já tava pra me deixar Esse truque do bicarbonato foi minha única tentativa que deu certo, você vai ver como funciona.", likes: 152, image: "https://i.imgur.com/hmBoEjU.png" },
+    { name: "José Antônio", text: "No início eu não acreditei, mas os resultados falam por si. Lutando com a disfunção e noites mal sucedidas, o tratamento foi o único que me deu alívio", likes: 2, image: "https://i.imgur.com/Os3Y3YP.png" },
+    { name: "Fernando Luiz Almeida", text: "Pagaria até um milhão por esse tratamento se soubesse que ia me fazer tão bem assim", likes: 1, image: "https://i.imgur.com/5fLYqMn.png" },
     { name: "Bento Silva", text: "Hoje eu finalmente parei de sofrer com aquela meia bomba e agora, eu não acordo mais envergonhado, mas sim com minha mulher querendo fogo!", likes: 56, image: "https://i.imgur.com/om1IUWv.jpeg" },
   ];
 
@@ -54,7 +54,7 @@ export default function VSLPage() {
         <div className="text-center mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
                 INCRÍVEL ! Ator da industria pornô revela :<br/>
-                <span className="text-blue-600">O ingrediente caseiro secreto</span> usado para <span className="text-blue-600">aumentar em até 9 cm o tamanho do PÊNIS !</span>
+                <span className="text-red-600">O ingrediente caseiro secreto</span> usado para <span className="text-red-600">aumentar em até 9 cm o tamanho do PÊNIS !</span>
             </h1>
         </div>
 
@@ -88,7 +88,7 @@ export default function VSLPage() {
                   <p className="font-bold text-blue-600">{comment.name}</p>
                   <p className="text-gray-700">{comment.text}</p>
                   <div className="flex items-center text-gray-500 text-sm mt-1">
-                    <ThumbsUp className="w-4 h-4 mr-1" />
+                    <ThumbsUp className="w-4 h-4 mr-1 text-blue-600" />
                     <span>{comment.likes}</span>
                   </div>
                 </div>
