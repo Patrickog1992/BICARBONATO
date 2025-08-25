@@ -23,7 +23,7 @@ export default function VSLPage() {
     
     const timer = setTimeout(() => {
         setIsButtonVisible(true);
-    }, 1411000); // 23 minutos e 31 segundos
+    }, 5000); // 5 segundos para teste
 
     return () => clearTimeout(timer);
   }, []);
@@ -67,15 +67,15 @@ export default function VSLPage() {
             </h1>
         </div>
 
-        <div id="vid_68ac96e7195a057df62e1153" style={{display: 'block', margin: '0 auto', width: '100%', maxWidth: '400px'}}/>
+        <div id="vid_68ac96e7195a057df62e1153" className="mx-auto w-full max-w-4xl aspect-video" />
         <Script 
           src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68ac96e7195a057df62e1153/player.js" 
           strategy="afterInteractive" 
         />
         
         {isButtonVisible && (
-            <div className="text-center my-10 animate-in fade-in duration-500">
-                <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white font-bold text-xl px-10 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse">
+            <div className="text-center my-10 animate-in fade-in duration-500 px-4">
+                <Button asChild size="lg" className="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-10 py-6 md:py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse">
                     <a href="https://pay.kirvano.com/3d84f476-5561-4bcc-a687-214eecfd547e">QUERO O LORDE DAS EREÇÕES POR R$ 147,00</a>
                 </Button>
             </div>
