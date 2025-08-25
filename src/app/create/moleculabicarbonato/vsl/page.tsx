@@ -48,26 +48,26 @@ export default function VSLPage() {
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans">
+    <div className="bg-white text-gray-800 min-h-screen font-sans">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-4">
           <p className="text-red-500 font-bold animate-pulse">1423 Pessoas estão assistindo à esse vídeo.</p>
-          <p className="text-gray-400">
+          <p className="text-gray-600">
             Devido a alta demanda de acessos, garantimos a apresentação somente até: <span className="font-bold">{currentDate}</span>
           </p>
         </div>
 
         {/* VSL Video Placeholder */}
-        <div className="aspect-video bg-gray-900 mb-4 rounded-lg flex items-center justify-center">
+        <div className="aspect-video bg-gray-100 mb-4 rounded-lg flex items-center justify-center border border-gray-200">
           <p className="text-gray-500 text-lg">Seu vídeo VSL aqui</p>
         </div>
 
         <div className="text-center mb-12">
-          <p className="text-yellow-400 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
+          <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
         </div>
         
         <div className="text-center my-12">
-            <h2 className="text-2xl font-bold mb-6">Referências Científicas</h2>
+            <h2 className="text-2xl font-bold mb-6 text-gray-900">Referências Científicas</h2>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-70">
                 {universities.map(uni => (
                     <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} data-ai-hint={uni.hint} />
@@ -77,17 +77,17 @@ export default function VSLPage() {
 
 
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-xl font-bold mb-4">448 comentários</h2>
-          <div className="border-t border-gray-700 mb-6"></div>
-          <p className="text-gray-400 mb-6">Exibindo os 23 mais relevantes</p>
+          <h2 className="text-xl font-bold mb-4 text-gray-900">448 comentários</h2>
+          <div className="border-t border-gray-200 mb-6"></div>
+          <p className="text-gray-500 mb-6">Exibindo os 23 mais relevantes</p>
 
           <div className="space-y-6">
             {comments.map((comment, index) => (
               <div key={index} className="flex items-start space-x-3">
-                <div className="w-10 h-10 rounded-full bg-gray-700 flex-shrink-0"></div>
+                <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0"></div>
                 <div className="flex-1">
-                  <p className="font-bold text-blue-400">{comment.name}</p>
-                  <p className="text-gray-300">{comment.text}</p>
+                  <p className="font-bold text-blue-600">{comment.name}</p>
+                  <p className="text-gray-700">{comment.text}</p>
                   <div className="flex items-center text-gray-500 text-sm mt-1">
                     <ThumbsUp className="w-4 h-4 mr-1" />
                     <span>{comment.likes}</span>
@@ -105,4 +105,3 @@ export default function VSLPage() {
     </div>
   );
 }
-
