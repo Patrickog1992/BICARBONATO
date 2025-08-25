@@ -42,10 +42,10 @@ export default function VSLPage() {
   ];
 
   const universities = [
-    { name: "Harvard", image: "https://placehold.co/150x50.png", hint: "harvard university logo" },
-    { name: "Stanford", image: "https://placehold.co/150x50.png", hint: "stanford university logo" },
-    { name: "Oxford", image: "https://placehold.co/150x50.png", hint: "oxford university logo" },
-    { name: "Cambridge", image: "https://placehold.co/150x50.png", hint: "cambridge university logo" },
+    { name: "Harvard", image: "https://i.imgur.com/g05iUDL.png", hint: "harvard university logo" },
+    { name: "Stanford", image: "https://i.imgur.com/0A21Vsc.png", hint: "stanford university logo" },
+    { name: "Oxford", image: "https://i.imgur.com/M435S4V.png", hint: "oxford university logo" },
+    { name: "Cambridge", image: "https://i.imgur.com/zN2sYyI.png", hint: "cambridge university logo" },
   ];
 
   return (
@@ -78,7 +78,7 @@ export default function VSLPage() {
             <h2 className="text-2xl font-bold mb-6 text-gray-900">Referências Científicas</h2>
             <div className="flex flex-wrap justify-center items-center gap-2 opacity-70">
                 {universities.map(uni => (
-                    <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} data-ai-hint={uni.hint} />
+                    <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} className="object-contain" data-ai-hint={uni.hint} />
                 ))}
             </div>
         </div>
