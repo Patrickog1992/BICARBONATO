@@ -87,15 +87,16 @@ export default function VSLPage() {
           <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
         </div>
         
+        <div className='my-8'>
+            <h2 className="text-lg font-bold text-center">Referências Científicas</h2>
+        </div>
+
         <div className="my-12 flex justify-center">
             <Image src="https://i.imgur.com/pc0IljQ.png" alt="Selo de garantia" width={500} height={100} data-ai-hint="guarantee seal" />
         </div>
 
 
         <div className="max-w-2xl mx-auto">
-          <div className='my-8'>
-            <h2 className="text-lg font-bold text-center">Referências Científicas</h2>
-          </div>
           <h2 className="text-xl font-bold mb-4 text-gray-900">448 comentários</h2>
           <div className="border-t border-gray-200 mb-6"></div>
           <p className="text-gray-500 mb-6">Exibindo os 23 mais relevantes</p>
