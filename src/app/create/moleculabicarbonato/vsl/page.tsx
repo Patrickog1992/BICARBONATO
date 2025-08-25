@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ThumbsUp, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Script from 'next/script';
+import { Button } from '@/components/ui/button';
 
 export default function VSLPage() {
   const [currentDate, setCurrentDate] = useState('');
@@ -69,6 +70,12 @@ export default function VSLPage() {
           <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
         </div>
         
+        <div className="text-center my-10 animate-in fade-in duration-500">
+            <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white font-bold text-xl px-10 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse">
+                <a href="#">QUERO O LORDE DAS EREÇÕES POR R$ 147,00</a>
+            </Button>
+        </div>
+
         <div className="my-12 flex justify-center">
             <Image src="https://i.imgur.com/pc0IljQ.png" alt="Selo de garantia" width={500} height={100} data-ai-hint="guarantee seal" />
         </div>
@@ -107,5 +114,3 @@ export default function VSLPage() {
     </div>
   );
 }
-
-    
