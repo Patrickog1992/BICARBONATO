@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ThumbsUp } from 'lucide-react';
+import { ThumbsUp, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function VSLPage() {
@@ -89,6 +89,7 @@ export default function VSLPage() {
                   <p className="text-gray-700">{comment.text}</p>
                   <div className="flex items-center text-gray-500 text-sm mt-1">
                     <ThumbsUp className="w-4 h-4 mr-1 text-blue-600" />
+                    <Heart className="w-4 h-4 mr-1 text-red-600 fill-current" />
                     <span>{comment.likes}</span>
                   </div>
                 </div>
