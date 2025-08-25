@@ -93,6 +93,9 @@ export default function VSLPage() {
 
 
         <div className="max-w-2xl mx-auto">
+          <div className='my-8'>
+            <h2 className="text-lg font-bold text-center">Referências Científicas</h2>
+          </div>
           <h2 className="text-xl font-bold mb-4 text-gray-900">448 comentários</h2>
           <div className="border-t border-gray-200 mb-6"></div>
           <p className="text-gray-500 mb-6">Exibindo os 23 mais relevantes</p>
@@ -125,5 +128,3 @@ export default function VSLPage() {
     </div>
   );
 }
-
-    
