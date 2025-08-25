@@ -41,13 +41,6 @@ export default function VSLPage() {
     { name: "Bento Silva", text: "Hoje eu finalmente parei de sofrer com aquela meia bomba e agora, eu não acordo mais envergonhado, mas sim com minha mulher querendo fogo!", likes: 56, image: "https://i.imgur.com/om1IUWv.jpeg" },
   ];
 
-  const universities = [
-    { name: "Harvard", image: "https://i.imgur.com/g05iUDL.png", hint: "harvard university logo" },
-    { name: "Stanford", image: "https://i.imgur.com/0A21Vsc.png", hint: "stanford university logo" },
-    { name: "Oxford", image: "https://i.imgur.com/M435S4V.png", hint: "oxford university logo" },
-    { name: "Cambridge", image: "https://i.imgur.com/zN2sYyI.png", hint: "cambridge university logo" },
-  ];
-
   return (
     <div className="bg-white text-gray-800 min-h-screen font-sans">
       <div className="bg-red-600 text-white text-center p-2">
@@ -74,15 +67,6 @@ export default function VSLPage() {
           <p className="text-blue-600 text-lg font-semibold">Por favor, verifique se o som está ligado.</p>
         </div>
         
-        <div className="text-center my-12">
-            <h2 className="text-2xl font-bold mb-6 text-gray-900">Referências Científicas</h2>
-            <div className="flex flex-wrap justify-center items-center gap-2 opacity-70">
-                {universities.map(uni => (
-                    <Image key={uni.name} src={uni.image} alt={`${uni.name} Logo`} width={150} height={50} className="object-contain" data-ai-hint={uni.hint} />
-                ))}
-            </div>
-        </div>
-
         <div className="my-12 flex justify-center">
             <Image src="https://i.imgur.com/pc0IljQ.png" alt="Selo de garantia" width={500} height={100} data-ai-hint="guarantee seal" />
         </div>
