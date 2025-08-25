@@ -23,7 +23,7 @@ export default function VSLPage() {
     
     const timer = setTimeout(() => {
         setIsButtonVisible(true);
-    }, 5000); // 5 segundos para teste
+    }, 1411000); // 23 minutos e 31 segundos
 
     return () => clearTimeout(timer);
   }, []);
@@ -129,3 +129,5 @@ export default function VSLPage() {
     </div>
   );
 }
+
+    
