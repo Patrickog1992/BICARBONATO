@@ -54,7 +54,7 @@ export default function VSLPage() {
         <div className="text-center mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
                 INCRÍVEL ! Ator da industria pornô revela :<br/>
-                O ingrediente caseiro secreto usado para aumentar em até 9 cm o tamanho do PÊNIS !
+                <span className="text-blue-600">O ingrediente caseiro secreto</span> usado para <span className="text-blue-600">aumentar em até 9 cm o tamanho do PÊNIS !</span>
             </h1>
         </div>
 
