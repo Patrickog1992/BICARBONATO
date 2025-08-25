@@ -49,14 +49,14 @@ export default function VSLPage() {
 
   return (
     <div className="bg-white text-gray-800 min-h-screen font-sans">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-4">
-          <p className="text-red-500 font-bold animate-pulse">1423 Pessoas estão assistindo à esse vídeo.</p>
-          <p className="text-gray-600">
-            Devido a alta demanda de acessos, garantimos a apresentação somente até: <span className="font-bold">{currentDate}</span>
-          </p>
-        </div>
+      <div className="bg-red-600 text-white text-center p-2 mb-4">
+        <p className="font-bold animate-pulse">1423 Pessoas estão assistindo à esse vídeo.</p>
+        <p>
+          Devido a alta demanda de acessos, garantimos a apresentação somente até: <span className="font-bold">{currentDate}</span>
+        </p>
+      </div>
 
+      <div className="container mx-auto px-4 py-8">
         {/* VSL Video Placeholder */}
         <div className="aspect-video bg-gray-100 mb-4 rounded-lg flex items-center justify-center border border-gray-200">
           <p className="text-gray-500 text-lg">Seu vídeo VSL aqui</p>
