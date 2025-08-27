@@ -46,7 +46,7 @@ export default function VSLChaveDoCoracaoPage() {
                   dangerouslySetInnerHTML={{
                     __html: `
                       var s=document.createElement("script");
-                      s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                      s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js?autoplay=1";
                       s.async=true;
                       document.head.appendChild(s);
                     `
