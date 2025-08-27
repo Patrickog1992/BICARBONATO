@@ -186,11 +186,11 @@ export default function ChaveDoCoracaoQuizPage() {
         <h2 className="text-2xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
 
         {step.type === 'image' && (
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+          <div className="grid grid-cols-2 justify-center items-start gap-4">
             {step.options.map((opt, index) => (
               <div key={index} className="flex flex-col items-center gap-4">
-                <Image src={opt.image || ''} alt={opt.text} width={150} height={150} className="rounded-lg" />
-                <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 text-lg w-full">
+                <Image src={opt.image || ''} alt={opt.text} width={120} height={120} className="rounded-lg" />
+                <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-base w-full max-w-[120px]">
                   {opt.text}
                 </Button>
               </div>
