@@ -39,18 +39,10 @@ export default function VSLChaveDoCoracaoPage() {
             </h1>
             
             <div className="max-w-2xl mx-auto my-8">
-                <div id="vid-68af21bd6a9a5bd9908ea953"></div>
-                <Script
-                    id="vturb-player-script"
+                <div id="vid_68af21bd6a9a5bd9908ea953"></div>
+                 <Script
                     strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                    __html: `
-                        var s=document.createElement("script"); 
-                        s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
-                        s.async=true;
-                        document.head.appendChild(s);
-                    `,
-                    }}
+                    src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js"
                 />
             </div>
             
