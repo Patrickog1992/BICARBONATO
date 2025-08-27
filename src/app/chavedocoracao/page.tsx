@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -9,7 +9,8 @@ import { Progress } from '@/components/ui/progress';
 
 const quizSteps = [
   {
-    title: 'DEIXE QUALQUER PESSOA AOS SEUS PÉS, EM MENOS DE 7 DIAS',
+    title: 'DEIXE QUALQUER PESSOA AOS SEUS PÉS, ',
+    highlight: 'EM MENOS DE 7 DIAS',
     question: 'QUAL SEU SEXO?',
     options: [
       { text: 'MULHER', image: 'https://i.imgur.com/HVbHMfJ.png' },
@@ -167,18 +168,27 @@ export default function ChaveDoCoracaoQuizPage() {
   }
 
   const step = quizSteps[currentStep];
+  const progressPercentage = ((currentStep + 1) / quizSteps.length) * 100;
 
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center justify-center text-white p-6 font-sans">
-      <div className="text-center max-w-4xl mx-auto">
-        {step.title && <h1 className="text-3xl md:text-4xl font-bold mb-4">{step.title}</h1>}
+    <div className="bg-black min-h-screen flex flex-col items-center justify-start text-white p-6 font-sans">
+        <div className="w-full max-w-4xl px-4 py-2">
+            <Progress value={progressPercentage} className="h-2 bg-gray-700 [&>div]:bg-red-600" />
+        </div>
+      <div className="text-center max-w-4xl mx-auto mt-8">
+        {step.title && 
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                {step.title}
+                {step.highlight && <span className="text-red-600">{step.highlight}</span>}
+            </h1>
+        }
         <h2 className="text-2xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
 
         {step.type === 'image' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
             {step.options.map((opt, index) => (
               <div key={index} className="flex flex-col items-center gap-4">
-                <Image src={opt.image || ''} alt={opt.text} width={400} height={400} className="rounded-lg" />
+                <Image src={opt.image || ''} alt={opt.text} width={250} height={250} className="rounded-lg" />
                 <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-12 text-lg w-full">
                   {opt.text}
                 </Button>
@@ -208,6 +218,11 @@ export default function ChaveDoCoracaoQuizPage() {
             </div>
         )}
       </div>
+      <footer className="mt-auto pt-20 pb-4 text-center text-gray-500 text-sm">
+        <p>As 7 chaves do coração todos os direitos reservados 2025</p>
+      </footer>
     </div>
   );
 }
+
+    
