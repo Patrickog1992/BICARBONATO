@@ -29,53 +29,51 @@ export default function VSLChaveDoCoracaoPage() {
 
   return (
     <div className="bg-black min-h-screen text-white font-sans">
-      <div className="p-6">
-        <div className="text-center max-w-4xl mx-auto">
-            <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold my-8">
-                <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-8">
-                FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
-            </h1>
-            
-            <div className="max-w-[800px] mx-auto my-8">
-                <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
-                <Script id="vturb-player-script">
-                  {`
-                    var s=document.createElement("script");
-                    s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
-                    s.async=true;
-                    document.head.appendChild(s);
-                  `}
-                </Script>
-            </div>
-            
-            <div className="max-w-2xl mx-auto text-left mt-12">
-              <h2 className="text-xl font-bold mb-4 text-white">Comentários</h2>
-              <div className="border-t border-neutral-700 mb-6"></div>
+      <div className="text-center mx-auto">
+        <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold my-8">
+            <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
+        </div>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">
+            FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
+        </h1>
+        
+        <div className="max-w-[800px] mx-auto my-8">
+            <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
+            <Script id="vturb-player-script">
+              {`
+                var s=document.createElement("script");
+                s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                s.async=true;
+                document.head.appendChild(s);
+              `}
+            </Script>
+        </div>
+        
+        <div className="max-w-2xl mx-auto text-left mt-12 px-6">
+          <h2 className="text-xl font-bold mb-4 text-white">Comentários</h2>
+          <div className="border-t border-neutral-700 mb-6"></div>
 
-              <div className="space-y-6">
-                {comments.map((comment, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                     <Avatar>
-                        <AvatarImage src={comment.image} alt={comment.name} />
-                        <AvatarFallback>{comment.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <p className="font-bold text-red-500">{comment.name}</p>
-                      <p className="text-neutral-300">{comment.text}</p>
-                      <div className="flex items-center text-neutral-500 text-sm mt-1">
-                        <ThumbsUp className="w-4 h-4 mr-1 text-blue-500" />
-                        <Heart className="w-4 h-4 mr-1 text-red-500 fill-current" />
-                        <span>{comment.likes}</span>
-                      </div>
-                    </div>
+          <div className="space-y-6">
+            {comments.map((comment, index) => (
+              <div key={index} className="flex items-start space-x-3">
+                 <Avatar>
+                    <AvatarImage src={comment.image} alt={comment.name} />
+                    <AvatarFallback>{comment.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <p className="font-bold text-red-500">{comment.name}</p>
+                  <p className="text-neutral-300">{comment.text}</p>
+                  <div className="flex items-center text-neutral-500 text-sm mt-1">
+                    <ThumbsUp className="w-4 h-4 mr-1 text-blue-500" />
+                    <Heart className="w-4 h-4 mr-1 text-red-500 fill-current" />
+                    <span>{comment.likes}</span>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
+      </div>
     </div>
   );
 }
