@@ -175,7 +175,8 @@ export default function ChaveDoCoracaoQuizPage() {
         <div className="w-full max-w-4xl px-4 py-2">
             <Progress value={progressPercentage} className="h-2 bg-gray-700 [&>div]:bg-red-600" />
         </div>
-      <div className="text-center max-w-4xl mx-auto mt-8">
+        <Image src="https://i.imgur.com/9Urc5Rq.png" alt="Chave do Coração" width={100} height={100} className="my-6" />
+      <div className="text-center max-w-4xl mx-auto">
         {step.title && 
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
                 {step.title}
@@ -185,11 +186,11 @@ export default function ChaveDoCoracaoQuizPage() {
         <h2 className="text-2xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
 
         {step.type === 'image' && (
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
             {step.options.map((opt, index) => (
               <div key={index} className="flex flex-col items-center gap-4">
-                <Image src={opt.image || ''} alt={opt.text} width={250} height={250} className="rounded-lg" />
-                <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-12 text-lg w-full">
+                <Image src={opt.image || ''} alt={opt.text} width={150} height={150} className="rounded-lg" />
+                <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 text-lg w-full">
                   {opt.text}
                 </Button>
               </div>
@@ -224,5 +225,3 @@ export default function ChaveDoCoracaoQuizPage() {
     </div>
   );
 }
-
-    
