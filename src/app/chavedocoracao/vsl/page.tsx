@@ -39,7 +39,7 @@ export default function VSLChaveDoCoracaoPage() {
             </h1>
             
             <div className="max-w-2xl mx-auto my-8">
-                <div id="vid_68af21bd6a9a5bd9908ea953"></div>
+                <vturb-smartplayer id="vid_68af21bd6a9a5bd9908ea953"></vturb-smartplayer>
                  <Script
                     strategy="afterInteractive"
                     src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js"
