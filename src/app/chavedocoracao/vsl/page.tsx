@@ -29,24 +29,26 @@ export default function VSLChaveDoCoracaoPage() {
 
   return (
     <div className="bg-black min-h-screen text-white font-sans">
-      <div className="text-center mx-auto">
-        <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold my-8">
-            <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">
-            FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
-        </h1>
-        
-        <div className="max-w-[800px] mx-auto my-8">
-            <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
-            <Script id="vturb-player-script">
-              {`
-                var s=document.createElement("script");
-                s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
-                s.async=true;
-                document.head.appendChild(s);
-              `}
-            </Script>
+      <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
+          <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
+      </div>
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center max-w-[800px] mx-auto">
+            <h1 className="text-3xl md:text-4xl font-bold mb-8">
+                FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
+            </h1>
+            
+            <div className="my-8">
+                <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
+                <Script id="vturb-player-script">
+                  {`
+                    var s=document.createElement("script");
+                    s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                    s.async=true;
+                    document.head.appendChild(s);
+                  `}
+                </Script>
+            </div>
         </div>
         
         <div className="max-w-2xl mx-auto text-left mt-12 px-6">
