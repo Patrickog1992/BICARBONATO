@@ -29,12 +29,12 @@ export default function VSLChaveDoCoracaoPage() {
 
   return (
     <div className="bg-black min-h-screen text-white font-sans">
-      <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
-          <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
-      </div>
       <div className="p-6">
         <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold my-8">
+            <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold my-8">
+                <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-8">
                 FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
             </h1>
             
