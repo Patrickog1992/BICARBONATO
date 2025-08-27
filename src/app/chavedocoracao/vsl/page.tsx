@@ -4,6 +4,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThumbsUp, Heart } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Script from 'next/script';
 
 export default function VSLChaveDoCoracaoPage() {
     const [currentDate, setCurrentDate] = useState('');
@@ -37,9 +38,21 @@ export default function VSLChaveDoCoracaoPage() {
                 FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
             </h1>
             
-            <div className="aspect-video bg-neutral-800 rounded-lg mb-12 flex items-center justify-center">
-                <p className="text-neutral-400">Seu vídeo (VSL) aparecerá aqui</p>
+            <div className="aspect-video mb-12">
+                <div id="vid_68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}} />
             </div>
+            <Script 
+              id="vturb-player-script"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  var s=document.createElement("script");
+                  s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                  s.async=true;
+                  document.head.appendChild(s);
+                `
+              }}
+            />
 
             <div className="max-w-2xl mx-auto text-left">
               <h2 className="text-xl font-bold mb-4 text-white">Comentários</h2>
