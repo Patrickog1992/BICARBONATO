@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThumbsUp, Heart } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
+import { Button } from '@/components/ui/button';
 
 export default function VSLChaveDoCoracaoPage() {
     const [currentDate, setCurrentDate] = useState('');
@@ -29,12 +30,12 @@ export default function VSLChaveDoCoracaoPage() {
 
   return (
     <div className="bg-black min-h-screen text-white font-sans">
-      <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
-          <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
-      </div>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4">
         <div className="text-center max-w-[800px] mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-8">
+            <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
+                <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold my-8">
                 FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
             </h1>
             
@@ -48,6 +49,12 @@ export default function VSLChaveDoCoracaoPage() {
                     document.head.appendChild(s);
                   `}
                 </Script>
+            </div>
+
+            <div className="my-10 animate-in fade-in duration-500 px-4">
+                <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong">
+                    QUERO FAZER A CORRENTE
+                </Button>
             </div>
         </div>
         
