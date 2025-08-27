@@ -10,6 +10,7 @@ import Link from 'next/link';
 
 export default function VSLChaveDoCoracaoPage() {
     const [currentDate, setCurrentDate] = useState('');
+    const [isButtonVisible, setIsButtonVisible] = useState(false);
 
     useEffect(() => {
         const today = new Date();
@@ -19,6 +20,12 @@ export default function VSLChaveDoCoracaoPage() {
             year: 'numeric',
         });
         setCurrentDate(formattedDate);
+
+        const timer = setTimeout(() => {
+            setIsButtonVisible(true);
+        }, 598000); // 9 minutes and 58 seconds
+
+        return () => clearTimeout(timer);
     }, []);
 
     const comments = [
@@ -52,11 +59,13 @@ export default function VSLChaveDoCoracaoPage() {
                 </Script>
             </div>
 
-            <div className="my-10 animate-in fade-in duration-500 px-4">
-                <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong" asChild>
-                    <Link href="https://pay.kirvano.com/04c3098d-157a-43a1-a11d-b30ec7e1ae3d">QUERO FAZER A CORRENTE</Link>
-                </Button>
-            </div>
+            {isButtonVisible && (
+              <div className="my-10 animate-in fade-in duration-500 px-4">
+                  <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong" asChild>
+                      <Link href="https://pay.kirvano.com/04c3098d-157a-43a1-a11d-b30ec7e1ae3d">QUERO FAZER A CORRENTE</Link>
+                  </Button>
+              </div>
+            )}
         </div>
         
         <div className="max-w-2xl mx-auto text-left mt-12 px-6">
