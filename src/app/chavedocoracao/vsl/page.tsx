@@ -39,7 +39,7 @@ export default function VSLChaveDoCoracaoPage() {
             </h1>
             
             <div className="aspect-video mb-12">
-                <div id="vid_68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}} />
+                <div id="vid_68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></div>
                 <Script 
                   id="vturb-player-script"
                   strategy="afterInteractive"
