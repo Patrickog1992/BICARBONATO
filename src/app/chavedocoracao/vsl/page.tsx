@@ -6,6 +6,7 @@ import { ThumbsUp, Heart } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function VSLChaveDoCoracaoPage() {
     const [currentDate, setCurrentDate] = useState('');
@@ -41,7 +42,7 @@ export default function VSLChaveDoCoracaoPage() {
             
             <div className="my-8">
                 <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
-                <Script id="vturb-player-script">
+                <Script id="vturb-player-script" strategy="afterInteractive">
                   {`
                     var s=document.createElement("script");
                     s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
@@ -52,8 +53,8 @@ export default function VSLChaveDoCoracaoPage() {
             </div>
 
             <div className="my-10 animate-in fade-in duration-500 px-4">
-                <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong">
-                    QUERO FAZER A CORRENTE
+                <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong" asChild>
+                    <Link href="https://pay.kirvano.com/04c3098d-157a-43a1-a11d-b30ec7e1ae3d">QUERO FAZER A CORRENTE</Link>
                 </Button>
             </div>
         </div>
