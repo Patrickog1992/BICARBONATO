@@ -23,7 +23,7 @@ export default function VSLChaveDoCoracaoPage() {
 
         const timer = setTimeout(() => {
             setIsButtonVisible(true);
-        }, 5000); // 5 seconds
+        }, 598000); // 9 minutes and 58 seconds
 
         return () => clearTimeout(timer);
     }, []);
