@@ -29,7 +29,7 @@ export default function VSLChaveDoCoracaoPage() {
   return (
     <div className="bg-black min-h-screen text-white font-sans">
       <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
-          <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: {currentDate}</p>
+          <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
       </div>
       <div className="p-6">
         <div className="text-center max-w-4xl mx-auto">
