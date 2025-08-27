@@ -1,208 +1,213 @@
 
 'use client';
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
-import { Heart, Key, Star, ShieldCheck, Truck, Gift, ShoppingCart } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Progress } from '@/components/ui/progress';
 
-export default function ChaveDoCoracaoPage() {
-    const checkoutUrl = "https://pay.kirvano.com/dbe23b9f-7023-42b4-82a1-1254a64b38d3";
+const quizSteps = [
+  {
+    title: 'DEIXE QUALQUER PESSOA AOS SEUS PÉS, EM MENOS DE 7 DIAS',
+    question: 'QUAL SEU SEXO?',
+    options: [
+      { text: 'MULHER', image: 'https://i.imgur.com/HVbHMfJ.png' },
+      { text: 'HOMEM', image: 'https://i.imgur.com/qrr0DWy.png' },
+    ],
+    type: 'image',
+  },
+  {
+    question: 'QUAL SEXO DO SEU PRETENDENTE?',
+    options: [
+        { text: 'MULHER', image: 'https://i.imgur.com/HVbHMfJ.png' },
+        { text: 'HOMEM', image: 'https://i.imgur.com/qrr0DWy.png' },
+    ],
+    type: 'image',
+  },
+  {
+    question: 'O QUE VOCÊ DESEJA ALCANÇAR COM A CORRENTE?',
+    image: 'https://i.imgur.com/Dn2RvTp.jpeg',
+    options: ['REATAR UM RELACIONAMENTO', 'CONQUISTAR UM NOVO AMOR'],
+    type: 'text',
+  },
+  {
+    question: 'COMO ESSA PESSOA SE ENCONTRA HOJE?',
+    image: 'https://i.imgur.com/mxu9rjT.jpeg',
+    options: ['CASADA', 'NAMORANDO', 'SOLTEIRA', 'NÃO SEI'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊS MANTÉM CONTATO?',
+    image: 'https://i.imgur.com/KXB8MlZ.jpeg',
+    options: ['SIM', 'NÃO', 'AS VEZES'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊ ACHA QUE ESSA PESSOA AINDA TE AMA?',
+    image: 'https://i.imgur.com/EhESUOK.jpeg',
+    options: ['SIM', 'NÃO', 'TENHO DUVIDAS'],
+    type: 'text',
+  },
+  {
+    question: 'DE 0 A 10 QUANTO ESSA PESSOA É IMPORTANTE PARA VOCÊ?',
+    image: 'https://i.imgur.com/s1V9qrP.jpeg',
+    options: ['DE 0 A 3', 'DE 4 A 7', 'DE 8 A 9', '10'],
+    type: 'text',
+  },
+  {
+    question: 'DE 0 A 10 QUAL SEU AMOR POR ESSA PESSOA?',
+    image: 'https://i.imgur.com/YG01vJx.jpeg',
+    options: ['DE 0 A 3', 'DE 4 A 7', 'DE 8 A 9', '10'],
+    type: 'text',
+  },
+  {
+    question: 'EM ALGUM MOMENTO VOCÊ JA DISSE QUE AMA ESSA PESSOA?',
+    image: 'https://i.imgur.com/Vx1AAHY.jpeg',
+    options: ['SIM', 'NÃO', 'VARIAS VEZES'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊ JA BUSCOU AJUDA ESPIRITUAL PARA TER ESSA PESSOA?',
+    image: 'https://i.imgur.com/4yTnx30.jpeg',
+    options: ['SIM, UM PAI DE SANTO', 'SIM, UM TARÓLOGO', 'SIM, UM PASTOR', 'NÃO, NUNCA BUSQUEI'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊ JA FEZ ALGUM TRABALHO ESPIRITUAL?',
+    image: 'https://i.imgur.com/N0VtXHi.jpeg',
+    options: ['SIM, AMARRAÇÃO', 'SIM, REZAS', 'SIM, ORAÇÔES', 'NÃO, NUNCA FIZ'],
+    type: 'text',
+  },
+  {
+    question: 'AGORA VAMOS ANALISAR SEU NÍVEL DE FÉ, PARA LIBERAR SEU ACESSO A CORRENTE!',
+    options: ['CONTINUAR'],
+    type: 'text-only-button',
+  },
+  {
+    question: 'VOCÊ TEM FÉ, QUE ESSA CORRENTE ESPIRITUAL PODE DEIXAR SEU PRETENDENTE LOUCO DE AMOR POR VOCÊ?',
+    image: 'https://i.imgur.com/OHjsJZN.png',
+    options: ['SIM', 'NÃO'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊ TEM FÉ, QUE AO FAZER A CORRENTE SEU PRETENDENTE VAI TE PROCURAR DENTRO DE 7 DIAS?',
+    image: 'https://i.imgur.com/5YLq0t9.jpeg',
+    options: ['SIM', 'NÃO'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊ TEM FÉ, QUE AS FORÇAS ESPIRITUAIS PODEM AFASTAR TODO MAL DA SUA VIDA AMOROSA?',
+    image: 'https://i.imgur.com/FSdoBBX.jpeg',
+    options: ['SIM', 'NÃO'],
+    type: 'text',
+  },
+  {
+    question: 'VOCÊ DESCONFIA QUE FOI FEITO ALGUM TRABALHO DE MAGIA NEGRA PARA VOCÊ?',
+    image: 'https://i.imgur.com/XV6zyHr.jpeg',
+    options: ['SIM', 'NÃO'],
+    type: 'text',
+  },
+  {
+    question: 'RESPONDA COM SINCERIDADE, SE LIBERARMOS O ACESSO A CORRENTE DO AMOR, VOCÊ PROMETE FAZER AS REZAS TODOS OS 7 DIAS?',
+    image: 'https://i.imgur.com/yMFAL1A.jpeg',
+    options: ['SIM', 'NÃO'],
+    type: 'text',
+  },
+];
 
-    const testimonials = [
-        { name: "Juliana R.", text: "Dei de presente para o meu namorado e ele amou! O colar é ainda mais bonito pessoalmente. A caixinha com a mensagem é um toque muito especial. Super recomendo!", image: "https://i.imgur.com/kKzKmA0.png" },
-        { name: "Marcos T.", text: "Comprei para minha esposa e ela ficou muito emocionada. A qualidade é excelente e a entrega foi super rápida. Virou o amuleto da sorte dela.", image: "https://i.imgur.com/SVV6zrv.png" },
-        { name: "Fernanda L.", text: "Perfeito! Estava procurando um presente único e encontrei. O brilho do colar é incrível e o significado é lindo. Cinco estrelas!", image: "https://i.imgur.com/VhoVk3r.png" },
-    ];
+const LoadingScreen = () => {
+    const [progress, setProgress] = useState(0);
+    const router = useRouter();
 
-    const faqItems = [
-        { question: "Qual é o material do colar?", answer: "O colar é feito de aço inoxidável de alta qualidade, banhado a ouro 18k, garantindo que não escureça, não enferruje e seja hipoalergênico." },
-        { question: "O colar vem com a caixa da foto?", answer: "Sim! O colar acompanha uma caixa de presente exclusiva com a mensagem 'A Chave do Meu Coração', exatamente como mostrado nas imagens." },
-        { question: "Qual o prazo de entrega?", answer: "O prazo de entrega varia de 3 a 7 dias úteis, dependendo da sua localização. Você receberá um código de rastreio para acompanhar seu pedido." },
-        { question: "Tenho garantia?", answer: "Com certeza! Oferecemos uma garantia de 7 dias para devolução por qualquer motivo e 30 dias contra defeitos de fabricação." },
-    ];
+    useEffect(() => {
+        const timer = setInterval(() => {
+        setProgress((prev) => {
+            if (prev >= 100) {
+            clearInterval(timer);
+            router.push('/chavedocoracao/vsl');
+            return 100;
+            }
+            return prev + 5;
+        });
+        }, 150);
 
-    const StarRating = ({ rating }: { rating: number }) => (
-        <div className="flex gap-0.5 text-yellow-400">
-            {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className={`h-5 w-5 ${i < rating ? 'fill-current' : 'text-gray-400'}`} />
-            ))}
-        </div>
-    );
+        return () => {
+        clearInterval(timer);
+        };
+    }, [router]);
 
     return (
-        <div className="bg-[#1C1C1C] text-white font-sans">
-            <style jsx global>{`
-                .text-shadow-gold {
-                    text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
-                }
-                .animate-pulse-slow {
-                    animation: pulse-slow 2.5s infinite ease-in-out;
-                }
-                @keyframes pulse-slow {
-                    0%, 100% {
-                        transform: scale(1);
-                        box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-                    }
-                    50% {
-                        transform: scale(1.05);
-                        box-shadow: 0 0 35px rgba(212, 175, 55, 0.7);
-                    }
-                }
-            `}</style>
-            
-            <header className="bg-black/50 backdrop-blur-sm sticky top-0 z-50">
-                <div className="container mx-auto px-6 py-4 text-center">
-                    <h2 className="text-xl font-bold text-[#D4AF37] tracking-widest">CHAVE DO CORAÇÃO</h2>
-                </div>
-            </header>
-
-            <main>
-                {/* Hero Section */}
-                <section className="relative text-center py-20 px-6 overflow-hidden bg-gradient-to-b from-[#1C1C1C] to-[#282828]">
-                    <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-                    <div className="container mx-auto max-w-3xl relative z-10">
-                        <h1 className="text-4xl md:text-6xl font-extrabold text-shadow-gold text-white leading-tight">
-                            A Chave que Abre o Coração do seu Amor
-                        </h1>
-                        <p className="mt-6 text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto">
-                            O presente perfeito para simbolizar sua conexão única. Um colar elegante que guarda o segredo do seu amor.
-                        </p>
-                        <div className="my-10">
-                            <Image 
-                                src="https://i.imgur.com/kS9l5gQ.png" 
-                                alt="Colar Chave do Coração"
-                                width={500} 
-                                height={500} 
-                                className="rounded-lg shadow-2xl mx-auto"
-                                data-ai-hint="heart key necklace"
-                                priority
-                            />
-                        </div>
-                        <a href="#comprar">
-                            <Button size="lg" className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-black font-bold text-lg px-12 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 animate-pulse-slow">
-                                <ShoppingCart className="mr-3" /> EU QUERO ESSE PRESENTE
-                            </Button>
-                        </a>
-                        <p className="mt-4 text-sm text-neutral-400">Últimas unidades com frete grátis!</p>
-                    </div>
-                </section>
-
-                {/* Benefits Section */}
-                <section className="py-24 bg-[#282828]">
-                    <div className="container mx-auto px-6 max-w-5xl">
-                        <div className="grid md:grid-cols-3 gap-10 text-center">
-                            <div className="flex flex-col items-center">
-                                <div className="p-4 bg-black/30 rounded-full mb-4 border border-neutral-700">
-                                    <Key className="h-10 w-10 text-[#D4AF37]" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-2">Design Exclusivo</h3>
-                                <p className="text-neutral-400">Um coração com uma fechadura e uma chave, simbolizando um amor que se completa.</p>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <div className="p-4 bg-black/30 rounded-full mb-4 border border-neutral-700">
-                                    <Gift className="h-10 w-10 text-[#D4AF37]" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-2">Caixa de Presente Especial</h3>
-                                <p className="text-neutral-400">Acompanha uma caixa luxuosa com uma mensagem emocionante, pronta para presentear.</p>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <div className="p-4 bg-black/30 rounded-full mb-4 border border-neutral-700">
-                                    <Heart className="h-10 w-10 text-[#D4AF37]" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-2">Material de Alta Qualidade</h3>
-                                <p className="text-neutral-400">Feito em aço inoxidável banhado a ouro. Não escurece e não causa alergia.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Testimonials */}
-                <section className="py-24 bg-[#1C1C1C]">
-                    <div className="container mx-auto px-6 text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">Quem comprou, se apaixonou</h2>
-                        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            {testimonials.map((testimonial, index) => (
-                                <Card key={index} className="bg-[#282828] border-neutral-700 text-left">
-                                    <CardContent className="p-6">
-                                        <div className="flex items-center mb-4">
-                                            <Avatar>
-                                                <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                                                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                                            </Avatar>
-                                            <div className="ml-4">
-                                                <p className="font-bold text-white">{testimonial.name}</p>
-                                                <StarRating rating={5} />
-                                            </div>
-                                        </div>
-                                        <p className="text-neutral-300 italic">"{testimonial.text}"</p>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-                
-                {/* CTA Section */}
-                <section id="comprar" className="py-24 bg-[#282828]">
-                    <div className="container mx-auto px-6 max-w-3xl text-center">
-                         <Card className="bg-black/50 border-2 border-[#D4AF37] p-8 rounded-2xl shadow-2xl shadow-[#D4AF37]/20">
-                            <CardHeader>
-                                <CardTitle className="text-3xl font-bold text-[#D4AF37] mb-2">OFERTA ESPECIAL</CardTitle>
-                                <CardDescription className="text-neutral-300 text-lg">Surpreenda quem você ama com um presente inesquecível.</CardDescription>
-                            </CardHeader>
-                            <CardContent className="my-6">
-                                <p className="text-5xl font-bold text-white">R$ 127,00</p>
-                                <p className="text-neutral-400 line-through mt-2">De R$ 254,00</p>
-                                <p className="text-green-400 font-semibold mt-2">50% de DESCONTO + Frete Grátis</p>
-                            </CardContent>
-                            <CardFooter className="flex-col gap-4">
-                                <a href={checkoutUrl} className="w-full">
-                                    <Button size="lg" className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-black font-bold text-lg px-10 py-7 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-                                        COMPRAR AGORA
-                                    </Button>
-                                </a>
-                                <div className="flex items-center gap-4 text-neutral-400 text-sm">
-                                    <ShieldCheck className="w-5 h-5 text-green-500"/>
-                                    <span>Compra Segura</span>
-                                    <Truck className="w-5 h-5 text-green-500"/>
-                                    <span>Entrega Rápida</span>
-                                </div>
-                            </CardFooter>
-                         </Card>
-                    </div>
-                </section>
-                
-                {/* FAQ Section */}
-                <section className="py-24 bg-[#1C1C1C]">
-                    <div className="container mx-auto px-6 max-w-3xl">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Perguntas Frequentes</h2>
-                        <Accordion type="single" collapsible className="w-full">
-                            {faqItems.map((item, index) => (
-                                <AccordionItem value={`item-${index+1}`} key={index} className="border-neutral-800 bg-black/20 rounded-lg mb-3 px-4">
-                                    <AccordionTrigger className="hover:no-underline text-lg font-semibold text-left text-white">{item.question}</AccordionTrigger>
-                                    <AccordionContent className="text-neutral-300 text-base pb-4">
-                                        {item.answer}
-                                    </AccordionContent>
-                                </AccordionItem>
-                            ))}
-                        </Accordion>
-                    </div>
-                </section>
-            </main>
-
-            <footer className="bg-black text-neutral-400 text-sm">
-                <div className="container mx-auto px-6 py-8 text-center">
-                    <p>Copyright © 2024 - Chave do Coração. Todos os direitos reservados.</p>
-                    <div className="flex justify-center gap-6 mt-4">
-                        <Link href="#" className="hover:text-white">Termos de Uso</Link>
-                        <Link href="#" className="hover:text-white">Política de Privacidade</Link>
-                    </div>
-                </div>
-            </footer>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4">
+            <h2 className="text-2xl font-bold mb-8">LIBERANDO SEU ACESSO</h2>
+            <div className="w-full max-w-md">
+                <Progress value={progress} className="w-full h-4 bg-gray-700 [&>div]:bg-red-600" />
+                <p className="text-center mt-2 text-lg">{progress}%</p>
+            </div>
         </div>
     );
+};
+
+
+export default function ChaveDoCoracaoQuizPage() {
+  const [currentStep, setCurrentStep] = useState(0);
+  const router = useRouter();
+
+  const handleNextStep = () => {
+    if (currentStep < quizSteps.length -1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      // Last step, go to loading screen
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  if (currentStep >= quizSteps.length) {
+    return <LoadingScreen />;
+  }
+
+  const step = quizSteps[currentStep];
+
+  return (
+    <div className="bg-black min-h-screen flex flex-col items-center justify-center text-white p-6 font-sans">
+      <div className="text-center max-w-4xl mx-auto">
+        {step.title && <h1 className="text-3xl md:text-4xl font-bold mb-4">{step.title}</h1>}
+        <h2 className="text-2xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
+
+        {step.type === 'image' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {step.options.map((opt, index) => (
+              <div key={index} className="flex flex-col items-center gap-4">
+                <Image src={opt.image || ''} alt={opt.text} width={400} height={400} className="rounded-lg" />
+                <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-12 text-lg w-full">
+                  {opt.text}
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {step.type === 'text' && (
+            <div className="flex flex-col items-center gap-8">
+                {step.image && <Image src={step.image} alt="Ilustração da pergunta" width={500} height={300} className="rounded-lg mb-4" />}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
+                    {step.options.map((opt, index) => (
+                    <Button key={index} onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-lg">
+                        {opt}
+                    </Button>
+                    ))}
+                </div>
+          </div>
+        )}
+        
+        {step.type === 'text-only-button' && (
+             <div className="flex flex-col items-center gap-8">
+                <Button onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-16 text-xl">
+                    {step.options[0]}
+                </Button>
+            </div>
+        )}
+      </div>
+    </div>
+  );
 }
