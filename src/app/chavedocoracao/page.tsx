@@ -123,20 +123,19 @@ const LoadingScreen = () => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-        setProgress((prev) => {
-            if (prev >= 100) {
-            clearInterval(timer);
-            router.push('/chavedocoracao/vsl');
-            return 100;
-            }
-            return prev + 5;
-        });
+            setProgress((prev) => (prev >= 100 ? 100 : prev + 5));
         }, 150);
 
         return () => {
-        clearInterval(timer);
+            clearInterval(timer);
         };
-    }, [router]);
+    }, []);
+
+    useEffect(() => {
+        if (progress >= 100) {
+            router.push('/chavedocoracao/vsl');
+        }
+    }, [progress, router]);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4">
@@ -152,13 +151,9 @@ const LoadingScreen = () => {
 
 export default function ChaveDoCoracaoQuizPage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const router = useRouter();
 
   const handleNextStep = () => {
-    if (currentStep < quizSteps.length -1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      // Last step, go to loading screen
+    if (currentStep < quizSteps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
