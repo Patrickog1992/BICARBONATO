@@ -38,19 +38,16 @@ export default function VSLChaveDoCoracaoPage() {
                 FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
             </h1>
             
-            <div className="max-w-4xl mx-auto my-8">
-                <div id="vid_68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', maxWidth: '800px', width: '100%'}}></div>
-                <Script
-                    strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            var s=document.createElement("script");
-                            s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
-                            s.async=true;
-                            document.head.appendChild(s);
-                        `
-                    }}
-                />
+            <div className="max-w-[800px] mx-auto my-8">
+                <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
+                <Script id="vturb-player-script">
+                  {`
+                    var s=document.createElement("script");
+                    s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                    s.async=true;
+                    document.head.appendChild(s);
+                  `}
+                </Script>
             </div>
             
             <div className="max-w-2xl mx-auto text-left mt-12">
