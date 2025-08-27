@@ -40,19 +40,19 @@ export default function VSLChaveDoCoracaoPage() {
             
             <div className="aspect-video mb-12">
                 <div id="vid_68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}} />
+                <Script 
+                  id="vturb-player-script"
+                  strategy="afterInteractive"
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                      var s=document.createElement("script");
+                      s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                      s.async=true;
+                      document.head.appendChild(s);
+                    `
+                  }}
+                />
             </div>
-            <Script 
-              id="vturb-player-script"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  var s=document.createElement("script");
-                  s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
-                  s.async=true;
-                  document.head.appendChild(s);
-                `
-              }}
-            />
 
             <div className="max-w-2xl mx-auto text-left">
               <h2 className="text-xl font-bold mb-4 text-white">Comentários</h2>
