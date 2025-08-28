@@ -170,7 +170,7 @@ export default function ChaveDoCoracaoQuizPage() {
         <div className="w-full max-w-4xl px-4 py-2">
             <Progress value={progressPercentage} className="h-2 bg-gray-700 [&>div]:bg-red-600" />
         </div>
-        <Image src="https://i.imgur.com/9Urc5Rq.png" alt="Chave do Coração" width={100} height={100} className="my-6" />
+        <Image src="https://i.imgur.com/C9h8Xlc.png" alt="Chave do Coração" width={100} height={100} className="my-6" />
       <div className="text-center max-w-4xl mx-auto">
         {step.title && 
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
