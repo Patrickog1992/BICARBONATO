@@ -38,35 +38,39 @@ export default function VSLChaveDoCoracaoPage() {
 
   return (
     <div className="bg-black min-h-screen text-white font-sans">
+      <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
+          <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
+      </div>
       <div className="container mx-auto px-4">
         <div className="text-center max-w-[800px] mx-auto">
-            <div className="w-full bg-red-600 text-white text-center p-2 text-sm font-semibold">
-                <p>ATENÇÃO: Devido ao grande número de acesso essa página vai sair do ar no dia: <span className="text-yellow-400 font-bold">{currentDate}</span></p>
-            </div>
             <h1 className="text-3xl md:text-4xl font-bold my-8">
                 FAÇA ESSA CORRENTE DE ORAÇÃO E TENHA A PESSOA QUE QUISER AOS SEUS PÉS EM ATÉ 7 DIAS
             </h1>
-            
-            <div className="my-8">
-                <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
-                <Script id="vturb-player-script" strategy="afterInteractive">
-                  {`
-                    var s=document.createElement("script");
-                    s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
-                    s.async=true;
-                    document.head.appendChild(s);
-                  `}
-                </Script>
-            </div>
-
-            {isButtonVisible && (
-              <div className="my-10 animate-in fade-in duration-500 px-4">
-                  <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong" asChild>
-                      <Link href="https://pay.kirvano.com/04c3098d-157a-43a1-a11d-b30ec7e1ae3d">QUERO FAZER A CORRENTE</Link>
-                  </Button>
-              </div>
-            )}
         </div>
+      </div>
+            
+      <div className="my-8 mx-auto w-full max-w-4xl px-4">
+          <div className="aspect-video w-full">
+            <vturb-smartplayer id="vid-68af21bd6a9a5bd9908ea953" style={{display: 'block', margin: '0 auto', width: '100%', height: '100%'}}></vturb-smartplayer>
+            <Script id="vturb-player-script" strategy="afterInteractive">
+              {`
+                var s=document.createElement("script");
+                s.src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68af21bd6a9a5bd9908ea953/v4/player.js";
+                s.async=true;
+                document.head.appendChild(s);
+              `}
+            </Script>
+          </div>
+      </div>
+
+      <div className="container mx-auto px-4">
+        {isButtonVisible && (
+          <div className="my-10 animate-in fade-in duration-500 max-w-[800px] mx-auto">
+              <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-6 py-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform animate-pulse-strong" asChild>
+                  <Link href="https://pay.kirvano.com/04c3098d-157a-43a1-a11d-b30ec7e1ae3d">QUERO FAZER A CORRENTE</Link>
+              </Button>
+          </div>
+        )}
         
         <div className="max-w-2xl mx-auto text-left mt-12 px-6">
           <h2 className="text-xl font-bold mb-4 text-white">Comentários</h2>
