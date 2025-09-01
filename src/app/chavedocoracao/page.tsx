@@ -196,9 +196,9 @@ export default function ChaveDoCoracaoQuizPage() {
         {step.type === 'text' && (
             <div className="flex flex-col items-center gap-8">
                 {step.image && <Image src={step.image} alt="Ilustração da pergunta" width={500} height={300} className="rounded-lg mb-4" />}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
+                <div className="flex flex-col gap-4 w-full max-w-lg">
                     {step.options.map((opt, index) => (
-                    <Button key={index} onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-lg">
+                    <Button key={index} onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-lg w-full">
                         {opt}
                     </Button>
                     ))}
