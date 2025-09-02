@@ -21,7 +21,7 @@ const quizSteps = [
       'Uma mulher chamada Paolla está agitando as redes sociais ao afirmar que descobriu um método, apelidado de “A Chave do Coração”, capaz de fazer qualquer pessoa se apaixonar perdidamente em poucos dias.',
       'Em um vídeo que já acumula milhões de visualizações, Paolla explica que não se trata de simpatia, mas de uma “corrente de oração” poderosa. Especialistas e céticos debatem a veracidade do método, enquanto milhares de pessoas já relatam resultados surpreendentes.',
     ],
-    buttonText: 'RESPONDA ESSE QUIZZ PARA TRAZER A SUA PESSOA DE VOLTA',
+    buttonText: 'responda esse quizz para trazer o seu amor de volta',
   },
   {
     title: 'DEIXE QUALQUER PESSOA AOS SEUS PÉS, ',
