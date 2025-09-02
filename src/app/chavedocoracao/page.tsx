@@ -190,11 +190,12 @@ export default function ChaveDoCoracaoQuizPage() {
         
         {step.type === 'news' ? (
              <div className="w-full max-w-4xl animate-in fade-in">
-                <header className="border-b-2 border-red-600 pb-2 mb-4 flex items-center gap-4">
+                 <header className="border-b-2 border-red-600 pb-2 mb-4 flex items-center justify-between">
                     <h1 className="text-5xl font-extrabold text-red-600 tracking-tighter">
                       g1<span className="text-blue-500">.</span>
                     </h1>
-                    <span className="text-2xl text-gray-500 font-semibold mt-1">{step.newsTitle}</span>
+                    <span className="text-2xl text-red-600 font-semibold">{step.newsTitle}</span>
+                    <div className="w-24"></div> {/* Espaço em branco para ajudar na centralização */}
                 </header>
                 <main>
                     <h2 className="text-3xl font-bold text-gray-800 mb-2 leading-tight">{step.headline}</h2>
