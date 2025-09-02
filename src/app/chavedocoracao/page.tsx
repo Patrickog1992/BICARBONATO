@@ -219,16 +219,16 @@ export default function ChaveDoCoracaoQuizPage() {
                 </main>
             </div>
         ) : (
-          <div className="bg-black w-full flex-grow flex flex-col items-center pt-6">
+          <div className="bg-black w-full flex-grow flex flex-col items-center pt-6 px-4">
             <Image src="https://i.imgur.com/C9h8Xlc.png" alt="Chave do Coração" width={100} height={100} className="my-6" />
-            <div className="text-center max-w-4xl mx-auto text-white">
+            <div className="text-center max-w-4xl mx-auto text-white w-full">
                 {step.title && 
-                    <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                    <h1 className="text-2xl md:text-4xl font-bold mb-4">
                         {step.title}
                         {step.highlight && <span className="text-red-600">{step.highlight}</span>}
                     </h1>
                 }
-                <h2 className="text-2xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
+                <h2 className="text-xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
 
                 {step.type === 'image' && (
                   <div className="grid grid-cols-2 justify-center items-start gap-4">
@@ -245,7 +245,7 @@ export default function ChaveDoCoracaoQuizPage() {
 
                 {step.type === 'text' && (
                     <div className="flex flex-col items-center gap-8">
-                        {step.image && <Image src={step.image} alt="Ilustração da pergunta" width={500} height={300} className="rounded-lg mb-4" />}
+                        {step.image && <Image src={step.image} alt="Ilustração da pergunta" width={500} height={300} className="rounded-lg mb-4 max-w-full h-auto" />}
                         <div className="flex flex-col gap-4 w-full max-w-lg">
                             {Array.isArray(step.options) && step.options.map((opt: any, index: number) => (
                               <Button key={index} onClick={handleNextStep} className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-lg w-full">
