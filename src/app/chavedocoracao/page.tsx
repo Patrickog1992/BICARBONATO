@@ -11,7 +11,7 @@ const quizSteps = [
   {
     type: 'news',
     newsTitle: 'RELIGIOSIDADE',
-    headline: 'MULHER REVELA SEGREDO PARA TER QUALQUER QUALQUER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
+    headline: 'MULHER REVELA SEGREDO PARA TER QUALQUER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
     reporter: 'Por g1, São Paulo',
     timestamp: 'Atualizado há 2 horas',
     image: 'https://i.imgur.com/xEXtZJ6.png',
