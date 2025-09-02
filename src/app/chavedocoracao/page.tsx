@@ -228,7 +228,7 @@ export default function ChaveDoCoracaoQuizPage() {
                         {step.highlight && <span className="text-red-600">{step.highlight}</span>}
                     </h1>
                 }
-                <h2 className="text-xl md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
+                <h2 className="text-base sm:text-lg md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
 
                 {step.type === 'image' && (
                   <div className="grid grid-cols-2 justify-center items-start gap-4">
@@ -272,3 +272,5 @@ export default function ChaveDoCoracaoQuizPage() {
     </div>
   );
 }
+
+    
