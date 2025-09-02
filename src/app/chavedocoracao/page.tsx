@@ -264,9 +264,11 @@ export default function ChaveDoCoracaoQuizPage() {
                     </div>
                 )}
             </div>
-             <footer className="mt-auto pt-20 pb-20 text-center text-gray-500 text-sm">
-                <p>As 7 chaves do coração todos os direitos reservados 2025</p>
-            </footer>
+            {step.type !== 'news' && (
+                 <footer className="mt-auto pt-20 pb-20 text-center text-gray-500 text-sm">
+                    <p>As 7 chaves do coração todos os direitos reservados 2025</p>
+                </footer>
+            )}
           </div>
         )}
     </div>
