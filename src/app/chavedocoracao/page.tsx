@@ -15,13 +15,13 @@ const quizSteps = [
     headline: 'MULHER REVELA SEGREDO PARA TER QUALQUER HOMEM E CAUSA POLÊMICA NA INTERNET',
     reporter: 'Por g1, São Paulo',
     timestamp: 'Atualizado há 2 horas',
-    videoThumbnail: 'https://i.imgur.com/OHjsJZN.png',
+    image: 'https://i.imgur.com/xEXtZJ6.png',
     videoTitle: 'Paolla, a mulher que descobriu o segredo da “Chave do Coração”',
     newsText: [
       'Uma mulher chamada Paolla está agitando as redes sociais ao afirmar que descobriu um método, apelidado de “A Chave do Coração”, capaz de fazer qualquer pessoa se apaixonar perdidamente em poucos dias.',
       'Em um vídeo que já acumula milhões de visualizações, Paolla explica que não se trata de simpatia, mas de uma “corrente de oração” poderosa. Especialistas e céticos debatem a veracidade do método, enquanto milhares de pessoas já relatam resultados surpreendentes.',
     ],
-    buttonText: 'ASSISTIR A REPORTAGEM COMPLETA',
+    buttonText: 'responda esse quizz para trazer a sua pessoa de volta',
   },
   {
     title: 'DEIXE QUALQUER PESSOA AOS SEUS PÉS, ',
@@ -201,11 +201,8 @@ export default function ChaveDoCoracaoQuizPage() {
                     <p className="text-sm text-gray-500 mb-1">{step.reporter}</p>
                     <p className="text-xs text-gray-500 mb-6">{step.timestamp}</p>
                     
-                    <div className="relative mb-4 cursor-pointer" onClick={handleNextStep}>
-                        <Image src={step.videoThumbnail || ''} alt="Vídeo da reportagem" width={800} height={450} className="rounded-lg w-full" />
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center rounded-lg">
-                            <PlayCircle className="w-16 h-16 text-white/80" />
-                        </div>
+                    <div className="relative mb-4">
+                        <Image src={step.image || ''} alt="Reportagem sobre Paolla" width={800} height={450} className="rounded-lg w-full" />
                     </div>
                     <p className="text-sm text-gray-600 mb-6 text-center">{step.videoTitle}</p>
 
