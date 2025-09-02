@@ -12,7 +12,7 @@ const quizSteps = [
   {
     type: 'news',
     newsTitle: 'g1',
-    headline: 'MULHER REVELA SEGREDO PARA TER QUALQUER HOMEM E CAUSA POLÊMICA NA INTERNET',
+    headline: 'MULHER REVELA SEGREDO PARA TER QUALQUER QUALQUER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
     reporter: 'Por g1, São Paulo',
     timestamp: 'Atualizado há 2 horas',
     image: 'https://i.imgur.com/xEXtZJ6.png',
@@ -271,5 +271,7 @@ export default function ChaveDoCoracaoQuizPage() {
     </div>
   );
 }
+
+    
 
     
