@@ -189,7 +189,7 @@ export default function ChaveDoCoracaoQuizPage() {
         )}
         
         {step.type === 'news' ? (
-             <div className="w-full max-w-4xl animate-in fade-in">
+             <div className="w-full max-w-4xl animate-in fade-in pb-12">
                  <header className="border-b-2 border-red-600 pb-2 mb-4 flex items-center justify-between">
                     <h1 className="text-5xl font-extrabold text-red-600 tracking-tighter">
                       g1<span className="text-blue-500">.</span>
