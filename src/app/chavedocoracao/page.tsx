@@ -21,7 +21,7 @@ const quizSteps = [
       'Uma mulher chamada Paolla está agitando as redes sociais ao afirmar que descobriu um método, apelidado de “A Chave do Coração”, capaz de fazer qualquer pessoa se apaixonar perdidamente em poucos dias.',
       'Em um vídeo que já acumula milhões de visualizações, Paolla explica que não se trata de simpatia, mas de uma “corrente de oração” poderosa. Especialistas e céticos debatem a veracidade do método, enquanto milhares de pessoas já relatam resultados surpreendentes.',
     ],
-    buttonText: 'responda esse quizz para trazer a sua pessoa de volta',
+    buttonText: 'RESPONDA ESSE QUIZZ PARA TRAZER A SUA PESSOA DE VOLTA',
   },
   {
     title: 'DEIXE QUALQUER PESSOA AOS SEUS PÉS, ',
@@ -212,7 +212,7 @@ export default function ChaveDoCoracaoQuizPage() {
                         ))}
                     </div>
 
-                    <Button onClick={handleNextStep} className="mt-8 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-xl">
+                    <Button onClick={handleNextStep} className="mt-8 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-xl uppercase">
                         {step.buttonText}
                     </Button>
                 </main>
@@ -271,3 +271,5 @@ export default function ChaveDoCoracaoQuizPage() {
     </div>
   );
 }
+
+    
