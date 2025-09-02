@@ -188,7 +188,7 @@ export default function ChaveDoCoracaoQuizPage() {
         )}
         
         {step.type === 'news' ? (
-             <div className="w-full max-w-4xl animate-in fade-in p-6 pb-16">
+             <div className="w-full max-w-4xl animate-in fade-in p-6 pb-24">
                  <header className="border-b-2 border-red-600 pb-2 mb-4 flex items-center justify-between">
                     <h1 className="text-5xl font-extrabold text-red-600 tracking-tighter">
                       g1<span className="text-blue-500">.</span>
@@ -221,7 +221,7 @@ export default function ChaveDoCoracaoQuizPage() {
                 </main>
             </div>
         ) : (
-          <div className="bg-black w-full flex-grow flex flex-col items-center pt-6 px-4 pb-16">
+          <div className="bg-black w-full flex-grow flex flex-col items-center pt-6 px-4 pb-24">
             <Image src="https://i.imgur.com/C9h8Xlc.png" alt="Chave do Coração" width={100} height={100} className="my-6" />
             <div className="text-center max-w-4xl mx-auto text-white w-full">
                 {step.title && 
