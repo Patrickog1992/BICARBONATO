@@ -213,7 +213,7 @@ export default function ChaveDoCoracaoQuizPage() {
                         ))}
                     </div>
 
-                    <Button onClick={handleNextStep} className="mt-8 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-base md:text-xl uppercase">
+                    <Button onClick={handleNextStep} className="mt-8 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-base md:text-xl uppercase whitespace-normal h-auto">
                         {step.buttonText}
                     </Button>
                 </main>
