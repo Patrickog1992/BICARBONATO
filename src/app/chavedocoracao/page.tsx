@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Progress } from '@/components/ui/progress';
-import { PlayCircle } from 'lucide-react';
 
 const quizSteps = [
   {
@@ -181,7 +180,7 @@ export default function ChaveDoCoracaoQuizPage() {
   const progressPercentage = ((currentStep + 1) / quizSteps.length) * 100;
 
   return (
-    <div className="bg-white min-h-screen flex flex-col items-center justify-start text-black p-6 font-sans">
+    <div className={`bg-white min-h-screen flex flex-col items-center justify-start text-black font-sans ${step.type === 'news' ? 'p-6' : ''}`}>
         {step.type !== 'news' && (
             <div className="w-full max-w-4xl px-4 py-2 bg-black">
                 <Progress value={progressPercentage} className="h-2 bg-gray-700 [&>div]:bg-red-600" />
@@ -189,7 +188,7 @@ export default function ChaveDoCoracaoQuizPage() {
         )}
         
         {step.type === 'news' ? (
-             <div className="w-full max-w-4xl animate-in fade-in pb-24">
+             <div className="w-full max-w-4xl animate-in fade-in">
                  <header className="border-b-2 border-red-600 pb-2 mb-4 flex items-center justify-between">
                     <h1 className="text-5xl font-extrabold text-red-600 tracking-tighter">
                       g1<span className="text-blue-500">.</span>
@@ -213,7 +212,7 @@ export default function ChaveDoCoracaoQuizPage() {
                         ))}
                     </div>
 
-                    <Button onClick={handleNextStep} className="mt-8 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-base md:text-xl uppercase whitespace-normal h-auto">
+                    <Button onClick={handleNextStep} className="mt-8 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-base md:text-xl uppercase">
                         {step.buttonText}
                     </Button>
                 </main>
@@ -228,7 +227,7 @@ export default function ChaveDoCoracaoQuizPage() {
                         {step.highlight && <span className="text-red-600">{step.highlight}</span>}
                     </h1>
                 }
-                <h2 className="text-base sm:text-lg md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
+                <h2 className="text-lg md:text-3xl mt-8 mb-12 font-semibold">{step.question}</h2>
 
                 {step.type === 'image' && (
                   <div className="grid grid-cols-2 justify-center items-start gap-4">
@@ -265,7 +264,7 @@ export default function ChaveDoCoracaoQuizPage() {
                 )}
             </div>
             {step.type !== 'news' && (
-                 <footer className="mt-auto pt-20 pb-20 text-center text-gray-500 text-sm">
+                 <footer className="mt-auto pt-8 pb-4 text-center text-gray-500 text-sm">
                     <p>As 7 chaves do coração todos os direitos reservados 2025</p>
                 </footer>
             )}
