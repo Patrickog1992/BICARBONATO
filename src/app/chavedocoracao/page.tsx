@@ -14,7 +14,7 @@ const quizSteps = [
     headline: 'MULHER REVELA SEGREDO PARA TER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
     reporter: 'Por g1, São Paulo',
     timestamp: 'Atualizado há 2 horas',
-    image: 'https://i.imgur.com/xEXtZJ6.png',
+    image: 'https://i.imgur.com/XC9Yh7g.jpeg',
     videoTitle: 'Paolla, a mulher que descobriu o segredo da “Chave do Coração”',
     newsText: [
       'Uma mulher chamada Paolla está agitando as redes sociais ao afirmar que descobriu um método, apelidado de “A Chave do Coração”, capaz de fazer qualquer pessoa se apaixonar perdidamente em poucos dias.',
