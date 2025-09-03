@@ -10,8 +10,8 @@ import { Progress } from '@/components/ui/progress';
 const quizSteps = [
   {
     type: 'news',
-    newsTitle: 'RELIGIOSIDADE',
-    headline: 'MULHER REVELA SEGREDO PARA TER QUALQUER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
+    newsLogo: 'https://i.imgur.com/v8SjTh9.png',
+    headline: 'MULHER REVELA SEGREDO PARA TER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
     reporter: 'Por g1, São Paulo',
     timestamp: 'Atualizado há 2 horas',
     image: 'https://i.imgur.com/xEXtZJ6.png',
@@ -193,7 +193,7 @@ export default function ChaveDoCoracaoQuizPage() {
                     <h1 className="text-5xl font-extrabold text-red-600 tracking-tighter">
                       g1<span className="text-blue-500">.</span>
                     </h1>
-                    <span className="text-2xl text-red-600 font-semibold">{step.newsTitle}</span>
+                    {step.newsLogo && <Image src={step.newsLogo} alt="Logo" width={150} height={40} />}
                     <div className="w-24"></div> {/* Espaço em branco para ajudar na centralização */}
                 </header>
                 <main>
