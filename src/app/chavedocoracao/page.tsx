@@ -10,7 +10,7 @@ import { Progress } from '@/components/ui/progress';
 const quizSteps = [
   {
     type: 'news',
-    newsLogo: 'https://i.imgur.com/v8SjTh9.png',
+    newsLogo: 'https://i.imgur.com/M5JCL0F.jpeg',
     headline: 'MULHER REVELA SEGREDO PARA TER PESSOA DE VOLTA E CAUSA POLÊMICA NA INTERNET',
     reporter: 'Por g1, São Paulo',
     timestamp: 'Atualizado há 2 horas',
