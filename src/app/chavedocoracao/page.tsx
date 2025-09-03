@@ -202,7 +202,7 @@ export default function ChaveDoCoracaoQuizPage() {
                     <p className="text-xs text-gray-500 mb-6">{step.timestamp}</p>
                     
                     <div className="relative mb-4">
-                        <Image src={step.image || ''} alt="Reportagem sobre Paolla" width={800} height={450} className="rounded-lg w-full" />
+                        <Image src={step.image || ''} alt="Reportagem sobre Paolla" width={600} height={338} className="rounded-lg w-full" />
                     </div>
                     <p className="text-sm text-gray-600 mb-6 text-center">{step.videoTitle}</p>
 
