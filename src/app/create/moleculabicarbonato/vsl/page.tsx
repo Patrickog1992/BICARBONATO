@@ -62,9 +62,9 @@ export default function VSLPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                INCRÍVEL ! Ator da industria pornô revela :<br/>
-                <span className="text-red-600">O ingrediente caseiro secreto</span> usado para <span className="text-red-600">aumentar em até 9 cm o tamanho do PÊNIS !</span>
+                ESPECIALISTA REVELOU O TRUQUE DO BICARBONATO DE SÓDIO QUE FAZ HOMENS TER EREÇÔES POR HORASE ATÉ AUMENTAR O PÊNIS
             </h1>
+            <p className="text-lg md:text-xl mt-4 text-gray-700">(Totalmente natural e sem efeitos colaterais)</p>
         </div>
 
         <div className="mx-auto w-full max-w-4xl">
@@ -129,5 +129,7 @@ export default function VSLPage() {
     </div>
   );
 }
+
+    
 
     
