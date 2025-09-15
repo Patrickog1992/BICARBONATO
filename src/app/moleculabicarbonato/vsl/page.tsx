@@ -65,6 +65,7 @@ export default function VSLPage() {
                  ESPECIALISTA REVELOU O TRUQUE DO BICARBONATO DE SÓDIO QUE FAZ HOMENS <span className="text-red-600">TER EREÇÔES POR HORAS E ATÉ AUMENTAR O PÊNIS</span>
             </h1>
             <p className="text-lg md:text-xl mt-4 text-gray-700">(Totalmente natural e sem efeitos colaterais)</p>
+            <p className="text-xl md:text-2xl mt-4 text-gray-900 font-bold">VEJA O VÍDEO ABAIXO</p>
         </div>
 
         <div className="mx-auto w-full max-w-4xl mb-8">
@@ -133,6 +134,8 @@ export default function VSLPage() {
     </div>
   );
 }
+    
+
     
 
     
