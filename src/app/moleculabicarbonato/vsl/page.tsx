@@ -69,14 +69,13 @@ export default function VSLPage() {
         </div>
 
         <div className="mx-auto w-full max-w-4xl mb-8">
-             <vturb-smartplayer id="vid-68c7735ee211203eaaf04e58" style={{display: 'block', margin: '0 auto', width: '100%', maxWidth: '800px'}}></vturb-smartplayer>
+             <vturb-smartplayer id="vid-68c85c0c7bbfdccab85807b0" style={{display: 'block', margin: '0 auto', width: '100%', maxWidth: '400px'}}></vturb-smartplayer>
         </div>
         <Script id="vturb-player-script" strategy="afterInteractive">
           {`
-            var s=document.createElement("script");
-            s.src="https://scripts.converteai.net/1a6a90ad-f1f6-4f11-b6be-e02b59de709c/players/68c7735ee211203eaaf04e58/v4/player.js";
-            s.async=true;
-            document.head.appendChild(s);
+            var s=document.createElement("script"); 
+            s.src="https://scripts.converteai.net/b45e4a12-72fd-43f2-a7e4-73d6b242d5d9/players/68c85c0c7bbfdccab85807b0/v4/player.js", 
+            s.async=!0,document.head.appendChild(s);
           `}
         </Script>
         
@@ -143,3 +142,4 @@ export default function VSLPage() {
     
 
     
+
