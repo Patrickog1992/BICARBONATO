@@ -61,11 +61,11 @@ export default function VSLPage() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-            <h1 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-lg md:text-xl font-bold text-gray-900 leading-tight">
                  ESPECIALISTA REVELOU O TRUQUE DO BICARBONATO DE SÓDIO QUE FAZ HOMENS <span className="text-red-600">TER EREÇÔES POR HORAS E ATÉ AUMENTAR O PÊNIS</span>
             </h1>
-            <p className="text-base md:text-lg mt-4 text-gray-700">(Totalmente natural e sem efeitos colaterais)</p>
-            <p className="text-base mt-4 text-gray-900 font-bold">VEJA O VÍDEO ABAIXO</p>
+            <p className="text-sm md:text-base mt-4 text-gray-700">(Totalmente natural e sem efeitos colaterais)</p>
+            <p className="text-sm mt-4 text-gray-900 font-bold">VEJA O VÍDEO ABAIXO</p>
         </div>
 
         <div className="mx-auto w-full max-w-4xl mb-8">
