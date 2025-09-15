@@ -68,11 +68,18 @@ export default function VSLPage() {
         </div>
 
         <div className="mx-auto w-full max-w-4xl">
-            <div id="vid_68ac96e7195a057df62e1153" />
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: `<vturb-smartplayer id="vid-68c7735ee211203eaaf04e58" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>`,
+                }}
+            />
         </div>
-        <Script 
-          src="https://scripts.converteai.net/eaf579c8-6aa1-4f6f-b5bd-8ba46f9e23f8/players/68ac96e7195a057df62e1153/player.js" 
-          strategy="afterInteractive" 
+        <Script
+            id="vturb-player-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+                __html: `var s=document.createElement("script"); s.src="https://scripts.converteai.net/1a6a90ad-f1f6-4f11-b6be-e02b59de709c/players/68c7735ee211203eaaf04e58/v4/player.js", s.async=!0,document.head.appendChild(s);`,
+            }}
         />
         
         {isButtonVisible && (
@@ -129,3 +136,4 @@ export default function VSLPage() {
     </div>
   );
 }
+
