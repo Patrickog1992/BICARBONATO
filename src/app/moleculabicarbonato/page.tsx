@@ -18,7 +18,7 @@ export default function BicarbonatoQuizPage() {
   ];
 
   return (
-    <div className="bg-white min-h-screen flex flex-col items-center justify-center text-gray-800 p-6 font-sans">
+    <div className="bg-white min-h-screen flex flex-col items-center justify-center text-gray-800 p-6 pb-16 font-sans">
       <div className="text-center max-w-3xl mx-auto">
         <h1 className="text-3xl md:text-5xl font-bold leading-tight text-gray-900">
           Tenha um pau duro, grande e grosso como uma barra de ferro usando um <span className="text-blue-600">"Truque com Bicarbonato de Sódio"</span> 100% natural
