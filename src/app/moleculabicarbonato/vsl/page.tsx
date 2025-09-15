@@ -23,7 +23,7 @@ export default function VSLPage() {
     
     const timer = setTimeout(() => {
         setIsButtonVisible(true);
-    }, 1411000); // 23 minutos e 31 segundos
+    }, 10000); // 10 segundos
 
     return () => clearTimeout(timer);
   }, []);
@@ -67,7 +67,7 @@ export default function VSLPage() {
             <p className="text-lg md:text-xl mt-4 text-gray-700">(Totalmente natural e sem efeitos colaterais)</p>
         </div>
 
-        <div className="mx-auto w-full max-w-4xl">
+        <div className="mx-auto w-full max-w-4xl mb-8">
              <vturb-smartplayer id="vid-68c7735ee211203eaaf04e58" style={{display: 'block', margin: '0 auto', width: '100%', maxWidth: '800px'}}></vturb-smartplayer>
         </div>
         <Script id="vturb-player-script" strategy="afterInteractive">
