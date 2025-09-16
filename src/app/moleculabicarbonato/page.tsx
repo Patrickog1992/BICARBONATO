@@ -3,13 +3,16 @@
 
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function BicarbonatoQuizPage() {
   const router = useRouter();
 
-  const handleOptionClick = () => {
-    router.push('/moleculabicarbonato/vsl');
-  };
+  // Prefetch a página de VSL para uma navegação mais rápida
+  useEffect(() => {
+    router.prefetch('/moleculabicarbonato/vsl');
+  }, [router]);
 
   const objectives = [
     { emoji: '🍆', text: 'Aumentar o Tamanho do Pênis' },
@@ -28,14 +31,14 @@ export default function BicarbonatoQuizPage() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {objectives.map((obj, index) => (
-            <button
-              key={index}
-              onClick={handleOptionClick}
-              className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center transform hover:scale-105 hover:border-blue-500 transition-all duration-300 shadow-md"
-            >
-              <div className="text-6xl mb-4">{obj.emoji}</div>
-              <p className="text-xl font-semibold text-gray-800">{obj.text}</p>
-            </button>
+            <Link key={index} href="/moleculabicarbonato/vsl" passHref>
+              <button
+                className="bg-gray-50 border-2 border-gray-200 rounded-lg p-6 text-center transform hover:scale-105 hover:border-blue-500 transition-all duration-300 shadow-md w-full h-full"
+              >
+                <div className="text-6xl mb-4">{obj.emoji}</div>
+                <p className="text-xl font-semibold text-gray-800">{obj.text}</p>
+              </button>
+            </Link>
           ))}
         </div>
       </div>
